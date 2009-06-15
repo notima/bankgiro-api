@@ -73,7 +73,7 @@ public class LbFile extends BgFile {
      */
     public void readFromFile(File file, Charset cs) throws IOException, BgParseException {
     	lastFile = file;
-    	BufferedReader reader = new BufferedReader(new FileReader(file));
+    	BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream( file ), cs));
     	String line;
     	LbSet currentSet = null;
     	LbPayment	currentPayment = null;
