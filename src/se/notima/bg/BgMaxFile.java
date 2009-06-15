@@ -39,7 +39,7 @@ public class BgMaxFile extends BgFile {
 			BgParseException {
 		lastFile = file;
 
-    	BufferedReader reader = new BufferedReader(new FileReader(file));
+    	BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream( file ), cs));
     	String line;
     	BgMaxSet currentSet = null;
     	Transaction	currentTrans = null;
