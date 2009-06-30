@@ -23,6 +23,7 @@ package se.notima.bg.lb;
 
 import java.util.*;
 
+import se.notima.bg.BgParseException;
 import se.notima.bg.BgRecord;
 import se.notima.bg.BgUtil;
 import se.notima.bg.Transaction;
@@ -323,5 +324,30 @@ public class LbPayment implements Transaction {
 	public void setDstBg(String dstBg) {
 		this.dstBg = dstBg;
 	}
+	
+	/**
+	 * Returns the destination (pg/bg/account)
+	 * 
+	 * null if there's no known destination
+	 */
+	public String getDestination() {
+		if (isBgPayment()) return(dstBg);
+		if (isPgPayment()) return(dstPg);
+		if (isAccountPayment()) return(dstAccount);
+		return(null);
+	}
+	
+	/**
+	 * Returns the destination formatted (pg/bg/account)
+	 * 
+	 * null if there's no known destination
+	 */
+	public String getDestinationFormatted() throws BgParseException {
+		if (isBgPayment()) return(BgUtil.formatBg(dstBg));
+		if (isPgPayment()) return(BgUtil.formatPg(dstPg));
+		if (isAccountPayment()) return(dstAccount); // TODO: Add formatter for account
+		return(null);
+	}
+	
 	
 }

@@ -157,8 +157,11 @@ public class LbFile extends BgFile {
 	}
 
 	public java.util.Date getFileDate() {
-		// TODO: Implement this
-		return(null);
+		if (records!=null && records.size()>0) {
+			return(((LbSet)records.get(0)).getHeader().getCreateDate());
+		} else {
+			return(null);
+		}
 	}
 	
 	
