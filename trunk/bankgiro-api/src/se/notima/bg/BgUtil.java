@@ -135,6 +135,20 @@ public class BgUtil {
 	}
 	
 	/**
+	 * Format postgiro
+	 * Formats a sequence of digits to the general form of a postgiro account.
+	 */
+	public static String formatPg(String digits) throws BgParseException {
+		String fmt = toDigitsOnly(digits);
+		fmt = trimLeadingZeros(fmt);
+		if (fmt.length()<2) {
+			return(fmt);
+		} else {
+			return(fmt.substring(0,fmt.length()-1) + "-" + fmt.substring(fmt.length()-1, fmt.length()));
+		}
+	}
+	
+	/**
 	 * Converts a double to 12 digits where the two last digits
 	 * are "öre" or "cents"
 	 *
