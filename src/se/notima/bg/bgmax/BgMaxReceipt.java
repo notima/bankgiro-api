@@ -22,6 +22,7 @@
 package se.notima.bg.bgmax;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Vector;
 
 import se.notima.bg.BgRecord;
@@ -286,5 +287,32 @@ public class BgMaxReceipt implements Transaction {
 	public void setScannedImage(boolean scannedImage) {
 		this.scannedImage = scannedImage;
 	}
+	
+	/**
+	 * 
+	 * @return	Returns all information available (except the reference)
+	 */
+	public String getAllInfo() {
+		
+		StringBuffer buf = new StringBuffer();
+		Vector<String> info = getInfoRecords();
+		String line;
+		if (info!=null && info.size()>0) {
+			for (Iterator<String> it = info.iterator(); it.hasNext();) {
+				line = it.next();
+				if (line!=null && line.trim().length()>0) {
+					buf.append(line + "\n");
+				}
+			}
+		}
+		
+		if (getAddress()!=null) buf.append(getAddress() + "\n");
+		if (getZipCode()!=null) buf.append(getZipCode() + " ");
+		if (getCity()!=null) buf.append(getCity());
+		if(buf.charAt(buf.length()-1)=='\n') buf.deleteCharAt(buf.length()-1);
+		
+		return(buf.toString());
+	}
+	
 
 }
