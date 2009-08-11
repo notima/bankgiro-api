@@ -309,7 +309,7 @@ public class BgMaxReceipt implements Transaction {
 		if (getAddress()!=null) buf.append(getAddress() + "\n");
 		if (getZipCode()!=null) buf.append(getZipCode() + " ");
 		if (getCity()!=null) buf.append(getCity());
-		if(buf.charAt(buf.length()-1)=='\n') buf.deleteCharAt(buf.length()-1);
+		if(buf.length()>0 && buf.charAt(buf.length()-1)=='\n') buf.deleteCharAt(buf.length()-1);
 		
 		return(buf.toString());
 	}
