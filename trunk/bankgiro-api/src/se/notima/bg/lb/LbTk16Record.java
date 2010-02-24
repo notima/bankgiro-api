@@ -37,11 +37,12 @@ import se.notima.bg.BgUtil;
  */
 public class LbTk16Record extends BgRecord implements LbPaymentRecord {
 
-	private static Pattern	linePattern1 = Pattern.compile("16(\\d{10})(\\d|\\s{25})(\\d{12})(\\d{6}).{5}(.*)");
+	private static Pattern	linePattern1 = Pattern.compile("16(\\d{10})([\\d|\\s]{25})(\\d{12})(\\d{6})(\\d).{4}(.*)");
 	
     protected String    recipientBg;
 	protected String	ocrRef;
 	protected double	amount;
+	protected int		statusCode;
 	protected Date		payDate;
 	protected String	ourRefText;
 	
@@ -86,14 +87,19 @@ public class LbTk16Record extends BgRecord implements LbPaymentRecord {
 		Matcher m = linePattern1.matcher(line);
 		if (m.matches()) {
 			recipientBg = m.group(1);
-			ocrRef = m.group(2);
+			ocrRef = m.group(2).trim();
 			amount = BgUtil.parseAmountStr(m.group(3));
 			try {
 				payDate = BgUtil.parseDateString(m.group(4));
 			} catch (java.text.ParseException pe) {
 				throw new BgParseException("Can't parse date " + m.group(4), line);
 			}
-			ourRefText = m.group(5);
+			try {
+				statusCode = Integer.parseInt(m.group(5));
+			} catch (Exception ee) {
+				throw new BgParseException("Can't parse status code: " + m.group(5));
+			}
+			ourRefText = m.group(6).trim();
 		} else {
 			throw new BgParseException(line);
 		}
