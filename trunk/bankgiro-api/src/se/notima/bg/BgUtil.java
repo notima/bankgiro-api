@@ -123,7 +123,7 @@ public class BgUtil {
 	 * If it's not a bg account no formatting occurs, the string is returned as is. 
 	 * (ie \d{3,4}-\d{4})
 	 */
-	public static String formatBg(String digits) throws BgParseException {
+	public static String formatBg(String digits) {
 		String fmt = toDigitsOnly(digits);
 		fmt = trimLeadingZeros(fmt);
 		if (fmt.length()<7 || fmt.length()>8) return(digits);
@@ -138,7 +138,7 @@ public class BgUtil {
 	 * Format postgiro
 	 * Formats a sequence of digits to the general form of a postgiro account.
 	 */
-	public static String formatPg(String digits) throws BgParseException {
+	public static String formatPg(String digits) {
 		String fmt = toDigitsOnly(digits);
 		fmt = trimLeadingZeros(fmt);
 		if (fmt.length()<2) {

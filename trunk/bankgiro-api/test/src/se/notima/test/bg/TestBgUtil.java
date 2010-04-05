@@ -1,33 +1,88 @@
 package se.notima.test.bg;
 
 import static org.junit.Assert.*;
+
+import java.text.ParseException;
+import java.util.Calendar;
+
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
 import org.junit.Test;
 
 import se.notima.bg.BgParseException;
 import se.notima.bg.BgUtil;
 
-public class TestBgUtil {
+public class TestBgUtil extends TestCase {
 
 	@Test
 	public void testGetDateString() {
+		
+		// Create specific date
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, 2010);
+		cal.set(Calendar.MONTH, 1); // February
+		cal.set(Calendar.DATE, 19);
+		String result = BgUtil.getDateString(cal.getTime());
+		Assert.assertEquals("100219", result);
+		
 	}
 
 	@Test
 	public void testParseDateString() {
+		
+		try {
+			
+			java.util.Date date = BgUtil.parseDateString("091231");
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.YEAR, 2009);
+			cal.set(Calendar.MONTH, 11); // December
+			cal.set(Calendar.DATE, 31);
+			cal.set(Calendar.HOUR, 0);
+			cal.set(Calendar.AM_PM, Calendar.AM);
+			cal.set(Calendar.MINUTE, 0);
+			cal.set(Calendar.SECOND, 0);
+			cal.set(Calendar.MILLISECOND, 0);
+			Assert.assertEquals(date, cal.getTime());
+			
+			// Test "Genast"
+			date = BgUtil.parseDateString("GENAST");
+			Assert.assertNull(date);
+			// Test "000000"
+			date = BgUtil.parseDateString("000000");
+			Assert.assertNull(date);
+			
+		} catch (ParseException pe) {
+			Assert.fail(pe.getMessage());
+		}
+		
 	}
 
 	@Test
 	public void testToDigitsOnly() {
+		
+		String result = BgUtil.toDigitsOnly("1920-1928-12389BH");
+		Assert.assertEquals("1920192812389", result);
+		
 	}
 
 	@Test
 	public void testHasDigitsOnly() {
+		
+		boolean result = BgUtil.hasDigitsOnly("1234-1293");
+		Assert.assertEquals(false, result);
+		
+		result = BgUtil.hasDigitsOnly("12343920");
+		Assert.assertEquals(true, result);
+		
 	}
 
 	@Test
 	public void testTrimLeadingZeros() {
+		
+		String result = BgUtil.trimLeadingZeros("000123890");
+		Assert.assertEquals("123890", result);
+		
 	}
 
 	@Test
@@ -37,29 +92,22 @@ public class TestBgUtil {
 	@Test
 	public void testFormatBg() {
 		
-		try {
-			String result = BgUtil.formatBg("2703029");
-			Assert.assertEquals("270-3029", result);
-		} catch (BgParseException e) {
-			fail(e.getMessage());
-		}
+		String result = BgUtil.formatBg("2703029");
+		Assert.assertEquals("270-3029", result);
 		
 	}
 
 	@Test
 	public void testFormatPg() {
 		
-		try {
-			String actual = BgUtil.formatPg("2093280");
-			Assert.assertEquals("209328-0", actual);
-		} catch (BgParseException e) {
-			fail(e.getMessage());
-		}
+		String actual = BgUtil.formatPg("2093280");
+		Assert.assertEquals("209328-0", actual);
 		
 	}
 
 	@Test
 	public void testGetAmountStr() {
+		
 	}
 
 	@Test
