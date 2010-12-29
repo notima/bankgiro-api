@@ -32,7 +32,7 @@ public class BgMaxTk23Record extends BgRecord {
 
 	private static Pattern	linePattern1 = Pattern.compile("23(\\d{10})(.{25})(\\d{18})(\\d)(\\d)(\\d{12})(\\d).*");	
 	
-	private BgMaxReference reference;	
+	private BgMaxReference reference = new BgMaxReference();	
 	
 	public BgMaxTk23Record() {
 		super("23");
