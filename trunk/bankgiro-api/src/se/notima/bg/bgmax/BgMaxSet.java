@@ -79,6 +79,8 @@ public class BgMaxSet implements BgSet {
 			tr.setTransactionDate(setFooter.getTransactionDate());
 			total += tr.getAmount();
 		}
+		// Round total to two decimals. In certain cases differences may occur otherwise.
+		total = ((double)Math.round(total * 100))/100;
 		if (total!=setFooter.getAmount()) {
 			throw new BgParseException("Sum of transactions and footer sum is not equal: " + total + " != " + setFooter.getAmount());
 		}
