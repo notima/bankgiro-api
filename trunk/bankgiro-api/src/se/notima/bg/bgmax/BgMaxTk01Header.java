@@ -87,6 +87,11 @@ public class BgMaxTk01Header extends BgHeader {
 	}
 
 	@Override
+	public void setCurrency(String currency) {
+		
+	}
+	
+	@Override
 	public Date getPayDate() {
 		return createDate;
 	}

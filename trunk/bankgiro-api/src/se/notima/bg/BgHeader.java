@@ -45,6 +45,8 @@ public abstract class BgHeader extends BgRecord {
 	
 	public abstract String getCurrency();
 
+	public abstract void setCurrency(String currency);
+	
 	public abstract String getSenderAccount();
 	
 	public abstract java.util.Date getPayDate();
