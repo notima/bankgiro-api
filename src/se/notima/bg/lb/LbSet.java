@@ -71,6 +71,10 @@ public class LbSet implements BgSet {
 		return(header.getCurrency());
 	}
 	
+	public void setCurrency(String currency) {
+		header.setCurrency(currency);
+	}
+	
 	public java.util.Date getPayDate() {
 		return(header.getPayDate());
 	}
@@ -155,7 +159,7 @@ public class LbSet implements BgSet {
 			}
 		}
 		
-		lines.append(footer.toRecordString());
+		lines.append(footer.toRecordString() + "\n");
 		
 		return(lines.toString());
 	}
