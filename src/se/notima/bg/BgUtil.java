@@ -263,5 +263,25 @@ public class BgUtil {
 		return false;
 	}   //  validateOCRNumber
 
+	/**
+	 * Fills to a specified length
+	 */
+	public static String fillToLength(String str, boolean rightAlign, char fillChar, int len) {
+		StringBuffer buf = new StringBuffer();
+		if (str.length()>=len) {
+			buf.append(str.substring(0, len-1));
+			return(buf.toString());
+		}
+		// Append
+		buf.append(str);
+		while(buf.length()<len) {
+			if (rightAlign) {
+				buf.insert(0, fillChar);
+			} else {
+				buf.append(fillChar);
+			}
+		}
+		return(buf.toString());
+	}
 
 }
