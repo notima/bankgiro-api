@@ -37,13 +37,7 @@ import se.notima.bg.Transaction;
  * @author Daniel Tamm
  *
  */
-public class LbSet implements BgSet {
-
-	private BgHeader	header;
-	private BgFooter	footer;
-	private Vector<Transaction>	records;
-	private Vector<Transaction> creditTransactions = new Vector<Transaction>();
-	private Map<String, Vector<BgRecord>>	creditRecords = new TreeMap<String, Vector<BgRecord>>();
+public class LbSet extends AbstractLbSet {
 	
 	public static LbSet createPayableSet(String senderAccount) {
 		String sA = BgUtil.toDigitsOnly(senderAccount);
@@ -54,60 +48,7 @@ public class LbSet implements BgSet {
 	}
 	
 	public LbSet(BgHeader header, BgFooter footer) {
-		this.header = header;
-		this.footer = footer;
-		records = new Vector<Transaction>();
-	}
-
-	public String getSenderBankAccount() {
-		return(header.getSenderAccount());
-	}
-
-    public String getRecipientBankAccount() {
-        return(null);
-    }
-
-	public String getCurrency() {
-		return(header.getCurrency());
-	}
-	
-	public void setCurrency(String currency) {
-		header.setCurrency(currency);
-	}
-	
-	public java.util.Date getPayDate() {
-		return(header.getPayDate());
-	}
-	
-	public BgHeader getHeader() {
-		return header;
-	}
-	
-	public void setHeader(BgHeader header) {
-		this.header = header;
-	}
-	
-	public BgFooter getFooter() {
-		return(footer);
-	}
-	
-	public void setFooter(BgFooter footer) {
-		this.footer = footer;
-	}
-	
-	public Vector<Transaction> getRecords() {
-		return records;
-	}
-	
-	public void setRecords(Vector<Transaction> records) {
-		this.records = records;
-		footer.setAmount(0.0);
-		if (records!=null) {
-			footer.setCount(records.size());
-		}
-		for (Iterator<Transaction> it = records.iterator(); it.hasNext();) {
-			footer.incrementAmount(it.next().getAmount());
-		}
+		super(header,footer);
 	}
 
 	public void addCreditRecord(BgRecord creditRecord) {
@@ -130,38 +71,6 @@ public class LbSet implements BgSet {
 				}
 			}
 		}
-	}
-	
-	/**
-	 * Adds a payment to the set
-	 * @param payment
-	 */
-    public void addTransaction(Transaction payment) {
-    	if (footer!=null) {
-    		footer.incrementAmount(payment.getAmount());
-    		footer.incrementCount();
-    	}
-    	if (payment.getAmount()<0) {
-    		creditTransactions.add(payment);
-    	}
-        records.add((LbPayment)payment);
-    }
-
-	public String toRecordString() {
-		StringBuffer lines = new StringBuffer();
-		lines.append(header.toRecordString() + "\n");
-		Transaction payment;
-		if (records!=null && records.size()>0) {
-			for (int i=0; i<records.size(); i++) {
-				payment = records.get(i);
-				payment.setSeqNo(i+1);
-				lines.append(payment.toRecordString());
-			}
-		}
-		
-		lines.append(footer.toRecordString() + "\n");
-		
-		return(lines.toString());
 	}
 
 	@Override
