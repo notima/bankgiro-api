@@ -23,7 +23,7 @@ public class LbTk3Record extends BgRecord {
 		m_countryName = "";
 		m_postal += " " + m_countryName;
 		// Lookup bank country code
-		m_bankCountryCode = "  ";
+		m_bankCountryCode = m_countryCode; // Handelsbanken
 	}
 
 	@Override
@@ -45,11 +45,11 @@ public class LbTk3Record extends BgRecord {
 		// Reserve field 77
 		line.append(" ");
 		// Cost on sender or recipient 78
-		line.append(" ");
+		line.append("0"); // Handelsbanken 0 = Mottagaren betalar utländska kostnader
 		// Payment Form 79
-		line.append(" ");
+		line.append("B"); // Handelsbanken B, C  B = Betalning till annat EU land i SEK/EUR ?
 		// Payment method (Express etc) 80
-		line.append(" ");
+		line.append(" "); // Blank Handelsbanken
 		
 		while(line.length()<80) {
 			line.append(" ");

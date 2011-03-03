@@ -107,7 +107,8 @@ public class TestBgUtil extends TestCase {
 
 	@Test
 	public void testGetAmountStr() {
-		
+		String result = BgUtil.getAmountStr(-100.23);
+		Assert.assertEquals("00000001002L", result);
 	}
 
 	@Test

@@ -150,16 +150,47 @@ public class BgUtil {
 	
 	/**
 	 * Converts a double to 12 digits where the two last digits
-	 * are "öre" or "cents"
+	 * are "öre" or "cents".
+	 * If the amount is negative the last position is replaced.
 	 *
 	 * @return
 	 */
 	public static String getAmountStr(double amount) {
+		return(getAmountStr(amount, 12));
+	}
+	
+	/**
+	 * 
+	 * @param amount
+	 * @param len		Let you specify the length of the string
+	 * @return
+	 */
+	public static String getAmountStr(double amount, int len) {
 		StringBuffer buf = new StringBuffer();
-		long newAmount = Math.round(amount*100.0);
+		long newAmount = Math.round(Math.abs(amount)*100.0);
 		buf.append(new Long(newAmount).toString());
-		while(buf.length()<12) {
+		while(buf.length()<len) {
 			buf.insert(0, "0");
+		}
+		// Replace if negative
+		if (amount<0) {
+			String minusStr;
+			char lastDigit = buf.charAt(buf.length()-1);
+			switch (lastDigit) {
+				case '0' : minusStr = "-"; break;
+				case '1' : minusStr = "J"; break;
+				case '2' : minusStr = "K"; break;
+				case '3' : minusStr = "L"; break;
+				case '4' : minusStr = "M"; break;
+				case '5' : minusStr = "N"; break;
+				case '6' : minusStr = "O"; break;
+				case '7' : minusStr = "P"; break;
+				case '8' : minusStr = "Q"; break;
+				case '9' : minusStr = "R"; break;
+				default : minusStr = "E"; break; // Illegal character, shouldn't happen
+			}
+			// Replace last digit
+			buf.replace(buf.length()-1, buf.length(), minusStr);
 		}
 		return(buf.toString());
 	}
