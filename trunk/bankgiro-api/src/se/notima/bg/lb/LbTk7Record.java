@@ -4,16 +4,18 @@ import se.notima.bg.BgParseException;
 import se.notima.bg.BgRecord;
 import se.notima.bg.BgUtil;
 
-public class LbTk4Record extends BgRecord {
+public class LbTk7Record extends BgRecord {
 
 	private int	m_recipientNo;
-	private String	m_swift;
-	private String	m_iban;
+	private int	m_bankCode;	// Betalningskod i Visma
+	private String	m_hbAccountNo; // Used for payments in handelsbanken	
 	
-	public LbTk4Record(int recipientNo, String swift, String iban) {
-		super("4");
-		m_swift = swift;
-		m_iban = iban;
+	
+	public LbTk7Record(int recipientNo, int bankCode, String hbAccountNo) {
+		super("7");
+		m_recipientNo = recipientNo;
+		m_bankCode = bankCode;
+		m_hbAccountNo = hbAccountNo;
 	}
 
 	@Override
@@ -28,9 +30,11 @@ public class LbTk4Record extends BgRecord {
 		StringBuffer line = new StringBuffer(getTransCode()); // Pos 1
 		line.append(BgUtil.fillToLength(new Integer(m_recipientNo).toString(), 
 				true, '0', 7)); // Pos 2-8
-		line.append(BgUtil.fillToLength(m_iban.toUpperCase(), false, ' ', 58)); // Pos 9-67
-		line.append(BgUtil.fillToLength(m_swift.toUpperCase(), false, ' ', 11)); // Pos 68-78
-		
+		line.append(BgUtil.fillToLength(new Integer(m_bankCode).toString(), true, '0', 3));
+		if (m_hbAccountNo!=null && m_hbAccountNo.trim().length()>0) {
+			line.append("         DSE");
+			line.append(BgUtil.toDigitsOnly(m_hbAccountNo));
+		}
 		while(line.length()<80) {
 			line.append(" ");
 		}

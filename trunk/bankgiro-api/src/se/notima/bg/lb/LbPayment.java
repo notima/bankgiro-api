@@ -147,6 +147,72 @@ public class LbPayment implements Transaction {
     }
 
     /**
+     * 
+     * @param recipientNo	RecipientNo to identify this recipient. Should be unique for your 
+     * 						vendors. If you have a vendor no in your system you can use that.
+     * @param swift			SWIFT/BIC for international payment. Can be null. If null, check payment
+     * 						is used.
+     * @param iban			IBAN for international payment. Can be null. If null, check payment
+     * 						is used. For check, address must exist.
+     * @param name			Name of payee.
+     * @param address		Address of payee
+     * @param postal		Postal address of payee (ie zip and city)
+     * @param countryCode	Country of payee
+     * @param invoiceRef	The payees invoice ref. They identify the payment on this ref.
+     * @param amountSEK		Amount in SEK
+     * @param amount		Amount in foreign currency
+     * @param currency		Foreign currency (ISO code)
+     * @param ourRef		Our reference for this payment.
+     * @param payDate		Date when payment should occur
+     * @param bankCode		Bank code (101)
+     * @param hbAccountNo	If payments are done from Handelsbanken, this should be the account number
+     * 						used for the payment.
+     * @return
+     */
+    public static LbPayment createUtlPayment(int recipientNo,
+    										 String swift, 
+    										 String iban,
+    										 String name,
+    										 String address,
+    										 String postal,
+    										 String countryCode,
+    										 String invoiceRef,
+    										 double amountSEK,
+    										 double amount,
+    										 String currency,
+    										 String ourRef,
+    										 Date payDate,
+    										 int bankCode,
+    										 String hbAccountNo
+    										 ) {
+    	LbPayment payment = new LbPayment();
+    	payment.comment = invoiceRef;
+    	payment.ourRef = ourRef;
+    	payment.transDate = payDate;
+    	payment.amount = (double)Math.round(amount*100.0)/100.0;
+    	amountSEK = (double)Math.round(amountSEK*100.0)/100.0;
+    	// Add name record
+    	LbTk2Record nameRec = new LbTk2Record(recipientNo, name, "");
+    	payment.records.add(nameRec);
+    	// Add address record
+    	LbTk3Record addrRec = new LbTk3Record(recipientNo, address, postal, countryCode);
+    	payment.records.add(addrRec);
+    	// TODO: Better IBAN check
+    	if (iban!=null & iban.length()>0) {
+    		LbTk4Record ibanRec = new LbTk4Record(recipientNo, swift, iban);
+    		payment.records.add(ibanRec);
+    	}
+    	// Amount
+    	LbTk6Record amountRec = new LbTk6Record(recipientNo, invoiceRef, amountSEK, currency, payDate, amount);
+    	payment.records.add(amountRec);
+    	// Bank code
+    	LbTk7Record bankRec = new LbTk7Record(recipientNo, bankCode, hbAccountNo);
+    	payment.records.add(bankRec);
+    	
+    	return(payment);
+    }
+    
+    /**
      * Adds a record and adjusts the payment record accordingly
      * 
      * @param record
