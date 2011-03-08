@@ -9,18 +9,19 @@ public class LbTk6Record extends BgRecord {
 	private int	m_recipientNo;
 	private String	m_invoiceRef;
 	private String	m_currencyCode;
-	private double 	m_amountSEK;
+	private double 	m_amount;
 	private java.util.Date	m_payDate;
-	private double	m_amount;
+	private double	m_foreignAmount;
 	
 	
-	public LbTk6Record(int recipientNo, String invoiceRef, double amountSEK, String currencyCode, java.util.Date payDate, double amount) {
+	public LbTk6Record(int recipientNo, String invoiceRef, double amount, String currencyCode, java.util.Date payDate, double foreignAmount) {
 		super("6");
+		m_recipientNo = recipientNo;
 		m_invoiceRef = invoiceRef;
-		m_amountSEK = amountSEK;
+		m_amount = amount;
 		m_currencyCode = currencyCode;
 		m_payDate = payDate;
-		m_amount = amount;
+		m_foreignAmount = foreignAmount;
 	}
 
 	@Override
@@ -37,9 +38,11 @@ public class LbTk6Record extends BgRecord {
 				true, '0', 7)); // Pos 2-8
 		line.append(BgUtil.fillToLength(m_invoiceRef, false, ' ', 25));
 		// Kundbelopp - SEK
-		line.append(BgUtil.getAmountStr(m_amountSEK, 11));
+		line.append(BgUtil.getAmountStr(m_amount, 11));
 		// Valutakonto TODO: Implement
-		line.append("0000000000");
+		// line.append("0000000000");
+		// HB
+		line.append("          ");
 		// Currency code
 		line.append(m_currencyCode.substring(0, 3).toUpperCase());
 		// Pay date
@@ -49,7 +52,7 @@ public class LbTk6Record extends BgRecord {
 		// Reserve
 		line.append("0");
 		// Invoice amount in currency Code
-		line.append(BgUtil.getAmountStr(m_amount, 13));
+		line.append(BgUtil.getAmountStr(m_foreignAmount, 13));
 		while(line.length()<80) {
 			line.append(" ");
 		}

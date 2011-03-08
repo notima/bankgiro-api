@@ -1,29 +1,28 @@
 package se.notima.bg.lb;
 
 import java.util.Date;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.Vector;
-
 import se.notima.bg.BgFooter;
 import se.notima.bg.BgHeader;
 import se.notima.bg.BgRecord;
-import se.notima.bg.BgSet;
 import se.notima.bg.BgUtil;
-import se.notima.bg.Transaction;
 
 public class LbUtlSet extends AbstractLbSet {
 
-	public static LbUtlSet createPayableSet(String senderAccount, String senderName, String senderAddress) {
+	private int	m_bankId;
+	
+	public static LbUtlSet createPayableSet(String senderAccount, String senderName, String senderAddress, int bankId) {
 		String sA = BgUtil.toDigitsOnly(senderAccount);
 		BgHeader h = new LbTk0Header(sA, senderName, senderAddress);
-		BgFooter f = new LbTk9Footer(sA);
-		LbUtlSet set = new LbUtlSet(h,f);
+		LbTk9Footer f = new LbTk9Footer(sA);
+		LbUtlSet set = new LbUtlSet(h,f, bankId);
 		return(set);
 	}
 	
-	public LbUtlSet(BgHeader header, BgFooter footer) {
+	public LbUtlSet(BgHeader header, BgFooter footer, int bankId) {
 		super(header, footer);
+		header.setParentSet(this);
+		footer.setParentSet(this);
+		m_bankId = bankId;
 	}
 
 	@Override
@@ -36,6 +35,14 @@ public class LbUtlSet extends AbstractLbSet {
 	public Date getCreditRecordDate(String recipientBg, double amount) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public int getBankId() {
+		return m_bankId;
+	}
+
+	public void setBankId(int mBankId) {
+		m_bankId = mBankId;
 	}
 	
 

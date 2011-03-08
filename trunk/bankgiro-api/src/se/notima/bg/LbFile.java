@@ -25,6 +25,7 @@ import java.util.*;
 import java.io.*;
 import java.nio.charset.Charset;
 
+import se.notima.bg.lb.AbstractLbSet;
 import se.notima.bg.lb.LbPayment;
 import se.notima.bg.lb.LbPaymentRecord;
 import se.notima.bg.lb.LbRecordFactory;
@@ -42,7 +43,7 @@ public class LbFile extends BgFile {
 		return records;
 	}
 
-	public void addSet(LbSet rec) {
+	public void addSet(AbstractLbSet rec) {
 		if (records==null) {
 			records = new Vector<BgSet>();
 		}

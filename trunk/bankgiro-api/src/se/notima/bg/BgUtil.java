@@ -105,6 +105,22 @@ public class BgUtil {
 	}
 	
 	/**
+	 * Perform very basic validation
+	 * 
+	 * @param swift
+	 * @param iban
+	 * @return
+	 */
+	public static boolean validateIban(String swift, String iban) {
+		boolean pass = false;
+		if (swift!=null && swift.trim().length()>0 &&
+				iban!=null && iban.trim().length()>0) {
+			pass = true;
+		}
+		return(pass);	
+	}
+	
+	/**
 	 *  Validate Bankgiro
 	 *  @param Bankgiro
 	 *  @return "" or Error AD_Message
@@ -299,7 +315,7 @@ public class BgUtil {
 	 */
 	public static String fillToLength(String str, boolean rightAlign, char fillChar, int len) {
 		StringBuffer buf = new StringBuffer();
-		if (str.length()>=len) {
+		if (str.length()>len) {
 			buf.append(str.substring(0, len-1));
 			return(buf.toString());
 		}

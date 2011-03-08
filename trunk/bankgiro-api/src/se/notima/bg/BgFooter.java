@@ -26,6 +26,8 @@ public abstract class BgFooter extends BgRecord {
 
 	protected int		count;
 	protected double	amount;
+	protected double	foreignAmount;
+	protected String	foreignCurrency;
 	
 	public BgFooter(String code) {
 		super(code);
@@ -60,6 +62,30 @@ public abstract class BgFooter extends BgRecord {
 		this.amount -= amount;
 	}
 	
+	public void incrementForeignAmount(double amount) {
+		this.foreignAmount += amount;
+	}
+	
+	public void decrementForeignAmount(double amount) {
+		this.foreignAmount -= amount;
+	}
+	
+	public double getForeignAmount() {
+		return foreignAmount;
+	}
+
+	public void setForeignAmount(double foreignAmount) {
+		this.foreignAmount = foreignAmount;
+	}
+
+	public String getForeignCurrency() {
+		return foreignCurrency;
+	}
+
+	public void setForeignCurrency(String foreignCurrency) {
+		this.foreignCurrency = foreignCurrency;
+	}
+
 	public abstract String toRecordString();
 	
 	public abstract BgFooter parse(String line) throws BgParseException;

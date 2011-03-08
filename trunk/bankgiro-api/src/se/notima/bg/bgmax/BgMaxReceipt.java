@@ -26,6 +26,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import se.notima.bg.BgRecord;
+import se.notima.bg.BgSet;
 import se.notima.bg.Transaction;
 
 public class BgMaxReceipt implements Transaction {
@@ -312,6 +313,36 @@ public class BgMaxReceipt implements Transaction {
 		if(buf.length()>0 && buf.charAt(buf.length()-1)=='\n') buf.deleteCharAt(buf.length()-1);
 		
 		return(buf.toString());
+	}
+
+	@Override
+	public double getForeignAmount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getForeignCurrency() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isForeign() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public BgSet getParentSet() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setParentSet(BgSet parentSet) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

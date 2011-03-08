@@ -25,12 +25,14 @@ import java.util.*;
 
 import se.notima.bg.BgParseException;
 import se.notima.bg.BgRecord;
+import se.notima.bg.BgSet;
 import se.notima.bg.BgUtil;
 import se.notima.bg.Transaction;
 
 public class LbPayment implements Transaction {
 	
 	private Vector<BgRecord>	records;
+	private BgSet				parentSet;
 	private double				amount;
 	private String				dstName;
 	private String				dstAccount;
@@ -40,6 +42,9 @@ public class LbPayment implements Transaction {
 	private Date				transDate;
 	private String 				comment;
 	private String				ocr;
+	private double				foreignAmount;
+	private String				foreignCurrency;
+	private boolean				foreign = false;
 	private Vector<String>		info;
 
     public LbPayment() {
@@ -167,6 +172,8 @@ public class LbPayment implements Transaction {
      * @param bankCode		Bank code (101)
      * @param hbAccountNo	If payments are done from Handelsbanken, this should be the account number
      * 						used for the payment.
+     * @param parentSet		The set that this payment will be added to. The set contains information about
+     * 						the bank id. This must be known to properly generate a file.
      * @return
      */
     public static LbPayment createUtlPayment(int recipientNo,
@@ -177,8 +184,8 @@ public class LbPayment implements Transaction {
     										 String postal,
     										 String countryCode,
     										 String invoiceRef,
-    										 double amountSEK,
     										 double amount,
+    										 double foreignAmount,
     										 String currency,
     										 String ourRef,
     										 Date payDate,
@@ -186,11 +193,12 @@ public class LbPayment implements Transaction {
     										 String hbAccountNo
     										 ) {
     	LbPayment payment = new LbPayment();
+    	payment.setForeign(true);
     	payment.comment = invoiceRef;
     	payment.ourRef = ourRef;
     	payment.transDate = payDate;
+    	payment.foreignAmount = (double)Math.round(foreignAmount*100.0)/100.0;
     	payment.amount = (double)Math.round(amount*100.0)/100.0;
-    	amountSEK = (double)Math.round(amountSEK*100.0)/100.0;
     	// Add name record
     	LbTk2Record nameRec = new LbTk2Record(recipientNo, name, "");
     	payment.records.add(nameRec);
@@ -203,7 +211,7 @@ public class LbPayment implements Transaction {
     		payment.records.add(ibanRec);
     	}
     	// Amount
-    	LbTk6Record amountRec = new LbTk6Record(recipientNo, invoiceRef, amountSEK, currency, payDate, amount);
+    	LbTk6Record amountRec = new LbTk6Record(recipientNo, invoiceRef, payment.amount, currency, payDate, payment.foreignAmount);
     	payment.records.add(amountRec);
     	// Bank code
     	LbTk7Record bankRec = new LbTk7Record(recipientNo, bankCode, hbAccountNo);
@@ -218,6 +226,7 @@ public class LbPayment implements Transaction {
      * @param record
      */
     public void addRecord(BgRecord record) {
+    	record.setParentSet(parentSet);
     	int code = new Integer(record.getTransCode()).intValue();
     	if (code==40) {
     		LbTk40Record r = (LbTk40Record)record;
@@ -413,6 +422,46 @@ public class LbPayment implements Transaction {
 		if (isPgPayment()) return(BgUtil.formatPg(dstPg));
 		if (isAccountPayment()) return(dstAccount); // TODO: Add formatter for account
 		return(null);
+	}
+
+	public boolean isForeign() {
+		return foreign;
+	}
+
+	public void setForeign(boolean international) {
+		this.foreign = international;
+	}
+
+	public double getForeignAmount() {
+		return foreignAmount;
+	}
+
+	public void setForeignAmount(double foreignAmount) {
+		this.foreignAmount = foreignAmount;
+	}
+
+	public String getForeignCurrency() {
+		return foreignCurrency;
+	}
+
+	public void setForeignCurrency(String currency) {
+		this.foreignCurrency = currency;
+	}
+
+	@Override
+	public BgSet getParentSet() {
+		return(parentSet);
+	}
+
+	/**
+	 * Sets parent set of all containing records
+	 */
+	@Override
+	public void setParentSet(BgSet parentSet) {
+		this.parentSet = parentSet;
+		for (BgRecord rec : records) {
+			rec.setParentSet(parentSet);
+		}
 	}
 	
 	
