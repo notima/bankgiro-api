@@ -30,6 +30,12 @@ public interface Transaction {
 	
 	public double getAmount();
 	
+	public double getForeignAmount();
+	
+	public String getForeignCurrency();
+	
+	public boolean isForeign();
+	
 	public String toRecordString();
 	
 	public void addRecord(BgRecord record);
@@ -37,5 +43,9 @@ public interface Transaction {
 	public Date getTransactionDate();
 	
 	public void setTransactionDate(Date d);
+	
+	public void setParentSet(BgSet parentSet);
+	
+	public BgSet getParentSet();
 	
 }

@@ -2,6 +2,7 @@ package se.notima.bg.lb;
 
 import se.notima.bg.BgParseException;
 import se.notima.bg.BgRecord;
+import se.notima.bg.BgSet;
 import se.notima.bg.BgUtil;
 
 public class LbTk7Record extends BgRecord {
@@ -9,7 +10,7 @@ public class LbTk7Record extends BgRecord {
 	private int	m_recipientNo;
 	private int	m_bankCode;	// Betalningskod i Visma
 	private String	m_hbAccountNo; // Used for payments in handelsbanken	
-	
+	private int		bankId = 0;
 	
 	public LbTk7Record(int recipientNo, int bankCode, String hbAccountNo) {
 		super("7");
@@ -25,7 +26,12 @@ public class LbTk7Record extends BgRecord {
 
 	@Override
 	public String toRecordString() {
-
+		// Get parent set if any
+		BgSet parentSet = this.getParentSet();
+		if (parentSet!=null && parentSet instanceof LbUtlSet) {
+			bankId = ((LbUtlSet)parentSet).getBankId();
+		}
+		
 		// Handelsbanken format
 		StringBuffer line = new StringBuffer(getTransCode()); // Pos 1
 		line.append(BgUtil.fillToLength(new Integer(m_recipientNo).toString(), 

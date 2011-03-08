@@ -12,6 +12,7 @@ public class LbTk4Record extends BgRecord {
 	
 	public LbTk4Record(int recipientNo, String swift, String iban) {
 		super("4");
+		m_recipientNo = recipientNo;
 		m_swift = swift;
 		m_iban = iban;
 	}
@@ -28,8 +29,10 @@ public class LbTk4Record extends BgRecord {
 		StringBuffer line = new StringBuffer(getTransCode()); // Pos 1
 		line.append(BgUtil.fillToLength(new Integer(m_recipientNo).toString(), 
 				true, '0', 7)); // Pos 2-8
-		line.append(BgUtil.fillToLength(m_iban.toUpperCase(), false, ' ', 58)); // Pos 9-67
+		line.append(BgUtil.fillToLength(m_iban.toUpperCase(), false, ' ', 59)); // Pos 9-67
 		line.append(BgUtil.fillToLength(m_swift.toUpperCase(), false, ' ', 11)); // Pos 68-78
+		// HB
+		line.append("BP");
 		
 		while(line.length()<80) {
 			line.append(" ");

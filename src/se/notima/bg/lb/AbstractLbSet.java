@@ -13,6 +13,11 @@ import se.notima.bg.Transaction;
 
 public abstract class AbstractLbSet implements BgSet {
 
+	public static final int BANK_HANDELSBANKEN	= 1;
+	public static final int BANK_SWEDBANK = 2;
+	public static final int BANK_SEB = 3;
+	public static final int BANK_NORDEA = 4;
+	
 	protected BgHeader	header;
 	protected BgFooter	footer;
 	protected Vector<Transaction>	records;
@@ -70,9 +75,13 @@ public abstract class AbstractLbSet implements BgSet {
 	 * @param payment
 	 */
     public void addTransaction(Transaction payment) {
+    	payment.setParentSet(this);
     	if (footer!=null) {
     		footer.incrementAmount(payment.getAmount());
     		footer.incrementCount();
+    		if (payment.getForeignAmount()!=0) {
+    			footer.incrementForeignAmount(payment.getForeignAmount());
+    		}
     	}
     	if (payment.getAmount()<0) {
     		creditTransactions.add(payment);

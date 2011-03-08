@@ -2,14 +2,14 @@ package se.notima.bg.lb;
 
 import se.notima.bg.BgFooter;
 import se.notima.bg.BgParseException;
+import se.notima.bg.BgSet;
 import se.notima.bg.BgUtil;
 
 public class LbTk9Footer extends BgFooter {
 	
-	private double 	totalSek;
 	private int		totalRecipientsNo;
 	private String	bgAccount;
-	private double  totalUtl;
+	private int		bankId = 0;
 	
 	public LbTk9Footer(String senderAccount) {
 		super("9");
@@ -23,6 +23,12 @@ public class LbTk9Footer extends BgFooter {
 
 	@Override
 	public String toRecordString() {
+		// Get parent set if any
+		BgSet parentSet = this.getParentSet();
+		if (parentSet!=null && parentSet instanceof LbUtlSet) {
+			bankId = ((LbUtlSet)parentSet).getBankId();
+		}
+		
 		// Create "post-record"
 		StringBuffer line = new StringBuffer(transCode);
 		
@@ -37,7 +43,7 @@ public class LbTk9Footer extends BgFooter {
 		// Sender's bank account (bankgiro)
 		line.append(account);
 		// Total amount in SEK
-		line.append(BgUtil.getAmountStr(totalSek));
+		line.append(BgUtil.getAmountStr(amount));
 		// Reserve field 22-27
 		line.append("      ");
 		// Reserve field 28-31
@@ -48,10 +54,15 @@ public class LbTk9Footer extends BgFooter {
 		} else {
 			line.append(BgUtil.fillToLength(new Integer(totalRecipientsNo).toString(), true, ' ', 12));
 		}
-		line.append(BgUtil.fillToLength(new Integer(count).toString(), true, ' ', 12));
+		// Number of records
+		if (bankId!=LbUtlSet.BANK_HANDELSBANKEN) {
+			line.append(BgUtil.fillToLength(new Integer(count).toString(), true, ' ', 12));
+		} else {
+			line.append("            ");
+		}
 		// Reserve field 56-63
 		line.append(BgUtil.fillToLength(" ", false, ' ', 8));
-		totalUtl = totalUtl * 100;
+		double totalUtl = foreignAmount * 100;
 		line.append(BgUtil.fillToLength(new Long(Math.round(totalUtl)).toString(), 
 										true, '0', 15));
 

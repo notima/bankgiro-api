@@ -29,6 +29,7 @@ package se.notima.bg;
  */
 public abstract class BgRecord {
 
+	protected BgSet		parentSet;
 	protected int	    seqNo;
 	protected String	transCode;
 
@@ -55,5 +56,15 @@ public abstract class BgRecord {
 	public abstract BgRecord parse(String line) throws BgParseException;
 	
 	public abstract String toRecordString();
+
+	public BgSet getParentSet() {
+		return parentSet;
+	}
+
+	public void setParentSet(BgSet parentSet) {
+		this.parentSet = parentSet;
+	}
+	
+	
 	
 }

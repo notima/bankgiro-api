@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import se.notima.bg.BgHeader;
 import se.notima.bg.BgParseException;
 import se.notima.bg.BgRecord;
+import se.notima.bg.BgSet;
 import se.notima.bg.BgUtil;
 
 /**
@@ -71,6 +72,13 @@ public class LbTk0Header extends BgHeader {
 
 	@Override
 	public String toRecordString() {
+		// Get parent set if any
+		int bankId = 0;
+		BgSet parentSet = this.getParentSet();
+		if (parentSet!=null && parentSet instanceof LbUtlSet) {
+			bankId = ((LbUtlSet)parentSet).getBankId();
+		}
+		
 		// Create "post-record"
 		StringBuffer line = new StringBuffer(transCode);
 		
@@ -99,10 +107,14 @@ public class LbTk0Header extends BgHeader {
 			line.append("      ");
 		}
 		// Layout code
-		if (bga.length()==8) {
-			line.append("2");
+		if (bankId==LbUtlSet.BANK_HANDELSBANKEN) {
+			line.append("2"); // Always 2 on HB
 		} else {
-			line.append("1");
+			if (bga.length()==8) {
+				line.append("2");
+			} else {
+				line.append("1");
+			}
 		}
         while(line.length()<80) {
             line.append(" ");
