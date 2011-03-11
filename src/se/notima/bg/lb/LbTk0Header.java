@@ -98,7 +98,7 @@ public class LbTk0Header extends BgHeader {
 		String dateStr = BgUtil.getDateString(fileDate);
 		line.append(dateStr);
 		// Name of sender
-		line.append(BgUtil.fillToLength(name.toUpperCase(), false, ' ', 22));
+		line.append(BgUtil.fillToLength(name.toUpperCase(), false, ' ', 23));
 		// Address of sender
 		line.append(BgUtil.fillToLength(address.toUpperCase(), false, ' ', 35));
 		if (payDate!=null) {
