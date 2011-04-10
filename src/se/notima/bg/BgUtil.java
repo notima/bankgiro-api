@@ -331,4 +331,30 @@ public class BgUtil {
 		return(buf.toString());
 	}
 
+	public static boolean validateBankAccount(String clearing, String accountNo) {
+		if (clearing==null || accountNo==null) return false;
+		String clr = BgUtil.toDigitsOnly(clearing);
+		String no = BgUtil.toDigitsOnly(accountNo);
+		if (clr.length()<4 || clr.length()>5) {
+			return false;
+		}
+		if (no.length()<5 || clr.length()>10) {
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * 
+	 * @param clearing
+	 * @param accountNo
+	 * @return Trims account from all non digits. Separates the clearing and account no
+	 * 		   with a hyphen. '-'
+	 */
+	public static String getAccountString(String clearing, String accountNo) {
+		String clr = BgUtil.toDigitsOnly(clearing);
+		String no = BgUtil.toDigitsOnly(accountNo);
+		return(clr + "-" + no);
+	}
+
 }
