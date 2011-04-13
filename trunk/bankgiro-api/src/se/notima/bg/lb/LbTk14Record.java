@@ -39,7 +39,7 @@ public class LbTk14Record extends BgRecord implements LbPaymentRecord {
 	protected String	ourRefText;
 	protected String	payTypeCode;	// Betaltypskod
 	
-	private static Pattern	linePattern1 = Pattern.compile("14(\\d{10})([\\w|\\s|\\W]{25})(\\d{12})(\\w)(\\d{10})(.*)"); // From BG format
+	private static Pattern	linePattern1 = Pattern.compile("14(\\d{9}[\\d|\\s])([\\w|\\s|\\W]{25})(\\d{12})(\\w)(\\d{10})(.*)"); // From BG format
 	private static Pattern	linePattern2 = Pattern.compile("14(\\d{10})([\\d|\\s]{25})(\\d{12})(\\d{6}).{5}(.*)"); // To BG format
 	
 	public LbTk14Record() {
