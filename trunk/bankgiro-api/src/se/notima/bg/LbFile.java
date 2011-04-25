@@ -94,7 +94,7 @@ public class LbFile extends BgFile {
     			continue;
     		}
     		// If we have a current payment which is complete, add this now as a transaction 
-    		if (code!=25 && code!=65 && completePayment) {
+    		if (code!=25 && code!=65 && code!=21 && code!=20 && completePayment) {
         		// Add the payment to current set when complete
     			currentSet.addTransaction(currentPayment);
     			currentPayment = null; // Set to null for safety.
@@ -117,10 +117,10 @@ public class LbFile extends BgFile {
     		}
     		// If we have no current set at this point, something is wrong.
     		if (currentSet==null) throw new BgParseException("Footer but no current set. Error in file.", line);
+    		
     		// Check if credit description
-    		if (code==21) {
+    		if (code==21 || code==20) {
     			currentSet.addCreditRecord(record);
-    			completePayment = false; // Don't try to add a transaction in next iteration.
     			continue;
     		}
     		
@@ -140,7 +140,7 @@ public class LbFile extends BgFile {
     		currentPayment.addRecord(record);
     		
     		// Check if the payment is complete
-    		if (code==14 || code==15 || code==16 || code==17 || code==20 || code==54) {
+    		if (code==14 || code==15 || code==16 || code==17 || code==54) {
     			completePayment = true;
     		}
     	}

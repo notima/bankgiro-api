@@ -60,7 +60,7 @@ public class LbSet extends AbstractLbSet {
 				creditRecords.put(r.getRecipientBg(), recs);
 			}
 			recs.add(r);
-			// Find the credit which this credit record belongs to
+			// Find the credit which this credit record belongs to and set transaction date from Tk21
 			Transaction tr;
 			LbPayment payment;
 			for (Iterator<Transaction> it = creditTransactions.iterator(); it.hasNext();) {
@@ -70,7 +70,17 @@ public class LbSet extends AbstractLbSet {
 					payment.setTransactionDate(r.getCreditDate());
 				}
 			}
-		}
+		 } else if (creditRecord instanceof LbTk20Record) {
+			 // LbTk20Record is just an information message
+			 LbTk20Record r = (LbTk20Record)creditRecord;
+				Vector<BgRecord> recs = creditRecords.get(r.getRecipientBg());
+				if (recs==null) {
+					recs = new Vector<BgRecord>();
+					creditRecords.put(r.getRecipientBg(), recs);
+				}
+				recs.add(r);			 
+		 }
+		
 	}
 
 	@Override

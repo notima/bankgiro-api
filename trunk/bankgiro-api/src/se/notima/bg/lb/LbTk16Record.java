@@ -37,7 +37,7 @@ import se.notima.bg.BgUtil;
  */
 public class LbTk16Record extends BgRecord implements LbPaymentRecord {
 
-	private static Pattern	linePattern1 = Pattern.compile("16(\\d{10})([\\d|\\s]{25})(\\d{12})(\\d{6})(\\d).{4}(.*)");
+	private static Pattern	linePattern1 = Pattern.compile("16(\\d{9}[\\d|\\s])([\\s|\\w|\\W]{25})(\\d{12})(\\d{6})(\\d).{4}(.*)"); 
 	
     protected String    recipientBg;
 	protected String	ocrRef;
