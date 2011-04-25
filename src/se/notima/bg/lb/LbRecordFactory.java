@@ -46,6 +46,9 @@ public class LbRecordFactory implements BgRecordFactory {
 			case 16:
 				record = new LbTk16Record();
 				break;
+			case 20:
+				record = new LbTk20Record();
+				break;
 			case 21:
 				record = new LbTk21Record();
 				break;
