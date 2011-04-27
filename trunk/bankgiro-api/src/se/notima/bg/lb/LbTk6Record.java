@@ -38,7 +38,7 @@ public class LbTk6Record extends BgRecord {
 				true, '0', 7)); // Pos 2-8
 		line.append(BgUtil.fillToLength(m_invoiceRef, false, ' ', 25));
 		// Kundbelopp - SEK
-		line.append(BgUtil.getAmountStr(m_amount, 11));
+		line.append(BgUtil.getAmountStr(m_amount, 11, false));
 		// Valutakonto TODO: Implement
 		// line.append("0000000000");
 		// HB
@@ -52,7 +52,7 @@ public class LbTk6Record extends BgRecord {
 		// Reserve
 		line.append("0");
 		// Invoice amount in currency Code
-		line.append(BgUtil.getAmountStr(m_foreignAmount, 13));
+		line.append(BgUtil.getAmountStr(m_foreignAmount, 13, false));
 		while(line.length()<80) {
 			line.append(" ");
 		}

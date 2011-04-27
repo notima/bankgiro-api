@@ -85,6 +85,9 @@ public class LbTk29Record extends BgFooter {
 			amountStr.insert(0, "0");
 		}
 		line.append(amountStr);
+		if (amount<0) {
+			line.append("-");
+		}
 		while(line.length()<80) {
 			line.append(" ");
 		}
