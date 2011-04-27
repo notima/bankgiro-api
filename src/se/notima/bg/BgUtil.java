@@ -167,29 +167,32 @@ public class BgUtil {
 	/**
 	 * Converts a double to 12 digits where the two last digits
 	 * are "öre" or "cents".
-	 * If the amount is negative the last position is replaced.
+	 * Negative amounts are returned as absolute (no negative indicator)
 	 *
 	 * @return
 	 */
 	public static String getAmountStr(double amount) {
-		return(getAmountStr(amount, 12));
+		return(getAmountStr(amount, 12, true));
 	}
 	
 	/**
 	 * 
 	 * @param amount
 	 * @param len		Let you specify the length of the string
+	 * @param absolute	If true no negative indicator. If false the last digit is replaced
+	 * 					with a letter according to a specific pattern to indicate a negative
+	 * 					value.
 	 * @return
 	 */
-	public static String getAmountStr(double amount, int len) {
+	public static String getAmountStr(double amount, int len, boolean absolute) {
 		StringBuffer buf = new StringBuffer();
 		long newAmount = Math.round(Math.abs(amount)*100.0);
 		buf.append(new Long(newAmount).toString());
 		while(buf.length()<len) {
 			buf.insert(0, "0");
 		}
-		// Replace if negative
-		if (amount<0) {
+		// Replace if negative and not absolute
+		if (amount<0 && !absolute) {
 			String minusStr;
 			char lastDigit = buf.charAt(buf.length()-1);
 			switch (lastDigit) {
