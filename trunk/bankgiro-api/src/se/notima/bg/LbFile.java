@@ -30,6 +30,7 @@ import se.notima.bg.lb.LbPayment;
 import se.notima.bg.lb.LbPaymentRecord;
 import se.notima.bg.lb.LbRecordFactory;
 import se.notima.bg.lb.LbSet;
+import se.notima.bg.lb.LbTk16Record;
 
 public class LbFile extends BgFile {
 
@@ -129,10 +130,10 @@ public class LbFile extends BgFile {
     			currentPayment = new LbPayment();
     			completePayment = false;
     		}
-    		// Set pay date from set if not individually in the record
+    		// Set pay date from set if not individually in the record (or if credit record)
     		if (record instanceof LbPaymentRecord) {
     			LbPaymentRecord r = (LbPaymentRecord)record;
-    			if (r.getPayDate()==null) {
+    			if (r.getPayDate()==null || r instanceof LbTk16Record) {
     				((LbPaymentRecord)record).setPayDate(currentSet.getPayDate());
     			}
     		}
