@@ -169,7 +169,7 @@ public class LbPayment implements Transaction {
      * @param currency		Foreign currency (ISO code)
      * @param ourRef		Our reference for this payment.
      * @param payDate		Date when payment should occur
-     * @param bankCode		Bank code (101)
+     * @param bankCode		Bank code (101) (Varuimport/export)
      * @param hbAccountNo	If payments are done from Handelsbanken, this should be the account number
      * 						used for the payment.
      * @param parentSet		The set that this payment will be added to. The set contains information about
