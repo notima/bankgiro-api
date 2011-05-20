@@ -5,6 +5,12 @@ import se.notima.bg.BgRecord;
 import se.notima.bg.BgSet;
 import se.notima.bg.BgUtil;
 
+/**
+ * Centralbankspost med debetkontonummer
+ * 
+ * @author Daniel Tamm
+ *
+ */
 public class LbTk7Record extends BgRecord {
 
 	private int	m_recipientNo;
