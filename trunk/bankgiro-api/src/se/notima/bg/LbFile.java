@@ -145,7 +145,7 @@ public class LbFile extends BgFile {
     			completePayment = true;
     		}
     	}
-    	
+    	reader.close();
     }
     
 	public String toFileString() {
