@@ -107,7 +107,7 @@ public class TestBgUtil extends TestCase {
 
 	@Test
 	public void testGetAmountStr() {
-		String result = BgUtil.getAmountStr(-100.23);
+		String result = BgUtil.getAmountStr(-100.23, 12, false);
 		Assert.assertEquals("00000001002L", result);
 	}
 
@@ -122,6 +122,13 @@ public class TestBgUtil extends TestCase {
 	@Test
 	public void testToOCRNumber() {
 	}
+	
+	@Test
+	public void testToOCRNumberWithLengthCheck() {
+		String result = BgUtil.toOCRNumberWithLengthCheck("750210001012079");
+		Assert.assertEquals("75021000101207972", result);
+	}
+	
 
 	@Test
 	public void testIsValidOCRNumber() {
