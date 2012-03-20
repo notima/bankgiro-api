@@ -251,6 +251,19 @@ public class BgUtil {
     }
 	
 	/**
+	 * Converts a string of digits to an OCR-number with length check
+	 * @param indata
+	 * @return
+	 */
+	public static String toOCRNumberWithLengthCheck(String indata) {
+		indata = toDigitsOnly(indata);
+		int length = indata.length()+2; // Add two for the check digits
+		length = length%10; // Modulus
+		String ocrCode = indata + length;
+		return(ocrCode + getLuhnDigit(ocrCode));
+	}
+	
+	/**
 	 *  Validate OCR number.
 	 *  - Based on LUHN formula (Modulus10)
 	 *  @param OCRNumber
