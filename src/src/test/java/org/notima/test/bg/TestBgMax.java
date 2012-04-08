@@ -32,7 +32,7 @@ public class TestBgMax extends TestCase {
 	@Test
 	public void testReadBgMax() {
 		
-		URL url = ClassLoader.getSystemResource("BGMAX_Sample1.txt");
+		URL url = ClassLoader.getSystemResource("samplefiles/BGMAX_Sample1.txt");
 		if (url==null) {
 			Assert.fail("Can't find BGMAX_Sample1.txt in class path. The files are normally located in test/samplefiles");
 		}
