@@ -12,4 +12,17 @@
   		<version>4.10</version>
   	</dependency>
   </dependencies>
+  <url>http://www.notima.org/index.php/software/bankgiro-api</url>
+  <organization>
+  	<name>ADempiere Sverige KB</name>
+  	<url>www.adempiere.se</url>
+  </organization>
+  <scm>
+  	<url>svn:https://bankgiro.svn.sourceforge.net/svnroot/bankgiro</url>
+  	<developerConnection>Daniel Tamm</developerConnection>
+  </scm>
+  <issueManagement>
+  	<url>http://sourceforge.net/tracker/?group_id=263953&amp;atid=1381851</url>
+  	<system>SourceForge</system>
+  </issueManagement>
 </project>
