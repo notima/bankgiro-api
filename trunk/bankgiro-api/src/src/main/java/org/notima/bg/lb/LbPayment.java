@@ -449,7 +449,6 @@ public class LbPayment implements Transaction {
 		this.foreignCurrency = currency;
 	}
 
-	@Override
 	public BgSet getParentSet() {
 		return(parentSet);
 	}
@@ -457,7 +456,6 @@ public class LbPayment implements Transaction {
 	/**
 	 * Sets parent set of all containing records
 	 */
-	@Override
 	public void setParentSet(BgSet parentSet) {
 		this.parentSet = parentSet;
 		for (BgRecord rec : records) {

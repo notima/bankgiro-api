@@ -57,7 +57,6 @@ public class BgMaxReceipt implements Transaction {
 		this.transDate = transDate;
 	}
 
-	@Override
 	public void addRecord(BgRecord record) {
 		int code = new Integer(record.getTransCode()).intValue();
 		if (code==20) {
@@ -118,7 +117,6 @@ public class BgMaxReceipt implements Transaction {
 		records.add(record);
 	}
 	
-	@Override
 	public double getAmount() {
 		return amount;
 	}
@@ -136,7 +134,6 @@ public class BgMaxReceipt implements Transaction {
 		}
 	}
 
-	@Override
 	public String toRecordString() {
 		StringBuffer lines = new StringBuffer();
 		if (records!=null && records.size()>0) {
@@ -148,12 +145,10 @@ public class BgMaxReceipt implements Transaction {
 	}
 
 
-	@Override
 	public Date getTransactionDate() {
 		return transDate;
 	}
 
-	@Override
 	public void setTransactionDate(Date d) {
 		transDate = d;
 	}
@@ -316,31 +311,26 @@ public class BgMaxReceipt implements Transaction {
 		return(buf.toString());
 	}
 
-	@Override
 	public double getForeignAmount() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
 	public String getForeignCurrency() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public boolean isForeign() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public BgSet getParentSet() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void setParentSet(BgSet parentSet) {
 		// TODO Auto-generated method stub
 		

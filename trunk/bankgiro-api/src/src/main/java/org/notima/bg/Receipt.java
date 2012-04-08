@@ -28,19 +28,16 @@ public class Receipt implements Transaction {
 
 	private Vector<BgRecord>	records = new Vector<BgRecord>();
 	
-	@Override
 	public double getAmount() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
 	public void setSeqNo(int seqNo) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public String toRecordString() {
 		// TODO Auto-generated method stub
 		return null;
@@ -50,43 +47,36 @@ public class Receipt implements Transaction {
 		records.add(rec);
 	}
 
-	@Override
 	public Date getTransactionDate() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void setTransactionDate(Date d) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public double getForeignAmount() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
 	public String getForeignCurrency() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public boolean isForeign() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public BgSet getParentSet() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void setParentSet(BgSet parentSet) {
 		// TODO Auto-generated method stub
 		

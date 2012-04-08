@@ -49,12 +49,10 @@ public class BgMaxSet implements BgSet {
 		this.fileFooter = fileFooter;
 	}
 
-	@Override
 	public void addTransaction(Transaction trans) {
 		records.add(trans);
 	}
 
-	@Override
 	public void setRecords(Vector<Transaction> records) {
 		this.records = records;
 	}
@@ -99,7 +97,6 @@ public class BgMaxSet implements BgSet {
         return(null);
     }
 
-	@Override
 	public String toRecordString() {
 		StringBuffer lines = new StringBuffer();
 		lines.append(fileHeader.toRecordString() + "\n");
@@ -116,7 +113,6 @@ public class BgMaxSet implements BgSet {
 		
 	}
 
-	@Override
 	public Date getCreditRecordDate(String recipientBg, double amount) {
 		// TODO Auto-generated method stub
 		return null;
