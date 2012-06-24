@@ -221,6 +221,17 @@ public class BgUtil {
 	}
 
 	/**
+	 * Return Luhn Digit using an amount as in data
+	 * 
+	 * @param amount
+	 * @return
+	 */
+	public static int getLuhnDigit(double amount) {
+		String amountStr = trimLeadingZeros(getAmountStr(amount,20,true));
+		return(getLuhnDigit(amountStr));
+	}
+	
+	/**
 	 * Luhn algoritm.
 	 * @param indata
 	 * @return

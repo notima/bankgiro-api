@@ -117,6 +117,8 @@ public class TestBgUtil extends TestCase {
 
 	@Test
 	public void testGetLuhnDigit() {
+		int result = BgUtil.getLuhnDigit("2876821");
+		Assert.assertEquals(6, result);
 	}
 
 	@Test
@@ -134,4 +136,5 @@ public class TestBgUtil extends TestCase {
 	public void testIsValidOCRNumber() {
 	}
 
+	
 }
