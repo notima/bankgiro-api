@@ -171,6 +171,8 @@ public class LbPayment implements Transaction {
      * @param ourRef		Our reference for this payment.
      * @param payDate		Date when payment should occur
      * @param bankCode		Bank code (101) (Varuimport/export)
+     * @param costDist		CostDistribution, LbTk3Record.COST_* (who pays bank fees)
+     * @param trxType		Transaction type, LbTk3Record.TRX_* (how fast)
      * @param hbAccountNo	If payments are done from Handelsbanken, this should be the account number
      * 						used for the payment.
      * @param parentSet		The set that this payment will be added to. The set contains information about
@@ -191,6 +193,8 @@ public class LbPayment implements Transaction {
     										 String ourRef,
     										 Date payDate,
     										 int bankCode,
+    										 String costDist,
+    										 String trxType,
     										 String hbAccountNo
     										 ) {
     	LbPayment payment = new LbPayment();
@@ -204,7 +208,7 @@ public class LbPayment implements Transaction {
     	LbTk2Record nameRec = new LbTk2Record(recipientNo, name, "");
     	payment.records.add(nameRec);
     	// Add address record
-    	LbTk3Record addrRec = new LbTk3Record(recipientNo, address, postal, countryCode);
+    	LbTk3Record addrRec = new LbTk3Record(recipientNo, address, postal, countryCode, costDist, trxType);
     	payment.records.add(addrRec);
     	// TODO: Better IBAN check
     	if (iban!=null & iban.length()>0) {
