@@ -14,7 +14,7 @@ import org.notima.bg.BgUtil;
 public class LbTk7Record extends BgRecord {
 
 	private int	m_recipientNo;
-	private int	m_bankCode;	// Betalningskod i Visma
+	private int	m_bankCode;	// Betalningskod i Visma, ex 101 = Varuimport/export
 	private String	m_hbAccountNo; // Used for payments in handelsbanken	
 	private int		bankId = 0;
 	
