@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.notima.bg</groupId>
   <artifactId>bankgiro-api</artifactId>
-  <version>1.3.1</version>
+  <version>1.3.2</version>
   <name>bankgiro-api</name>
   <description>API for working with bankgiro files (transaction files for Swedish banking system). (www.bankgirot.se)</description>
   
@@ -34,8 +34,7 @@
   	<url>http://sourceforge.net/tracker/?group_id=263953&amp;atid=1381851</url>
   	<system>SourceForge</system>
   </issueManagement>
-  
-  <profiles>
+    <profiles>
   	<profile>
  		<id>release-sign-artifacts</id>
     	<activation>
@@ -57,12 +56,13 @@
 		              <goal>sign</goal>
 		            </goals>
 		          </execution>
-		        </executions>  		
+		        </executions>
   			</plugin>
 	  		</plugins>
   		</build>
   	</profile>
   </profiles>
-  
-  
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 </project>
