@@ -136,5 +136,15 @@ public class TestBgUtil extends TestCase {
 	public void testIsValidOCRNumber() {
 	}
 
+	@Test
+	public void testOnlyUSASCII() {
+		
+		String result = BgUtil.onlyUSASCII("UMEÅ");
+		Assert.assertEquals("UMEA", result);
+		result = BgUtil.onlyUSASCII("Gräddvägen");
+		Assert.assertEquals("GRADDVAGEN", result);
+		
+	}
+	
 	
 }

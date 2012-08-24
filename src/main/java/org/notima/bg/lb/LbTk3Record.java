@@ -28,8 +28,8 @@ public class LbTk3Record extends BgRecord {
 	public LbTk3Record(int recipientNo, String address, String postal, String countryCode, String costDist, String trxType) {
 		super("3");
 		m_recipientNo = recipientNo;
-		m_adress = address;
-		m_postal = postal;
+		m_adress = BgUtil.onlyUSASCII(address);
+		m_postal = BgUtil.onlyUSASCII(postal);
 		m_countryCode = countryCode;
 		// Lookup country name
 		m_countryName = "";

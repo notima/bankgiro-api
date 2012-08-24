@@ -384,4 +384,36 @@ public class BgUtil {
 		return(clr + "-" + no);
 	}
 
+	/**
+	 * Removes all non USASCII chars and converts to uppercase. Swedish characters
+	 * ÅÄÖ are replaced with A and O.
+	 * @param clearupstring
+	 * @return
+	 */
+	public static String onlyUSASCII(String clearupstring) {
+		if (clearupstring==null) return null;
+		StringBuffer buf = new StringBuffer();
+		String work = clearupstring.toUpperCase();
+		char c;
+		for (int i=0; i<work.length(); i++) {
+			c = work.charAt(i);
+			if (c=='Å' || c=='Ä') {
+				buf.append("A");
+				continue;
+			}
+			if (c=='Ö') {
+				buf.append("O");
+				continue;
+			}
+			if ((c>='0' && c<='9') || (c>='A' && c<='Z') || c==',' || c=='.' || c=='-') {
+				buf.append(c);
+			} else {
+				// Blank out non-legal chars
+				buf.append(" ");
+			}
+				
+		}
+		return(buf.toString());
+	}
+	
 }

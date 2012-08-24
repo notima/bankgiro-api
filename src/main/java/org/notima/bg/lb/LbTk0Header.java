@@ -38,8 +38,8 @@ public class LbTk0Header extends BgHeader {
 		bgAccount = senderAccount;
 		setHeaderType("LEVERANT\u00d6RSBETALNINGAR");
 		fileDate = Calendar.getInstance().getTime();
-		name = aName;
-		address = aAddress;
+		name = BgUtil.onlyUSASCII(aName);
+		address = BgUtil.onlyUSASCII(aAddress);
 	}
 	
 	@Override
@@ -99,7 +99,7 @@ public class LbTk0Header extends BgHeader {
 		String dateStr = BgUtil.getDateString(fileDate);
 		line.append(dateStr);
 		// Name of sender
-		line.append(BgUtil.fillToLength(name.toUpperCase(), false, ' ', 23));
+		line.append(BgUtil.fillToLength(name.toUpperCase(), false, ' ', 22));
 		// Address of sender
 		line.append(BgUtil.fillToLength(address.toUpperCase(), false, ' ', 35));
 		if (payDate!=null) {
