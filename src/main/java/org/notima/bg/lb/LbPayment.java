@@ -165,8 +165,8 @@ public class LbPayment implements Transaction {
      * @param postal		Postal address of payee (ie zip and city)
      * @param countryCode	Country of payee
      * @param invoiceRef	The payees invoice ref. They identify the payment on this ref.
-     * @param amountSEK		Amount in SEK
-     * @param amount		Amount in foreign currency
+     * @param amount		Amount in SEK (optional, if zero it's not considered)
+     * @param foreignAmount		Amount in foreign currency
      * @param currency		Foreign currency (ISO code)
      * @param ourRef		Our reference for this payment.
      * @param payDate		Date when payment should occur

@@ -37,8 +37,13 @@ public class LbTk6Record extends BgRecord {
 		line.append(BgUtil.fillToLength(new Integer(m_recipientNo).toString(), 
 				true, '0', 7)); // Pos 2-8
 		line.append(BgUtil.fillToLength(m_invoiceRef, false, ' ', 25));
-		// Kundbelopp - SEK
-		line.append(BgUtil.getAmountStr(m_amount, 11, false));
+		// Kundbelopp - SEK (optional)
+		if (m_amount!=0) {
+			line.append(BgUtil.getAmountStr(m_amount, 11, false));
+		} else {
+			// Leave empty if zero
+			line.append("           ");
+		}
 		// Valutakonto TODO: Implement
 		// line.append("0000000000");
 		// HB
