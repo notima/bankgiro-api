@@ -13,8 +13,8 @@ public class LbTk2Record extends BgRecord {
 	public LbTk2Record(int recipientNo, String name1, String name2) {
 		super("2");
 		m_recipientNo = recipientNo;
-		m_name1 = name1;
-		m_name2 = name2;
+		m_name1 = BgUtil.onlyUSASCII(name1);
+		m_name2 = BgUtil.onlyUSASCII(name2);
 	}
 
 	@Override
