@@ -415,5 +415,37 @@ public class BgUtil {
 		}
 		return(buf.toString());
 	}
+
+	/**
+	 * Returns number of days from today
+	 */
+	public static int daysFromNow(java.util.Date date) {
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		long then = date.getTime();
+		
+		Calendar nowCal = Calendar.getInstance();
+		long now = nowCal.getTimeInMillis();
+		long daysInMillis = then - now;
+		long days = daysInMillis / 1000 / 60 / 60 / 24;
+		
+		return ((int)days);
+	}
+	
+	/**
+	 * Adds number of days on specified date
+	 * 
+	 */
+	public static java.util.Date addDays(java.util.Date date, int daysToAdd) {
+
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		
+		cal.add(Calendar.DATE, daysToAdd);
+		
+		return(cal.getTime());
+		
+	}
 	
 }
