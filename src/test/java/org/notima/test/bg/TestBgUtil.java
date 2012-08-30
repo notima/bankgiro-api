@@ -146,5 +146,15 @@ public class TestBgUtil extends TestCase {
 		
 	}
 	
+	@Test
+	public void testDaysFromNow() {
+		
+		Calendar nowCal = Calendar.getInstance();
+		nowCal.add(Calendar.DATE, 60);
+		int days = BgUtil.daysFromNow(nowCal.getTime());
+		Assert.assertEquals(60, days);
+		
+	}
+	
 	
 }
