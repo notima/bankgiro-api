@@ -166,7 +166,7 @@ public class BgUtil {
 	
 	/**
 	 * Converts a double to 12 digits where the two last digits
-	 * are "öre" or "cents".
+	 * are "Ã¶re" or "cents".
 	 * Negative amounts are returned as absolute (no negative indicator)
 	 *
 	 * @return
