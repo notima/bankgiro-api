@@ -216,8 +216,13 @@ public class LbPayment implements Transaction {
     		payment.records.add(ibanRec);
     	}
     	// Amount
-    	LbTk6Record amountRec = new LbTk6Record(recipientNo, invoiceRef, payment.amount, currency, payDate, payment.foreignAmount);
-    	payment.records.add(amountRec);
+    	if (payment.amount>0) {
+	    	LbTk6Record amountRec = new LbTk6Record(recipientNo, invoiceRef, payment.amount, currency, payDate, payment.foreignAmount);
+	    	payment.records.add(amountRec);
+    	} else {  // Credit note
+    		LbTk5Record amountRec = new LbTk5Record(recipientNo, invoiceRef, payment.amount, currency, payDate, payment.foreignAmount);
+	    	payment.records.add(amountRec);
+    	}
     	// Bank code
     	LbTk7Record bankRec = new LbTk7Record(recipientNo, bankCode, hbAccountNo);
     	payment.records.add(bankRec);
