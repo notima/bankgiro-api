@@ -216,7 +216,7 @@ public class LbPayment implements Transaction {
     		payment.records.add(ibanRec);
     	}
     	// Amount
-    	if (payment.amount>0) {
+    	if (payment.foreignAmount>=0) {
 	    	LbTk6Record amountRec = new LbTk6Record(recipientNo, invoiceRef, payment.amount, currency, payDate, payment.foreignAmount);
 	    	payment.records.add(amountRec);
     	} else {  // Credit note
