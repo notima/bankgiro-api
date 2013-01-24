@@ -343,7 +343,7 @@ public class BgUtil {
 	public static String fillToLength(String str, boolean rightAlign, char fillChar, int len) {
 		StringBuffer buf = new StringBuffer();
 		if (str.length()>len) {
-			buf.append(str.substring(0, len-1));
+			buf.append(str.substring(0, len));
 			return(buf.toString());
 		}
 		// Append
