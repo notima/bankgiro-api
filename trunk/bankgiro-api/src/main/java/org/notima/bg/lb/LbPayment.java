@@ -119,7 +119,8 @@ public class LbPayment implements Transaction {
     }
 
     /**
-     * Creates a PlusGirot payment.
+     * Creates a PlusGirot payment. Credit / negative amounts not allowed since it's not supported by
+     * bankgirots format.
      *
      * @param recipientPg   Recipient's Plusgiro
      * @param OCR           Must be numeric
@@ -127,22 +128,27 @@ public class LbPayment implements Transaction {
      * @param ourRef        Used for matching payments
      * @param payDate
      * @param infoText      Array of text. Information that will be sent with the payment.
-     * @return
+     * @return	LbPayment. If amount is negative, null is returned.
      */
     public static LbPayment createPgPayment(String recipientPg, String OCR, double amount, String ourRef, Date payDate, String[] infoText) {
         LbPayment payment = new LbPayment();
         payment.amount = (double)Math.round(amount*100.0)/100.0;
-        LbTk54Record rec1 = new LbTk54Record(recipientPg, OCR, amount, ourRef, payDate);
-        payment.records.add(rec1);
-        if (infoText!=null && infoText.length>0) {
-            LbTk65Record rec2;
-            for (int i=0; i<infoText.length; i++) {
-                if (infoText[i]!=null && infoText[i].trim().length()>0) {
-                    rec2 = new LbTk65Record(recipientPg, infoText[i]);
-                    payment.records.add(rec2);
-                    payment.info.add(infoText[i]);
-                }
-            }
+        if (amount>=0.0) {
+	        LbTk54Record rec1 = new LbTk54Record(recipientPg, OCR, amount, ourRef, payDate);
+	        payment.records.add(rec1);
+	        if (infoText!=null && infoText.length>0) {
+	            LbTk65Record rec2;
+	            for (int i=0; i<infoText.length; i++) {
+	                if (infoText[i]!=null && infoText[i].trim().length()>0) {
+	                    rec2 = new LbTk65Record(recipientPg, infoText[i]);
+	                    payment.records.add(rec2);
+	                    payment.info.add(infoText[i]);
+	                }
+	            }
+	        }
+        } else {
+        	// Credit record not possible for plusgirot.
+        	return null;
         }
 		payment.dstPg = recipientPg;
 		payment.ourRef = ourRef;
