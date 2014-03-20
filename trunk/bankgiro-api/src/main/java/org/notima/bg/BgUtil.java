@@ -92,6 +92,26 @@ public class BgUtil {
         return true;
     }
 
+    /**
+     * Remove blanks from a string. Good for purging for instance IBAN numbers
+     * 
+     * @param cleanUp
+     * @return
+     */
+    public static String removeBlanks(String cleanUp) {
+    	if (cleanUp==null) return null;
+    	StringBuffer result = new StringBuffer();
+    	char c;
+    	for (int i=0;i<cleanUp.length(); i++) {
+    		c = cleanUp.charAt(i);
+    		if (c==' ' || c=='\t' || c=='\n' || c=='\r')
+    			continue;
+    		result.append(c);
+    	}
+    	return result.toString();
+    }
+    
+    
 	public static String trimLeadingZeros(String cleanUp) {
 		if (cleanUp==null) return("");
 		cleanUp = cleanUp.trim();

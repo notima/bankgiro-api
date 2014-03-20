@@ -1,7 +1,5 @@
 package org.notima.test.bg;
 
-import static org.junit.Assert.*;
-
 import java.text.ParseException;
 import java.util.Calendar;
 
@@ -9,7 +7,6 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.junit.Test;
-import org.notima.bg.BgParseException;
 import org.notima.bg.BgUtil;
 
 
@@ -28,6 +25,16 @@ public class TestBgUtil extends TestCase {
 		
 	}
 
+	@Test
+	public void testRemoveBlanks() {
+		
+		String test = "SE123 231 201 92 ";
+		String expected = "SE12323120192";
+		
+		Assert.assertEquals(expected, BgUtil.removeBlanks(test));
+		
+	}
+	
 	@Test
 	public void testParseDateString() {
 		
