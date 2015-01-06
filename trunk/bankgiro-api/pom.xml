@@ -41,7 +41,7 @@
   	<url>www.adempiere.se</url>
   </organization>
   <scm>
-  	<url>https://bankgiro.svn.sourceforge.net/svnroot/bankgiro</url>
+  	<url>https://svn.code.sf.net/p/bankgiro/code/trunk/bankgiro-api</url>
   	<developerConnection>Daniel Tamm</developerConnection>
   </scm>
   <issueManagement>
