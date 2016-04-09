@@ -21,12 +21,24 @@
 
 package org.notima.bg;
 
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Vector;
 
-import org.notima.bg.bgmax.*;
-import org.notima.bg.lb.LbPayment;
+import org.notima.bg.bgmax.BgMaxReceipt;
+import org.notima.bg.bgmax.BgMaxRecordFactory;
+import org.notima.bg.bgmax.BgMaxSet;
+import org.notima.bg.bgmax.BgMaxTk01Header;
+import org.notima.bg.bgmax.BgMaxTk05Record;
+import org.notima.bg.bgmax.BgMaxTk15Record;
 
 
 public class BgMaxFile extends BgFile {
@@ -34,7 +46,30 @@ public class BgMaxFile extends BgFile {
 	private List<BgSet>	records = new Vector<BgSet>();
 	private BgHeader	fileHeader;
 	private BgFooter	fileFooter;
+
+	/**
+	 * Returns a set of bg recipients in the file.
+	 * Good for checking that the file belongs to the correct customer / account.
+	 * 
+	 * @return
+	 */
+	public Set<String> getBgRecipients() {
+
+		Set<String> result = new TreeSet<String>();
+
+		for (BgSet s : records) {
+			result.add(s.getRecipientBankAccount());
+		}
+		
+		return result;
+		
+	}
 	
+	/**
+	 * Reads BGMax information from a file. Charset is mandatory. Normally the fileset is Cp850
+	 * Charset cs = Charset.forName("Cp850"); 
+	 * 
+	 */
 	@Override
 	public void readFromFile(File file, Charset cs) throws IOException,
 			BgParseException {
@@ -48,7 +83,10 @@ public class BgMaxFile extends BgFile {
     	int code = 0;
     	// Read first line
     	line = reader.readLine();
-    	if (line==null) throw new BgParseException("File is empty");
+    	if (line==null) {
+    		reader.close();
+    		throw new BgParseException("File is empty");
+    	}
     	BgRecordFactory factory = new BgMaxRecordFactory();
     	fileHeader = (BgHeader)factory.parseRecord(line);
     	
@@ -70,7 +108,10 @@ public class BgMaxFile extends BgFile {
     			continue;
     		}
     		if (code==15) {
-    			if (currentSet==null) throw new BgParseException("Footer but no current set. Error in file.", line);
+    			if (currentSet==null) {
+    				reader.close();
+    				throw new BgParseException("Footer but no current set. Error in file.", line);
+    			}
     			// Add current (last) transaction
     			if (currentTrans!=null) {
     				currentSet.addTransaction(currentTrans);
@@ -87,6 +128,7 @@ public class BgMaxFile extends BgFile {
     			break; // File done
     		}
     		if (currentSet==null) {
+    			reader.close();
     			throw new BgParseException("No current set. Error in file.", line);
     		}
     		if (code==20 || code==21) {
@@ -100,6 +142,7 @@ public class BgMaxFile extends BgFile {
     		currentTrans.addRecord(record);
     	}
     	reader.close();
+    	
 		
 	}
 

@@ -46,6 +46,9 @@ public class TestBgMax extends TestCase {
         	// Test file date
         	Assert.assertEquals("100324", BgUtil.getDateString(fileDate));
         	
+        	// Test recipient accounts
+        	Assert.assertEquals(true, ((BgMaxFile)inFile).getBgRecipients().contains("2407617"));
+        	
         	List<BgSet> bgSets = inFile.getRecords();
         	BgMaxSet bgMaxSet;
         	

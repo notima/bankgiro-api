@@ -21,20 +21,36 @@
 
 package org.notima.bg;
 
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.Vector;
 
 import org.notima.bg.lb.AbstractLbSet;
 import org.notima.bg.lb.LbPayment;
 import org.notima.bg.lb.LbPaymentRecord;
 import org.notima.bg.lb.LbRecordFactory;
 import org.notima.bg.lb.LbSet;
+import org.notima.bg.lb.LbTk11Header;
 import org.notima.bg.lb.LbTk16Record;
+import org.notima.bg.lb.LbTk29Record;
 
 
 public class LbFile extends BgFile {
 
+	public static final String FILE_PREFIX = "LB_ATER_";
+	public static final String FILE_SUFFIX = ".txt";
+	
 	private List<BgSet>	records;
 	
 	public LbFile() {
@@ -67,6 +83,88 @@ public class LbFile extends BgFile {
         lastFile = file;
     }
 
+    /**
+     * Splits the file into one file per sender
+     * 
+     * The files are named using the following pattern LB_ATER_XXXX_YYDDMM.txt
+     * 
+     */
+    public static void splitToFiles(File src, File dir, Charset cs) throws IOException, BgParseException {
+    	
+    	BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream( src ), cs));
+    	Date fileDate = null;
+    	String line;
+    	BgRecord record;
+    	int code = 0;
+    	BgRecordFactory factory = new LbRecordFactory();
+    	Map<String, StringBuffer> outFiles = new TreeMap<String, StringBuffer>();
+    	StringBuffer outFile = new StringBuffer();
+    	while((line=reader.readLine())!=null) {
+    		// Parse new line
+    		record = factory.parseRecord(line);
+    		outFile.append(line);
+    		outFile.append("\r\n");
+    		code = new Integer(record.getTransCode()).intValue();
+    		if (code==29) {
+    			LbTk29Record rec = new LbTk29Record();
+    			rec.parse(line);
+    			if (outFiles.containsKey(rec.getSenderAccount())) {
+    				reader.close();
+    				throw new BgParseException("Sender account " + rec.getSenderAccount() + " appears more than once in the file");
+    			}
+    			outFiles.put(rec.getSenderAccount(), outFile);
+    			outFile = new StringBuffer();
+    		}
+    		if (code==11 && fileDate==null) {
+    			LbTk11Header rec = new LbTk11Header();
+    			rec.parse(line);
+    			fileDate = rec.getFileDate();
+    		}
+    		
+    	}
+    	reader.close();
+    	
+    	// Write files
+    	FileOutputStream writer;
+    	File file;
+    	
+    	for (String key : outFiles.keySet()) {
+    		
+    		file = new File(dir.getCanonicalPath() + File.separator + 
+    						FILE_PREFIX + key + "_" + BgUtil.getDateString(fileDate) + FILE_SUFFIX);
+
+    		if (file.exists()) {
+    			throw new BgParseException("File " + file.getCanonicalPath() + " already exists.");
+    		}
+    		
+            writer = new FileOutputStream(file);
+    		writer.write(outFiles.get(key).toString().getBytes(cs));
+    		writer.close();
+    		
+    	}
+    	
+    }
+    
+    /**
+     * Returns the BG-senders in this file.
+     * 
+     * @return
+     */
+    public Set<String> getBgSenders() {
+
+    	Set<String> result = new TreeSet<String>();
+    	
+    	if (records==null)
+    		return result;
+    	
+    	for(BgSet s : records) {
+    		result.add(s.getSenderBankAccount());
+    	}
+    	
+    	return result;
+    	
+    }
+    
     /**
      * Reads a file and creates a data representation from the file.
      * @param file
@@ -110,15 +208,22 @@ public class LbFile extends BgFile {
     		}
     		// If the record is a footer, close the set using the record
     		if (record instanceof BgFooter) {
-    			if (currentSet==null) throw new BgParseException("Footer but no current set. Error in file.", line);
+    			if (currentSet==null) {
+    				reader.close();
+    				throw new BgParseException("Footer but no current set. Error in file.", line);
+    			}
     			currentSet.setFooter((BgFooter)record);
     			// Add current set to file
     			records.add(currentSet);
     			currentSet = null;
+    			completePayment = false;
     			continue;
     		}
     		// If we have no current set at this point, something is wrong.
-    		if (currentSet==null) throw new BgParseException("Footer but no current set. Error in file.", line);
+    		if (currentSet==null) {
+    			reader.close();
+    			throw new BgParseException("Footer but no current set. Error in file.", line);
+    		}
     		
     		// Check if credit description
     		if (code==21 || code==20) {
@@ -145,6 +250,7 @@ public class LbFile extends BgFile {
     		if (code==14 || code==15 || code==16 || code==17 || code==54) {
     			completePayment = true;
     		}
+    		
     	}
     	reader.close();
     }
