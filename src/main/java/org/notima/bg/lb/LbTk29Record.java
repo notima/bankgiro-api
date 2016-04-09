@@ -95,4 +95,14 @@ public class LbTk29Record extends BgFooter {
 		return line.toString();
 	}
 
+	public String getSenderAccount() {
+		return senderAccount;
+	}
+
+	public void setSenderAccount(String senderAccount) {
+		this.senderAccount = senderAccount;
+	}
+
+	
+	
 }
