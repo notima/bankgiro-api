@@ -37,7 +37,7 @@ import org.notima.bg.BgUtil;
  */
 public class LbTk54Record extends BgRecord implements LbPaymentRecord {
 
-	private static Pattern	linePattern1 = Pattern.compile("54(\\d{10})([\\d|\\s]{25})(\\d{12})(\\d|\\w)(\\d{10})(.*)"); // From BG format
+	private static Pattern	linePattern1 = Pattern.compile("54(\\d{10})(.{25})(\\d{12})(\\d|\\w)(\\d{10})(.*)"); // From BG format
 	
     private String recipientPg;
     private String recipientPgRedirected;
