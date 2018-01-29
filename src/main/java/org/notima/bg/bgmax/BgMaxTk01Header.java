@@ -33,12 +33,15 @@ import org.notima.bg.BgRecord;
 
 public class BgMaxTk01Header extends BgHeader {
 
-	private int 	version;
+	public static final int DEFAULT_VERSION = 1;
+	
+	private int 	version = DEFAULT_VERSION;
 	private Date	createDate;
 	private boolean	testFile;
 	
 	private static Pattern	linePattern1 = Pattern.compile("01BGMAX               (\\d{2})(\\d{20})(\\w).*");
 	private static SimpleDateFormat	dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+	private static DecimalFormat versionFormat = new DecimalFormat("00");
 	
 	public BgMaxTk01Header() {
 		super("01");
@@ -105,7 +108,12 @@ public class BgMaxTk01Header extends BgHeader {
 
 	@Override
 	public String toRecordString() {
-		return null;
+		StringBuffer line = new StringBuffer(getTransCode());
+		line.append("BGMAX               ");
+		line.append(versionFormat.format(version));
+		line.append(dateFormat.format(createDate));
+		
+		return line.toString();
 	}
 
 	@Override

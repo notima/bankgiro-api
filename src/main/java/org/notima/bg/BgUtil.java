@@ -38,8 +38,8 @@ public class BgUtil {
 	 * Method for converting date to standard date format for BG-files
 	 * If the date is null it equals to immediate payment.
 	 *
-	 * @param d
-	 * @return
+	 * @param d		Date to be converted.
+	 * @return		A date in BG-format. If null, GENAST is returned.
 	 */
 	public static String getDateString(java.util.Date d) {
 		if (d==null) return("GENAST");
@@ -48,9 +48,9 @@ public class BgUtil {
 
 	/**
 	 * Return the date. If the date string is empty or "GENAST", null is returned.
-	 * @param dateStr
-	 * @return
-	 * @throws ParseException
+	 * @param dateStr	Parses date format from BG.
+	 * @return			A java date.
+	 * @throws ParseException if the string can't be parsed.
 	 */
 	public static java.util.Date parseDateString(String dateStr) throws ParseException {
 		if (dateStr==null || dateStr.trim().length()==0 
@@ -64,8 +64,8 @@ public class BgUtil {
 	/**
 	 * Remove all non digit characters
 	 *
-	 * @param cleanUp
-	 * @return
+	 * @param cleanUp		String to be cleaned.
+	 * @return				A cleaned string.
 	 */
 	public static String toDigitsOnly(String cleanUp) {
 		if (cleanUp==null) return("");
@@ -95,8 +95,8 @@ public class BgUtil {
     /**
      * Remove blanks from a string. Good for purging for instance IBAN numbers
      * 
-     * @param cleanUp
-     * @return
+     * @param cleanUp		String to clean up.
+     * @return				A string without blanks.
      */
     public static String removeBlanks(String cleanUp) {
     	if (cleanUp==null) return null;
@@ -125,10 +125,10 @@ public class BgUtil {
 	}
 	
 	/**
-	 * Perform very basic validation
+	 * Perform very basic validation (length checks)
 	 * 
-	 * @param swift
-	 * @param iban
+	 * @param swift			Swift to be validated.
+	 * @param iban			Iban to be validated.
 	 * @return
 	 */
 	public static boolean validateIban(String swift, String iban) {
@@ -142,8 +142,8 @@ public class BgUtil {
 	
 	/**
 	 *  Validate Bankgiro
-	 *  @param Bankgiro
-	 *  @return "" or Error AD_Message
+	 *  @param Bankgiro			A string containing the bankgiro to be validated.
+	 *  @return true if the bankgiro has passed length test.
 	 */
 	public static boolean validateBankgiro (String Bankgiro)
 	{
@@ -186,10 +186,10 @@ public class BgUtil {
 	
 	/**
 	 * Converts a double to 12 digits where the two last digits
-	 * are "Ã¶re" or "cents".
+	 * are "öre" or "cents".
 	 * Negative amounts are returned as absolute (no negative indicator)
 	 *
-	 * @return
+	 * @return		A string representation of an amount in BG-format.
 	 */
 	public static String getAmountStr(double amount) {
 		return(getAmountStr(amount, 12, true));
@@ -197,12 +197,12 @@ public class BgUtil {
 	
 	/**
 	 * 
-	 * @param amount
+	 * @param amount	The amount to be converted.
 	 * @param len		Let you specify the length of the string
 	 * @param absolute	If true no negative indicator. If false the last digit is replaced
 	 * 					with a letter according to a specific pattern to indicate a negative
 	 * 					value.
-	 * @return
+	 * @return			The amount in string representation
 	 */
 	public static String getAmountStr(double amount, int len, boolean absolute) {
 		StringBuffer buf = new StringBuffer();
@@ -243,8 +243,8 @@ public class BgUtil {
 	/**
 	 * Return Luhn Digit using an amount as in data
 	 * 
-	 * @param amount
-	 * @return
+	 * @param amount		The amount
+	 * @return				The luhn digit associated with the amount.
 	 */
 	public static int getLuhnDigit(double amount) {
 		String amountStr = trimLeadingZeros(getAmountStr(amount,20,true));
@@ -253,8 +253,8 @@ public class BgUtil {
 	
 	/**
 	 * Luhn algoritm.
-	 * @param indata
-	 * @return
+	 * @param indata		The numbers to calculated a Luhn digit from.
+	 * @return	The luhn digit.
 	 */
 	public static int getLuhnDigit(String indata) {
 		int a = 2;
@@ -273,8 +273,8 @@ public class BgUtil {
 
 	/**
 	 * Converts a string of digits to the equivalent OCR-number
-	 * @param indata
-	 * @return
+	 * @param indata		The data to be converted
+	 * @return				An OCR number with a checkdigit.
 	 */
 	public static String toOCRNumber(String indata) {
 		indata = toDigitsOnly(indata);
@@ -283,8 +283,8 @@ public class BgUtil {
 	
 	/**
 	 * Converts a string of digits to an OCR-number with length check
-	 * @param indata
-	 * @return
+	 * @param indata		Numbers to be converted.
+	 * @return				OCR-number with luhn digit and length check.
 	 */
 	public static String toOCRNumberWithLengthCheck(String indata) {
 		indata = toDigitsOnly(indata);
@@ -393,8 +393,8 @@ public class BgUtil {
 	
 	/**
 	 * 
-	 * @param clearing
-	 * @param accountNo
+	 * @param clearing		Routing number (clearing)
+	 * @param accountNo		Account number
 	 * @return Trims account from all non digits. Separates the clearing and account no
 	 * 		   with a hyphen. '-'
 	 */
@@ -408,7 +408,7 @@ public class BgUtil {
 	 * Removes all non USASCII chars and converts to uppercase. Swedish characters
 	 * ÅÄÖ are replaced with A and O.
 	 * @param clearupstring
-	 * @return
+	 * @return	A string containing only ASCII
 	 */
 	public static String onlyUSASCII(String clearupstring) {
 		if (clearupstring==null) return null;
