@@ -27,6 +27,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.List;
@@ -73,14 +74,9 @@ public class LbFile extends BgFile {
 	}
 
     public void writeToFile(File file, Charset cs) throws IOException {
-        FileOutputStream writer = new FileOutputStream(file);
-        if (records!=null) {
-            for (int i=0; i<records.size(); i++) {
-                writer.write(records.get(i).toRecordString().getBytes(cs));
-            }
-        }
-        writer.close();
         lastFile = file;
+        FileOutputStream os = new FileOutputStream(file);
+        writeToStream(os, cs);
     }
 
     /**
@@ -271,6 +267,16 @@ public class LbFile extends BgFile {
 		} else {
 			return(null);
 		}
+	}
+
+	@Override
+	public void writeToStream(OutputStream os, Charset cs) throws IOException {
+        if (records!=null) {
+            for (int i=0; i<records.size(); i++) {
+                os.write(records.get(i).toRecordString().getBytes(cs));
+            }
+        }
+        os.close();
 	}
 	
 	

@@ -34,19 +34,25 @@ import org.notima.bg.Transaction;
 
 public class BgMaxSet implements BgSet {
 
-	private BgHeader	fileHeader;
-	private BgFooter	fileFooter;
 	private Vector<Transaction>	records = new Vector<Transaction>();
 	private BgMaxTk05Record	setHeader;
 	private BgMaxTk15Record setFooter;
 
+	public BgMaxSet(){};
 	
-	public BgMaxSet(BgHeader fileHeader) {
-		this.fileHeader = fileHeader;
+	public BgMaxSet(Date setDate, String currency, String recipientBankAcct) {
+		setHeader = new BgMaxTk05Record();
+		setHeader.setCurrency(currency);
+		setFooter = new BgMaxTk15Record();
+		setFooter.setCurrency(currency);
+		setFooter.setTransactionDate(setDate);
+		setFooter.setToBankAccount(recipientBankAcct);
 	}
-	
-	public void setFileFooter(BgFooter fileFooter) {
-		this.fileFooter = fileFooter;
+
+	private void initSetHeader() {
+		if (setHeader==null) {
+			setHeader = new BgMaxTk05Record();
+		}
 	}
 
 	public void addTransaction(Transaction trans) {
@@ -89,6 +95,20 @@ public class BgMaxSet implements BgSet {
         return(setHeader.getCurrency());
     }
 
+    public void setCurrency(String currency) {
+    	if (currency==null)
+    		return;
+    	initSetHeader();
+    	setHeader.setCurrency(currency.toUpperCase());
+    }
+    
+    public void setRecipientBankAccount(String account) {
+    	if (account==null)
+    		return;
+    	initSetHeader();
+    	setHeader.setRecipientBg(account);
+    }
+    
     public String getRecipientBankAccount() {
         return(setHeader.getRecipientBg());
     }
@@ -97,9 +117,19 @@ public class BgMaxSet implements BgSet {
         return(null);
     }
 
+    public BgMaxTk15Record generateFooter() {
+    	if (setFooter==null) {
+    		setFooter = new BgMaxTk15Record();
+    	}
+    	
+    	setFooter.setCurrency(setHeader.getCurrency());
+    	
+    	return setFooter;
+    }
+    
 	public String toRecordString() {
 		StringBuffer lines = new StringBuffer();
-		lines.append(fileHeader.toRecordString() + "\n");
+		lines.append(setHeader.toRecordString() + "\n");
 		Transaction receipt;
 		if (records!=null && records.size()>0) {
 			for (int i=0; i<records.size(); i++) {
@@ -108,7 +138,9 @@ public class BgMaxSet implements BgSet {
 				lines.append(receipt.toRecordString());
 			}
 		}
-		lines.append(fileFooter.toRecordString());
+		if (setFooter==null)
+			generateFooter();
+		lines.append(setFooter.toRecordString());
 		return(lines.toString());
 		
 	}

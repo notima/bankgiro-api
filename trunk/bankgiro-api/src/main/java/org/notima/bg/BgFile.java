@@ -23,17 +23,20 @@ package org.notima.bg;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
-import java.util.*;
-
-
-
+import java.util.List;
 
 public abstract class BgFile {
 
+	protected BgHeader	fileHeader;
+	protected BgFooter	fileFooter;
+	
 	protected File			lastFile;
 	
     public abstract void writeToFile(File file, Charset cs) throws IOException;
+    
+    public abstract void writeToStream(OutputStream os, Charset cs) throws IOException;
     
     /**
      * Reads a file and creates a data representation from the file.
@@ -43,7 +46,23 @@ public abstract class BgFile {
      * @throws BgParseException
      */
     public abstract void readFromFile(File file, Charset cs) throws IOException, BgParseException;
-	
+    
+	public BgHeader getFileHeader() {
+		return fileHeader;
+	}
+
+	public void setFileHeader(BgHeader fileHeader) {
+		this.fileHeader = fileHeader;
+	}
+
+	public BgFooter getFileFooter() {
+		return fileFooter;
+	}
+
+	public void setFileFooter(BgFooter fileFooter) {
+		this.fileFooter = fileFooter;
+	}
+
 	/**
 	 * Returns the last file used with this object (if any)
 	 * 

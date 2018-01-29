@@ -59,8 +59,10 @@ public class BgMaxTk05Record extends BgRecord {
 		return recipientBg;
 	}
 
-	public void setRecipientBg(String recipientBg) {
-		this.recipientBg = recipientBg;
+	public void setRecipientBg(String aRecipientBg) {
+		recipientBg = aRecipientBg;
+		if (recipientBg==null) return;
+		recipientBg = BgUtil.toDigitsOnly(recipientBg);
 	}
 
 	public String getRecipientPg() {
@@ -81,8 +83,36 @@ public class BgMaxTk05Record extends BgRecord {
 
 	@Override
 	public String toRecordString() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuffer line = new StringBuffer(getTransCode());
+
+		StringBuffer seqStr;
+        if (recipientBg==null) {
+            seqStr = new StringBuffer(new Integer(seqNo).toString());
+            while(seqStr.length()<9) {
+                // Prepend with zeroes
+                seqStr.insert(0, "0");
+            }
+            // No check digit, leave empty
+            seqStr.append(" ");
+        } else {
+            seqStr = new StringBuffer(recipientBg);
+            while(seqStr.length()<10) {
+                // Prepend with zeroes
+                seqStr.insert(0, "0");
+            }
+        }
+		line.append(seqStr);
+		// Right pad with spaces
+		while(line.length()<22) {
+			line.append(" ");
+		}
+		line.append(currency);
+		// Pad to 80
+		while(line.length()<81) {
+			line.append(" ");
+		}
+		
+		return line.toString();
 	}
 
 

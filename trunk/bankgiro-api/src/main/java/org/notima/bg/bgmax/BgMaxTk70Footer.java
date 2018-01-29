@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 
 import org.notima.bg.BgFooter;
 import org.notima.bg.BgParseException;
+import org.notima.bg.BgUtil;
 
 
 public class BgMaxTk70Footer extends BgFooter {
@@ -57,7 +58,28 @@ public class BgMaxTk70Footer extends BgFooter {
 
 	@Override
 	public String toRecordString() {
-		return null;
+
+		// Create "post-record"
+		StringBuffer line = new StringBuffer(transCode);
+
+		String receiptsString = Integer.toString(countReceipts);
+		receiptsString = BgUtil.fillToLength(receiptsString, true, '0', 8);
+		line.append(receiptsString);
+		
+		String reductionsStr = Integer.toString(countReductions);
+		reductionsStr = BgUtil.fillToLength(reductionsStr, true, '0', 8);
+		line.append(reductionsStr);
+		
+		String extraRefStr = Integer.toString(countExtraReferences);
+		extraRefStr = BgUtil.fillToLength(extraRefStr, true, '0', 8);
+		line.append(extraRefStr);
+		
+		String whatStr = Integer.toString(countWhat);
+		whatStr = BgUtil.fillToLength(whatStr, true, '0', 8);
+		line.append(whatStr);
+		
+		return line.toString();
+		
 	}
 
 	public int getCountReceipts() {
