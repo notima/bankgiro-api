@@ -57,6 +57,11 @@ public class BgMaxReceipt implements Transaction {
 		this.transDate = transDate;
 	}
 
+	/**
+	 * Adds a new TK record to the receipt
+	 * 
+	 * @param record			The record to be added
+	 */
 	public void addRecord(BgRecord record) {
 		int code = new Integer(record.getTransCode()).intValue();
 		if (code==20) {
@@ -117,6 +122,81 @@ public class BgMaxReceipt implements Transaction {
 		records.add(record);
 	}
 	
+	
+	/**
+	 * Creates a new TK record to the receipt using the existing attributes
+	 * 
+	 * @param record			The record to be created
+	 */
+	public void createRecord(BgRecord record) {
+		int code = new Integer(record.getTransCode()).intValue();
+		if (code==20) {
+			BgMaxTk20Record r = (BgMaxTk20Record)record;
+			r.setAmount(amount);
+			r.setSenderBg(senderBg);
+			r.setReference(reference);
+			r.setReferenceType(referenceType);
+			r.setPayChannel(payChannel);
+			r.setBgcRef(bgcRef);
+			r.setScannedImage(scannedImage);
+		}
+		if (code==21) {
+			BgMaxTk21Record r = (BgMaxTk21Record)record;
+			r.setAmount(-amount);
+			r.setSenderBg(senderBg);
+			r.setReference(reference);
+			r.setReferenceType(referenceType);
+			r.setPayChannel(payChannel);
+			r.setBgcRef(bgcRef);
+			r.setScannedImage(scannedImage);
+			r.setReductionType(reductionType);
+		}
+		if (code==22) {
+			BgMaxTk22Record rec = (BgMaxTk22Record)record;
+			BgMaxReference r = rec.getReferenceRecord();
+			r.setAmount(amount);
+			r.setSenderBg(senderBg);
+			r.setReference(reference);
+			r.setReferenceType(referenceType);
+			r.setPayChannel(payChannel);
+			r.setBgcRef(bgcRef);
+			r.setScannedImage(scannedImage);
+		}
+		if (code==23) {
+			BgMaxTk23Record rec = (BgMaxTk23Record)record;
+			BgMaxReference r = rec.getReferenceRecord();
+			r.setAmount(amount);
+			r.setSenderBg(senderBg);
+			r.setReference(reference);
+			r.setReferenceType(referenceType);
+			r.setPayChannel(payChannel);
+			r.setBgcRef(bgcRef);
+			r.setScannedImage(scannedImage);
+		}
+		if (code==26) {
+			BgMaxTk26Record r = (BgMaxTk26Record)record;
+			r.setName1(name1);
+			r.setName2(name2);
+		}
+		if (code==27) {
+			BgMaxTk27Record r = (BgMaxTk27Record)record;
+			r.setAddress(address);
+			r.setZipCode(zipCode);
+		}
+		if (code==28) {
+			BgMaxTk28Record r = (BgMaxTk28Record)record;
+			r.setCity(city);
+			r.setCountry(country);
+			r.setCountryCode(countryCode);
+		}
+		if (code==29) {
+			BgMaxTk29Record r = (BgMaxTk29Record)record;
+			r.setTaxId(taxId);
+		}
+		records.add(record);
+	}
+	
+	
 	public double getAmount() {
 		return amount;
 	}
@@ -134,8 +214,57 @@ public class BgMaxReceipt implements Transaction {
 		}
 	}
 
+	/**
+	 * Creates relevant records from the attributes
+	 */
+	private void createRecordsFromAttributes() {
+		
+		if (amount>0) {
+			createRecord(new BgMaxTk20Record());
+		} else {
+			createRecord(new BgMaxTk21Record());
+		}
+		
+		if (references!=null) {
+			for (BgMaxReference bgRef : references) {
+				createRecord(new BgMaxTk22Record());
+			}
+		}
+		
+		if (name1!=null || name2!=null) {
+			createRecord(new BgMaxTk26Record());
+		}
+		
+		if (address!=null || zipCode!=null) {
+			createRecord(new BgMaxTk27Record());
+		}
+		
+		if (city!=null || country!=null || countryCode!=null) {
+			createRecord(new BgMaxTk28Record());
+		}
+		
+		if (taxId!=null) {
+			createRecord(new BgMaxTk29Record());
+		}
+		
+		if (infoRecords!=null && infoRecords.size()>0) {
+			for (String infoStr : infoRecords) {
+				createRecord(new BgMaxTk25Record(infoStr));
+			}
+		}
+		
+		
+	}
+	
 	public String toRecordString() {
 		StringBuffer lines = new StringBuffer();
+		// If records are null, it means that nothing has been parsed
+		if (records==null || records.size()==0) {
+			// Create records from attributes
+			// This is the case when records should be created from the 
+			// attribute information.
+			createRecordsFromAttributes();
+		}
 		if (records!=null && records.size()>0) {
 			for (int i=0; i<records.size(); i++) {
 				lines.append(records.get(i).toRecordString() + "\n");

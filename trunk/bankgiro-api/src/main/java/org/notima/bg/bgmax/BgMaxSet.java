@@ -25,8 +25,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Vector;
 
-import org.notima.bg.BgFooter;
-import org.notima.bg.BgHeader;
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgSet;
 import org.notima.bg.Transaction;
@@ -40,7 +38,7 @@ public class BgMaxSet implements BgSet {
 
 	public BgMaxSet(){};
 	
-	public BgMaxSet(Date setDate, String currency, String recipientBankAcct) {
+	public BgMaxSet(Date setDate, String currency, String clearing, String recipientBankAcct) {
 		setHeader = new BgMaxTk05Record();
 		setHeader.setCurrency(currency);
 		setFooter = new BgMaxTk15Record();
@@ -81,7 +79,8 @@ public class BgMaxSet implements BgSet {
 		double total = 0.0;
 		for (Iterator<Transaction> it = records.iterator(); it.hasNext();) {
 			tr = it.next();
-			tr.setTransactionDate(setFooter.getTransactionDate());
+			if (tr.getTransactionDate()==null)
+				tr.setTransactionDate(setFooter.getTransactionDate());
 			total += tr.getAmount();
 		}
 		// Round total to two decimals. In certain cases differences may occur otherwise.
@@ -91,6 +90,26 @@ public class BgMaxSet implements BgSet {
 		}
 	}
 
+	/**
+	 * Calculates the footer from the transactions
+	 */
+	public void calculateFooter() {
+
+		double total = 0.0;
+		int count = 0;
+		Transaction tr;
+		for (Iterator<Transaction> it = records.iterator(); it.hasNext();) {
+			tr = it.next();
+			total += tr.getAmount();
+			count++;
+		}
+		// Round total to two decimals. In certain cases differences may occur otherwise.
+		total = ((double)Math.round(total * 100))/100;
+		setFooter.setAmount(total);
+		setFooter.setCount(count);
+		
+	}
+	
     public String getCurrency() {
         return(setHeader.getCurrency());
     }
@@ -117,18 +136,22 @@ public class BgMaxSet implements BgSet {
         return(null);
     }
 
-    public BgMaxTk15Record generateFooter() {
+    public BgMaxTk15Record generateFooter() throws BgParseException {
     	if (setFooter==null) {
     		setFooter = new BgMaxTk15Record();
     	}
     	
     	setFooter.setCurrency(setHeader.getCurrency());
+    	calculateFooter();
     	
     	return setFooter;
     }
     
 	public String toRecordString() {
 		StringBuffer lines = new StringBuffer();
+		if (records==null || records.size()==0) {
+			return "";
+		}
 		lines.append(setHeader.toRecordString() + "\n");
 		Transaction receipt;
 		if (records!=null && records.size()>0) {
@@ -138,9 +161,18 @@ public class BgMaxSet implements BgSet {
 				lines.append(receipt.toRecordString());
 			}
 		}
-		if (setFooter==null)
-			generateFooter();
-		lines.append(setFooter.toRecordString());
+		try {
+			if (setFooter==null)
+				generateFooter();
+			else {
+				// Recalculate sums
+				calculateFooter();
+			}
+			
+		} catch (BgParseException e) {
+			e.printStackTrace();
+		}
+		lines.append(setFooter.toRecordString() + "\n");
 		return(lines.toString());
 		
 	}

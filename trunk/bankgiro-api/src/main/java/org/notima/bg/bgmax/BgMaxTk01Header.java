@@ -112,7 +112,6 @@ public class BgMaxTk01Header extends BgHeader {
 		line.append("BGMAX               ");
 		line.append(versionFormat.format(version));
 		line.append(dateFormat.format(createDate));
-		
 		return line.toString();
 	}
 

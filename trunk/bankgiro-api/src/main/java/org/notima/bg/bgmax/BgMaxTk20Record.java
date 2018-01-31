@@ -64,8 +64,52 @@ public class BgMaxTk20Record extends BgRecord {
 	
 	@Override
 	public String toRecordString() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		StringBuffer line = new StringBuffer(getTransCode());
+
+		StringBuffer seqStr;
+        if (senderBg==null) {
+            seqStr = new StringBuffer();
+            while(seqStr.length()<10) {
+                seqStr.append(" ");
+            }
+        } else {
+            seqStr = new StringBuffer(senderBg);
+            while(seqStr.length()<10) {
+                // Prepend with zeroes
+                seqStr.insert(0, "0");
+            }
+        }
+		line.append(seqStr);
+		
+		// Reference
+		String refStr = reference!=null ? reference.reference : "";
+		String ref = BgUtil.fillToLength(refStr, false, ' ', 25);
+		line.append(ref);
+		
+		// Amount
+		line.append(BgUtil.getAmountStr(getAmount(), 18, false));
+		
+		// Reference Type
+		line.append(reference!=null ? reference.referenceType : BgMaxReference.REFTYPE_BLANK_NOREF_GIVEN);
+
+		// Paychannel
+		line.append(reference!=null ? reference.payChannel : BgMaxReference.PAYCHANNEL_EBANK);
+		
+		// BGC documentnumber
+		ref = BgUtil.fillToLength(bgcRef, true, '0', 12);
+		line.append(ref);
+		
+		// Image marker
+		line.append(reference!=null ? (reference.scannedImage ? "1" : "0") : "0");
+
+		// Pad with spaces
+		while(line.length()<81) {
+			line.append(" ");
+		}
+		
+		return line.toString();
+		
 	}
 
 	public String getSenderBg() {

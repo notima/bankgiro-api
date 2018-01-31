@@ -85,30 +85,13 @@ public class BgMaxTk05Record extends BgRecord {
 	public String toRecordString() {
 		StringBuffer line = new StringBuffer(getTransCode());
 
-		StringBuffer seqStr;
-        if (recipientBg==null) {
-            seqStr = new StringBuffer(new Integer(seqNo).toString());
-            while(seqStr.length()<9) {
-                // Prepend with zeroes
-                seqStr.insert(0, "0");
-            }
-            // No check digit, leave empty
-            seqStr.append(" ");
-        } else {
-            seqStr = new StringBuffer(recipientBg);
-            while(seqStr.length()<10) {
-                // Prepend with zeroes
-                seqStr.insert(0, "0");
-            }
-        }
-		line.append(seqStr);
-		// Right pad with spaces
-		while(line.length()<22) {
-			line.append(" ");
-		}
-		line.append(currency);
+		line.append(BgUtil.fillToLength(BgUtil.toDigitsOnly(recipientBg), true, '0', 10));
+		line.append(BgUtil.fillToLength(BgUtil.toDigitsOnly(recipientPg), true, 
+				((recipientPg==null || recipientPg.trim().length()==0) ? ' ' : '0'), 10));
+		line.append(BgUtil.fillToLength(currency, true, ' ', 3));
+		
 		// Pad to 80
-		while(line.length()<81) {
+		while(line.length()<80) {
 			line.append(" ");
 		}
 		
