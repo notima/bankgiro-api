@@ -207,9 +207,9 @@ public class BgMaxFile extends BgFile {
 	 * 
 	 * @return		The newly created BgMaxSet.
 	 */
-	public BgMaxSet createSet() {
+	public BgMaxSet createSet(Date setDate, String currency, String clearing, String bankAccount) {
 		
-		BgMaxSet result = new BgMaxSet();
+		BgMaxSet result = new BgMaxSet(setDate, currency, clearing, bankAccount);
 		records.add(result);
 		return result;
 		
@@ -241,6 +241,7 @@ public class BgMaxFile extends BgFile {
 			generateFileFooter();
 		
 		os.write(getFileHeader().toRecordString().getBytes(cs));
+		os.write('\n');
 		
         if (records!=null) {
             for (int i=0; i<records.size(); i++) {
@@ -249,6 +250,7 @@ public class BgMaxFile extends BgFile {
         }
         
         os.write(getFileFooter().toRecordString().getBytes(cs));
+        os.write('\n');
         
         os.close();
 		

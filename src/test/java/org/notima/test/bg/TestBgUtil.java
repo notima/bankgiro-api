@@ -163,5 +163,25 @@ public class TestBgUtil extends TestCase {
 		
 	}
 	
+	@Test
+	public void testFillToLength() {
+		
+		String result = BgUtil.fillToLength("10", true, '0', 4);
+		Assert.assertEquals("0010", result);
+		
+		result = BgUtil.fillToLength("10", false, '0', 4);
+		Assert.assertEquals("1000", result);
+		
+		result = BgUtil.fillToLength(null, true, '0', 4);
+		Assert.assertEquals("0000", result);
+		
+		result = BgUtil.fillToLength("100001", true, '0', 4);
+		Assert.assertEquals("0001", result);
+		
+		result = BgUtil.fillToLength("100001", false, '0', 4);
+		Assert.assertEquals("1000", result);
+		
+	}
+	
 	
 }

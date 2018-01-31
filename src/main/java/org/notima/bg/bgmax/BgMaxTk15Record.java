@@ -73,8 +73,26 @@ public class BgMaxTk15Record extends BgRecord {
 
 	@Override
 	public String toRecordString() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuffer line = new StringBuffer(this.getTransCode());
+		
+		// Bank (clearing)
+		line.append(BgUtil.fillToLength(BgUtil.toDigitsOnly(clearing), false, '0', 4));
+		// Bank (account number)
+		line.append(BgUtil.fillToLength(BgUtil.toDigitsOnly(accountNo), true, '0', 31));
+		// Date of payments
+		line.append(dateFormat.format(transactionDate));
+		// Receipt No
+		line.append(BgUtil.fillToLength(receiptNo, true, '0', 5));
+		// Total amount
+		line.append(BgUtil.getAmountStr(amount, 18, false));
+		// Currency
+		line.append(BgUtil.fillToLength(currency, true, 'X', 3));
+		// Number of payments
+		line.append(BgUtil.fillToLength(Integer.toString(count), true, '0', 8));
+		// Type of receipt
+		line.append(" "); // Normally blank
+		
+		return line.toString();
 	}
 
 	public String getToBankAccount() {
@@ -123,6 +141,22 @@ public class BgMaxTk15Record extends BgRecord {
 
 	public void setCount(int count) {
 		this.count = count;
+	}
+
+	public String getClearing() {
+		return clearing;
+	}
+
+	public void setClearing(String clearing) {
+		this.clearing = clearing;
+	}
+
+	public String getAccountNo() {
+		return accountNo;
+	}
+
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
 	}
 
 }

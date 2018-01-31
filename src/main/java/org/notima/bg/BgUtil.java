@@ -359,11 +359,20 @@ public class BgUtil {
 
 	/**
 	 * Fills to a specified length
+	 * 
+	 * @param		str			The string to be filled. If null it will be filled only with fillChar.
+	 * @param		rightAlign	If the string should be right aligned.
+	 * @param		fillChar	The char to fill.
+	 * @param		len			Lenght to fill. If str is more than len, str is truncated.
 	 */
 	public static String fillToLength(String str, boolean rightAlign, char fillChar, int len) {
+		if (str==null) str = "";
 		StringBuffer buf = new StringBuffer();
 		if (str.length()>len) {
-			buf.append(str.substring(0, len));
+			if (rightAlign)
+				buf.append(str.substring(str.length()-len, str.length()));
+			else
+				buf.append(str.substring(0, len));
 			return(buf.toString());
 		}
 		// Append
