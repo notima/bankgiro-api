@@ -184,12 +184,9 @@ public class BgMaxFile extends BgFile {
 		
 		for (BgSet bg : records) {
 			for (Transaction t : bg.getRecords()) {
-				if (t instanceof BgMaxTk20Record || 
-					t instanceof BgMaxTk22Record ||
-					t instanceof BgMaxTk23Record) {
+				if (t.getAmount()>0) {
 					payments++;
-				}
-				if (t instanceof BgMaxTk21Record) {
+				} else {
 					reductions++;
 				}
 			}
@@ -207,9 +204,9 @@ public class BgMaxFile extends BgFile {
 	 * 
 	 * @return		The newly created BgMaxSet.
 	 */
-	public BgMaxSet createSet(Date setDate, String currency, String clearing, String bankAccount) {
+	public BgMaxSet createSet(Date setDate, String currency, String clearing, String bankAccount, String bgAccount) {
 		
-		BgMaxSet result = new BgMaxSet(setDate, currency, clearing, bankAccount);
+		BgMaxSet result = new BgMaxSet(setDate, currency, clearing, bankAccount, bgAccount);
 		records.add(result);
 		return result;
 		

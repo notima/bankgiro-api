@@ -40,7 +40,7 @@ public class BgMaxTk01Header extends BgHeader {
 	private boolean	testFile;
 	
 	private static Pattern	linePattern1 = Pattern.compile("01BGMAX               (\\d{2})(\\d{20})(\\w).*");
-	private static SimpleDateFormat	dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+	private static SimpleDateFormat	dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 	private static DecimalFormat versionFormat = new DecimalFormat("00");
 	
 	public BgMaxTk01Header() {
@@ -73,7 +73,7 @@ public class BgMaxTk01Header extends BgHeader {
 		if (m.matches()) {
 			version = new Integer(m.group(1)).intValue();
 			try {
-				createDate = dateFormat.parse(m.group(2).substring(0, 12));
+				createDate = dateFormat.parse(m.group(2).substring(0, 14));
 			} catch (java.text.ParseException pe) {
 				throw new BgParseException("File date: " + m.group(2) + " not valid. ", line);
 			}
@@ -112,6 +112,14 @@ public class BgMaxTk01Header extends BgHeader {
 		line.append("BGMAX               ");
 		line.append(versionFormat.format(version));
 		line.append(dateFormat.format(createDate));
+		line.append("000000"); // Microseconds
+		line.append(isTestFile() ? "T" : "P");
+		
+		// Pad to 80
+		while(line.length()<80) {
+			line.append(" ");
+		}
+		
 		return line.toString();
 	}
 

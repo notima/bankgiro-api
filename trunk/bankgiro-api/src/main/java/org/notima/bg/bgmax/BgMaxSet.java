@@ -38,8 +38,9 @@ public class BgMaxSet implements BgSet {
 
 	public BgMaxSet(){};
 	
-	public BgMaxSet(Date setDate, String currency, String clearing, String recipientBankAcct) {
+	public BgMaxSet(Date setDate, String currency, String clearing, String recipientBankAcct, String bgAccount) {
 		setHeader = new BgMaxTk05Record();
+		setHeader.setRecipientBg(bgAccount);
 		setHeader.setCurrency(currency);
 		setFooter = new BgMaxTk15Record();
 		setFooter.setCurrency(currency);
