@@ -68,9 +68,7 @@ public class LbTk11Header extends BgHeader {
 	}
 
 	/**
-	 * The only valid currencies are:
-	 * <li>SEK</li>
-	 * <li>EUR</li>
+	 * The only valid currencies are SEK and EUR
 	 * 
 	 * @param currency
 	 */

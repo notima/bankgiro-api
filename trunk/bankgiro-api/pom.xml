@@ -48,6 +48,7 @@
   	<url>http://sourceforge.net/tracker/?group_id=263953&amp;atid=1381851</url>
   	<system>SourceForge</system>
   </issueManagement>
+  <!-- 
     <profiles>
   	<profile>
  		<id>release-sign-artifacts</id>
@@ -76,6 +77,7 @@
   		</build>
   	</profile>
   </profiles>
+   -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

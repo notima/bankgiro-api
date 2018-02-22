@@ -297,7 +297,7 @@ public class BgUtil {
 	/**
 	 *  Validate OCR number.
 	 *  - Based on LUHN formula (Modulus10)
-	 *  @param OCRNumber
+	 *  @param OCR
 	 *  @return True if OCR is correct
 	 */
 	public static boolean isValidOCRNumber (String OCR)
