@@ -1,0 +1,4 @@
+# Paths to included libraries and maven repositories
+# Rename this file to build.properties and set the correct paths
+maven-local-dir=/~/.m2/repository
+maven-release-dir=/~/mnt/maven2
