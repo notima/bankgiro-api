@@ -181,8 +181,6 @@ public class LbPayment implements Transaction {
      * @param trxType		Transaction type, LbTk3Record.TRX_* (how fast)
      * @param hbAccountNo	If payments are done from Handelsbanken, this should be the account number
      * 						used for the payment.
-     * @param parentSet		The set that this payment will be added to. The set contains information about
-     * 						the bank id. This must be known to properly generate a file.
      * @return
      */
     public static LbPayment createUtlPayment(int recipientNo,
