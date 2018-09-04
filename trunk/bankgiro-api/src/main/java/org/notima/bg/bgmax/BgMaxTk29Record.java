@@ -21,6 +21,7 @@
 
 package org.notima.bg.bgmax;
 
+import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,8 +53,17 @@ public class BgMaxTk29Record extends BgRecord {
 
 	@Override
 	public String toRecordString() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuffer line = new StringBuffer(transCode);
+		try {
+			taxId = BgUtil.formatTaxId(taxId);
+		} catch (ParseException pe) {
+			pe.printStackTrace();
+		}
+		line.append(BgUtil.fillToLength(taxId,  true,  '0',  12));
+		while(line.length()<80) {
+			line.append(" ");
+		}
+		return line.toString();
 	}
 
 	public String getTaxId() {
