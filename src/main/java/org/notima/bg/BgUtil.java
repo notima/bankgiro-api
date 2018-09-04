@@ -185,6 +185,24 @@ public class BgUtil {
 	}
 	
 	/**
+	 * Formats taxId to BGMax format (10 digits)
+	 */
+	public static String formatTaxId(String taxId) throws ParseException {
+		
+		// Convert to digits only
+		String taxDigits = toDigitsOnly(taxId);
+		if (taxDigits.length()>12) {
+			throw new ParseException(taxId + " invalid.", 0);
+		}
+		if (taxDigits.length()==12) {
+			taxDigits = (String) taxDigits.subSequence(2, taxDigits.length()-1);
+		}
+		
+		return taxDigits;
+	}
+	
+	
+	/**
 	 * Converts a double to 12 digits where the two last digits
 	 * are "öre" or "cents".
 	 * Negative amounts are returned as absolute (no negative indicator)
