@@ -49,7 +49,6 @@ public class LbTk16Record extends BgRecord implements LbPaymentRecord {
 	
 	public LbTk16Record() {
 		super("16");
-		// TODO Auto-generated constructor stub
 	}
 	
     /**

@@ -40,7 +40,6 @@ public class BgMaxTk28Record extends BgRecord {
 	
 	public BgMaxTk28Record() {
 		super("28");
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

@@ -179,7 +179,6 @@ public class BgMaxSet implements BgSet {
 	}
 
 	public Date getCreditRecordDate(String recipientBg, double amount) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

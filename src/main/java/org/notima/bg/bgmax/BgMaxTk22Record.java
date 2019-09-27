@@ -56,7 +56,6 @@ public class BgMaxTk22Record extends BgRecord {
 
 	@Override
 	public String toRecordString() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

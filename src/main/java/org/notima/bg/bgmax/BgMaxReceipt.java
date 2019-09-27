@@ -441,27 +441,22 @@ public class BgMaxReceipt implements Transaction {
 	}
 
 	public double getForeignAmount() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	public String getForeignCurrency() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public boolean isForeign() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	public BgSet getParentSet() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public void setParentSet(BgSet parentSet) {
-		// TODO Auto-generated method stub
 		
 	}
 	
