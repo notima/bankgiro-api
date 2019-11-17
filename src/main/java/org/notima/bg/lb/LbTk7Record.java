@@ -53,4 +53,14 @@ public class LbTk7Record extends BgRecord {
 		return(line.toString());
 	}
 
+	public int getBankId() {
+		return bankId;
+	}
+
+	public void setBankId(int bankId) {
+		this.bankId = bankId;
+	}
+
+	
+	
 }

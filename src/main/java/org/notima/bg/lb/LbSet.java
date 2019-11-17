@@ -21,12 +21,12 @@
 
 package org.notima.bg.lb;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.Vector;
 
 import org.notima.bg.BgFooter;
 import org.notima.bg.BgHeader;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgSet;
 import org.notima.bg.BgUtil;
 import org.notima.bg.Transaction;
 

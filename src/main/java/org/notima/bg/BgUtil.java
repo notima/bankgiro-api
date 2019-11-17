@@ -116,9 +116,8 @@ public class BgUtil {
 		if (cleanUp==null) return("");
 		cleanUp = cleanUp.trim();
 		if (cleanUp.length()==0) return("");
-		char c;
 		int i=0;
-		while(i<cleanUp.length() && (c=cleanUp.charAt(i))=='0') {
+		while(i<cleanUp.length() && (cleanUp.charAt(i))=='0') {
 			i++;
 		}
 		return(cleanUp.substring(i));

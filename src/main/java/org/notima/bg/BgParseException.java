@@ -28,6 +28,10 @@ package org.notima.bg;
  */
 public class BgParseException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7871720174925010981L;
 	private String	m_line;
 	
 	public BgParseException(String line) {

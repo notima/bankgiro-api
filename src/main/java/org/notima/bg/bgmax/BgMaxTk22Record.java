@@ -63,4 +63,8 @@ public class BgMaxTk22Record extends BgRecord {
 		return(reference);
 	}
 	
+	public void setReferenceRecord(BgMaxReference ref) {
+		reference = ref;
+	}
+	
 }

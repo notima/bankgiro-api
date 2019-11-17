@@ -21,8 +21,6 @@
 
 package org.notima.bg.lb;
 
-import java.util.*;
-
 import org.notima.bg.BgRecord;
 import org.notima.bg.BgUtil;
 

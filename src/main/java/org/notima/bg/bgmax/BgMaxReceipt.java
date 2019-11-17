@@ -226,8 +226,11 @@ public class BgMaxReceipt implements Transaction {
 		}
 		
 		if (references!=null) {
+			BgMaxTk22Record r;
 			for (BgMaxReference bgRef : references) {
-				createRecord(new BgMaxTk22Record());
+				r = new BgMaxTk22Record();
+				r.setReferenceRecord(bgRef);
+				createRecord(r);
 			}
 		}
 		

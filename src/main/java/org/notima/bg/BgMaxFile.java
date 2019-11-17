@@ -41,10 +41,6 @@ import org.notima.bg.bgmax.BgMaxSet;
 import org.notima.bg.bgmax.BgMaxTk01Header;
 import org.notima.bg.bgmax.BgMaxTk05Record;
 import org.notima.bg.bgmax.BgMaxTk15Record;
-import org.notima.bg.bgmax.BgMaxTk20Record;
-import org.notima.bg.bgmax.BgMaxTk21Record;
-import org.notima.bg.bgmax.BgMaxTk22Record;
-import org.notima.bg.bgmax.BgMaxTk23Record;
 import org.notima.bg.bgmax.BgMaxTk70Footer;
 
 public class BgMaxFile extends BgFile {
