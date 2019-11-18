@@ -52,18 +52,18 @@ public class LbTk9Footer extends BgFooter {
 		if (totalRecipientsNo==0) {
 			line.append("            ");
 		} else {
-			line.append(BgUtil.fillToLength(new Integer(totalRecipientsNo).toString(), true, ' ', 12));
+			line.append(BgUtil.fillToLength(Integer.toString(totalRecipientsNo), true, ' ', 12));
 		}
 		// Number of records
 		if (bankId!=LbUtlSet.BANK_HANDELSBANKEN) {
-			line.append(BgUtil.fillToLength(new Integer(count).toString(), true, ' ', 12));
+			line.append(BgUtil.fillToLength(Integer.toString(count), true, ' ', 12));
 		} else {
 			line.append("            ");
 		}
 		// Reserve field 56-63
 		line.append(BgUtil.fillToLength(" ", false, ' ', 8));
 		double totalUtl = foreignAmount * 100;
-		line.append(BgUtil.fillToLength(new Long(Math.round(totalUtl)).toString(), 
+		line.append(BgUtil.fillToLength(Long.toString(Math.round(totalUtl)), 
 										true, '0', 15));
 
 		while(line.length()<80) {

@@ -64,7 +64,7 @@ public class BgMaxTk15Record extends BgRecord {
 			receiptNo = m.group(3);
 			amount = BgUtil.parseAmountStr(m.group(4));
 			currency = m.group(5);
-			count = new Integer(m.group(6));
+			count = Integer.parseInt(m.group(6));
 			return(this);
 		} else {
 			throw new BgParseException(line);

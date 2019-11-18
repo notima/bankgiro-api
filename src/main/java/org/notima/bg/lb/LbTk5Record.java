@@ -40,7 +40,7 @@ public class LbTk5Record extends BgRecord {
 
 		// Handelsbanken format
 		StringBuffer line = new StringBuffer(getTransCode()); // Pos 1
-		line.append(BgUtil.fillToLength(new Integer(m_recipientNo).toString(), 
+		line.append(BgUtil.fillToLength(Integer.toString(m_recipientNo), 
 				true, '0', 7)); // Pos 2-8
 		line.append(BgUtil.fillToLength(m_invoiceRef, false, ' ', 25));
 		// Kundbelopp - SEK (optional)

@@ -25,7 +25,7 @@ public class LbTk2Record extends BgRecord {
 	@Override
 	public String toRecordString() {
 		StringBuffer line = new StringBuffer(getTransCode());
-		line.append(BgUtil.fillToLength(new Integer(m_recipientNo).toString(),
+		line.append(BgUtil.fillToLength(Integer.toString(m_recipientNo),
 				true, '0', 7));
 		line.append(BgUtil.fillToLength(m_name1.toUpperCase(), false, ' ', 30));
 		line.append(BgUtil.fillToLength(m_name2.toUpperCase(), false, ' ', 35));

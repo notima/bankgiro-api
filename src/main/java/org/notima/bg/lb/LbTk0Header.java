@@ -2,7 +2,6 @@ package org.notima.bg.lb;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.regex.Pattern;
 
 import org.notima.bg.BgHeader;
 import org.notima.bg.BgParseException;
@@ -24,10 +23,10 @@ public class LbTk0Header extends BgHeader {
 	private String			address = "";
 	private java.util.Date	fileDate;
 	private java.util.Date	payDate;	// Leave as null unless all records in this section have the same paydate
-	private String			currency = "";
+	// private String			currency = "";
 
-	private static Pattern	linePattern1 = Pattern.compile("11(\\d{10})(\\d{6})LEV.*");
-	private static Pattern	linePattern2 = Pattern.compile(".*?BETALNINGAR(.{6}).{13}(.{3}).*");
+	// private static Pattern	linePattern1 = Pattern.compile("11(\\d{10})(\\d{6})LEV.*");
+	// private static Pattern	linePattern2 = Pattern.compile(".*?BETALNINGAR(.{6}).{13}(.{3}).*");
 	
 	/**
 	 * Creates a new header using current time as file date.

@@ -241,7 +241,7 @@ public class LbPayment implements Transaction {
      */
     public void addRecord(BgRecord record) {
     	record.setParentSet(parentSet);
-    	int code = new Integer(record.getTransCode()).intValue();
+    	int code = Integer.parseInt(record.getTransCode());
     	if (code==40) {
     		LbTk40Record r = (LbTk40Record)record;
     		dstAccount = r.getFullAccountNo();

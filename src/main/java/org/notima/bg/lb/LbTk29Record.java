@@ -49,7 +49,7 @@ public class LbTk29Record extends BgFooter {
 		Matcher m = linePattern1.matcher(line);
 		if (m.matches()) {
 			senderAccount = m.group(1);
-			count = new Integer(m.group(2));
+			count = Integer.parseInt(m.group(2));
 			amount = BgUtil.parseAmountStr(m.group(3));
 			if ("-".equals(m.group(4))) {
 				amount = -amount;
@@ -76,7 +76,7 @@ public class LbTk29Record extends BgFooter {
 			accountStr.insert(0, "0");
 		}
 		line.append(accountStr.toString());
-		StringBuffer countStr = new StringBuffer(new Integer(count).toString());
+		StringBuffer countStr = new StringBuffer(Integer.toString(count));
 		while(countStr.length()<8) {
 			countStr.insert(0, "0");
 		}

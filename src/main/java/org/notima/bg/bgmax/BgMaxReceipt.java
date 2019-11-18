@@ -63,7 +63,7 @@ public class BgMaxReceipt implements Transaction {
 	 * @param record			The record to be added
 	 */
 	public void addRecord(BgRecord record) {
-		int code = new Integer(record.getTransCode()).intValue();
+		int code = Integer.parseInt(record.getTransCode());
 		if (code==20) {
 			BgMaxTk20Record r = (BgMaxTk20Record)record;
 			amount = r.getAmount();
@@ -129,7 +129,7 @@ public class BgMaxReceipt implements Transaction {
 	 * @param record			The record to be created
 	 */
 	public void createRecord(BgRecord record) {
-		int code = new Integer(record.getTransCode()).intValue();
+		int code = Integer.parseInt(record.getTransCode());
 		if (code==20) {
 			BgMaxTk20Record r = (BgMaxTk20Record)record;
 			r.setAmount(amount);

@@ -40,9 +40,9 @@ public class LbTk7Record extends BgRecord {
 		
 		// Handelsbanken format
 		StringBuffer line = new StringBuffer(getTransCode()); // Pos 1
-		line.append(BgUtil.fillToLength(new Integer(m_recipientNo).toString(), 
+		line.append(BgUtil.fillToLength(Integer.toString(m_recipientNo), 
 				true, '0', 7)); // Pos 2-8
-		line.append(BgUtil.fillToLength(new Integer(m_bankCode).toString(), true, '0', 3));
+		line.append(BgUtil.fillToLength(Integer.toString(m_bankCode), true, '0', 3));
 		if (m_hbAccountNo!=null && m_hbAccountNo.trim().length()>0) {
 			line.append("         DSE");
 			line.append(BgUtil.toDigitsOnly(m_hbAccountNo));

@@ -48,7 +48,7 @@ public class LbTk3Record extends BgRecord {
 	@Override
 	public String toRecordString() {
 		StringBuffer line = new StringBuffer(getTransCode());
-		line.append(BgUtil.fillToLength(new Integer(m_recipientNo).toString(),
+		line.append(BgUtil.fillToLength(Integer.toString(m_recipientNo),
 				true, '0', 7));
 		line.append(BgUtil.fillToLength(m_adress.toUpperCase(), false, ' ', 30));
 		line.append(BgUtil.fillToLength(m_postal.toUpperCase(), false, ' ', 35));

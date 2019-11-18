@@ -157,7 +157,7 @@ public class LbTk16Record extends BgRecord implements LbPaymentRecord {
 
 		StringBuffer seqStr;
         if (recipientBg==null) {
-            seqStr = new StringBuffer(new Integer(seqNo).toString());
+            seqStr = new StringBuffer(Integer.toString(seqNo));
             while(seqStr.length()<9) {
                 // Prepend with zeroes
                 seqStr.insert(0, "0");

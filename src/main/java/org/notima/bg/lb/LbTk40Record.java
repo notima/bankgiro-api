@@ -36,7 +36,7 @@ public class LbTk40Record extends BgRecord {
 	protected String	infoText;
 	protected boolean	isSalary;
 
-	private static Pattern	linePattern1 = Pattern.compile("40(\\d{10})(\\d{4})(.*)"); // From BG format
+	// private static Pattern	linePattern1 = Pattern.compile("40(\\d{10})(\\d{4})(.*)"); // From BG format
 	private static Pattern	linePattern2 = Pattern.compile("40(\\d{9})(\\d|\\s)(\\d{4})(\\d{12}).*"); // If bank account
 	
 	public LbTk40Record() {
@@ -47,7 +47,7 @@ public class LbTk40Record extends BgRecord {
 	public BgRecord parse(String line) throws BgParseException {
 		Matcher m = linePattern2.matcher(line);
 		if (m.matches()) {
-			seqNo = new Integer(m.group(1)).intValue();
+			seqNo = Integer.parseInt(m.group(1));
 			clearingNo = m.group(3);
 			accountNo = BgUtil.trimLeadingZeros(m.group(4));
 			return(this);
@@ -176,7 +176,7 @@ public class LbTk40Record extends BgRecord {
 		// Add reserve field
 		line.append("0000");
 		// Create sequence field
-		StringBuffer seqBuf = new StringBuffer(new Integer(seqNo).toString());
+		StringBuffer seqBuf = new StringBuffer(Integer.toString(seqNo));
 		while(seqBuf.length()<5) {
 			seqBuf.insert(0,"0");
 		}

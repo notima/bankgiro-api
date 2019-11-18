@@ -46,10 +46,10 @@ public class BgMaxTk70Footer extends BgFooter {
 	public BgFooter parse(String line) throws BgParseException {
 		Matcher m = linePattern1.matcher(line);
 		if (m.matches()) {
-			countReceipts = new Integer(m.group(1)).intValue();
-			countReductions = new Integer(m.group(2)).intValue();
-			countExtraReferences = new Integer(m.group(3)).intValue();
-			countWhat = new Integer(m.group(4)).intValue();
+			countReceipts = Integer.parseInt(m.group(1));
+			countReductions = Integer.parseInt(m.group(2));
+			countExtraReferences = Integer.parseInt(m.group(3));
+			countWhat = Integer.parseInt(m.group(4));
 			return(this);
 		} else {
 			throw new BgParseException(line);

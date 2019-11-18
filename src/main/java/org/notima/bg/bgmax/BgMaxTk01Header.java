@@ -71,7 +71,7 @@ public class BgMaxTk01Header extends BgHeader {
 	public BgRecord parse(String line) throws BgParseException {
 		Matcher m = linePattern1.matcher(line);
 		if (m.matches()) {
-			version = new Integer(m.group(1)).intValue();
+			version = Integer.parseInt(m.group(1));
 			try {
 				createDate = dateFormat.parse(m.group(2).substring(0, 14));
 			} catch (java.text.ParseException pe) {

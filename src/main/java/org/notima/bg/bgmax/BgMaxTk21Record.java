@@ -53,11 +53,11 @@ public class BgMaxTk21Record extends BgRecord {
 			senderBg = BgUtil.trimLeadingZeros(m.group(1));
 			reference.reference = BgUtil.trimLeadingZeros(m.group(2));
 			reference.amount = BgUtil.parseAmountStr(m.group(3));
-			reference.referenceType = new Integer(m.group(4));
-			reference.payChannel = new Integer(m.group(5));
+			reference.referenceType = Integer.parseInt(m.group(4));
+			reference.payChannel = Integer.parseInt(m.group(5));
 			bgcRef = m.group(6);
-			reference.scannedImage = new Integer(m.group(7)).intValue()>0;
-			reductionType = new Integer(m.group(8));
+			reference.scannedImage = Integer.parseInt(m.group(7)) >0;
+			reductionType = Integer.parseInt(m.group(8));
 			return(this);
 		} else {
 			throw new BgParseException(line);

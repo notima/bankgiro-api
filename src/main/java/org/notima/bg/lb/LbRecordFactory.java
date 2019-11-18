@@ -35,7 +35,7 @@ public class LbRecordFactory implements BgRecordFactory {
 		if (line==null || line.trim().length()<2) return null;
 		BgRecord record = null;
 		String transCodeStr = line.substring(0,2);
-		int transCode = new Integer(transCodeStr).intValue();
+		int transCode = Integer.parseInt(transCodeStr);
 		switch (transCode) {
 			case 11:
 				record = new LbTk11Header();

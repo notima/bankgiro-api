@@ -64,7 +64,7 @@ public class LbTk25Record extends BgRecord {
 
 		StringBuffer seqStr;
         if (recipientBg==null) {
-            seqStr = new StringBuffer(new Integer(seqNo).toString());
+            seqStr = new StringBuffer(Integer.toString(seqNo));
             while(seqStr.length()<9) {
                 // Prepend with zeroes
                 seqStr.insert(0, "0");

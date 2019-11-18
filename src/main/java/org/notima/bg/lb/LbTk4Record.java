@@ -27,7 +27,7 @@ public class LbTk4Record extends BgRecord {
 
 		// Handelsbanken format
 		StringBuffer line = new StringBuffer(getTransCode()); // Pos 1
-		line.append(BgUtil.fillToLength(new Integer(m_recipientNo).toString(), 
+		line.append(BgUtil.fillToLength(Integer.toString(m_recipientNo), 
 				true, '0', 7)); // Pos 2-8
 		line.append(BgUtil.fillToLength(m_iban.toUpperCase(), false, ' ', 59)); // Pos 9-67
 		line.append(BgUtil.fillToLength(m_swift.toUpperCase(), false, ' ', 11)); // Pos 68-78
