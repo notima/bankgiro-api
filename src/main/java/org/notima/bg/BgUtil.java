@@ -224,7 +224,7 @@ public class BgUtil {
 	public static String getAmountStr(double amount, int len, boolean absolute) {
 		StringBuffer buf = new StringBuffer();
 		long newAmount = Math.round(Math.abs(amount)*100.0);
-		buf.append(new Long(newAmount).toString());
+		buf.append(Long.toString(newAmount));
 		while(buf.length()<len) {
 			buf.insert(0, "0");
 		}
@@ -252,7 +252,7 @@ public class BgUtil {
 	}
 	
 	public static double parseAmountStr(String amountStr) {
-		Double amount = new Double(amountStr);
+		Double amount = Double.parseDouble(amountStr);
 		amount = amount / 100.0;
 		return(amount);
 	}

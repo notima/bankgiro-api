@@ -110,7 +110,7 @@ public class BgMaxFile extends BgFile {
     	
     	while((line=reader.readLine())!=null) {
     		record = factory.parseRecord(line);
-    		code = new Integer(record.getTransCode()).intValue();
+    		code = Integer.parseInt(record.getTransCode());
     		if (code==1) {
     			// Create new set since it's the beginning of the file.
     			currentSet = new BgMaxSet();

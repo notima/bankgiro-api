@@ -100,7 +100,7 @@ public class LbFile extends BgFile {
     		record = factory.parseRecord(line);
     		outFile.append(line);
     		outFile.append("\r\n");
-    		code = new Integer(record.getTransCode()).intValue();
+    		code = Integer.parseInt(record.getTransCode());
     		if (code==29) {
     			LbTk29Record rec = new LbTk29Record();
     			rec.parse(line);
@@ -182,7 +182,7 @@ public class LbFile extends BgFile {
     		// Parse new line
     		record = factory.parseRecord(line);
     		// Read code from parsed record
-    		code = new Integer(record.getTransCode()).intValue();
+    		code = Integer.parseInt(record.getTransCode());
     		// If newly parsed record is a "comment record", add it to the current payment
     		if ((code==25 || code==65) && currentPayment!=null) {
     			// Comments attached at the bottom of the current payment
