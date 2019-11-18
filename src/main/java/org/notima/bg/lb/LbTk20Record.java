@@ -114,7 +114,7 @@ public class LbTk20Record extends BgRecord {
 
     /**
      * Date of the credit invoice (when it was first put on monitoring)
-     * @return
+     * @return	The credit date
      */
 	public java.util.Date getCreditDate() {
 		return creditDate;

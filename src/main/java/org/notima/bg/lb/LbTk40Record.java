@@ -104,7 +104,7 @@ public class LbTk40Record extends BgRecord {
 	 * Written on the account statement of the recipient
 	 * Maximum of 12 characters.
 	 * 
-	 * @return
+	 * @return	InfoText
 	 */
 	public String getInfoText() {
 		return infoText;
@@ -169,7 +169,7 @@ public class LbTk40Record extends BgRecord {
 	/**
 	 * Converts the information in this record to a BG-record
 	 * 
-	 * @return
+	 * @return	A BG-record represented as a string (line)
 	 */
 	public String toRecordString() {
 		StringBuffer line = new StringBuffer(transCode);

@@ -69,7 +69,7 @@ public class BgMaxFile extends BgFile {
 	 * Returns a set of bg recipients in the file.
 	 * Good for checking that the file belongs to the correct customer / account.
 	 * 
-	 * @return
+	 * @return	A set of bg recipients in the file
 	 */
 	public Set<String> getBgRecipients() {
 

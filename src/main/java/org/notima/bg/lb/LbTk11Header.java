@@ -60,7 +60,7 @@ public class LbTk11Header extends BgHeader {
 	
 	/**
 	 * If empty it defaults to SEK.
-	 * @return
+	 * @return	The currency
 	 */
 	public String getCurrency() {
 		if (currency==null || currency.trim().length()==0) return("SEK");

@@ -27,8 +27,8 @@ public class BgMaxRecordFactory implements BgRecordFactory {
 
 	/**
 	 * Parses a line and returns the record
-	 * @param line
-	 * @return
+	 * @param line	The text line to be parsed
+	 * @return	A BgRecord
 	 * @throws BgParseException
 	 */
 	public BgRecord parseRecord(String line) throws BgParseException {

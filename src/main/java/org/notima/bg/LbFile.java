@@ -144,7 +144,7 @@ public class LbFile extends BgFile {
     /**
      * Returns the BG-senders in this file.
      * 
-     * @return
+     * @return	A set of strings containing the BG-senders in the file
      */
     public Set<String> getBgSenders() {
 

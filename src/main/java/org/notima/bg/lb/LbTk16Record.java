@@ -124,7 +124,7 @@ public class LbTk16Record extends BgRecord implements LbPaymentRecord {
 
 	/**
 	 * Returns a negative amount since it's a credit.
-	 * @return
+	 * @return	The amount for this record
 	 */
 	public double getAmount() {
 		return -amount;

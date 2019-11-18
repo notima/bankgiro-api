@@ -28,7 +28,7 @@ public class LbRecordFactory implements BgRecordFactory {
 	/**
 	 * Parses a line and returns the record
 	 * @param line
-	 * @return
+	 * @return	The parsed line as a BgRecord
 	 * @throws BgParseException
 	 */
 	public BgRecord parseRecord(String line) throws BgParseException {

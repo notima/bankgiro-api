@@ -128,7 +128,7 @@ public class BgUtil {
 	 * 
 	 * @param swift			Swift to be validated.
 	 * @param iban			Iban to be validated.
-	 * @return
+	 * @return	True if the IBAN passes a basic validation
 	 */
 	public static boolean validateIban(String swift, String iban) {
 		boolean pass = false;

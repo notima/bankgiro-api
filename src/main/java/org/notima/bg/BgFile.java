@@ -66,7 +66,7 @@ public abstract class BgFile {
 	/**
 	 * Returns the last file used with this object (if any)
 	 * 
-	 * @return
+	 * @return	Last file used with this object.
 	 */
 	public File getFile() {
 		return(lastFile);

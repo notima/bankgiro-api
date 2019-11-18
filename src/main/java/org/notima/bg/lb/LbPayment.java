@@ -83,11 +83,11 @@ public class LbPayment implements Transaction {
     /**
      * Create a BG payment
      *
-     * @param recipientBg
-     * @param OCR
-     * @param amount
-     * @param ourRef
-     * @return
+     * @param recipientBg		The recipient's bg number
+     * @param OCR				The OCR-reference for the payment
+     * @param amount			The amount 
+     * @param ourRef			Our reference (that we wants returned back)
+     * @return	A representation of a accounts payable payment
      */
     public static LbPayment createBgPayment(String recipientBg, String OCR, double amount, String ourRef, Date payDate) {
         LbPayment payment = new LbPayment();
@@ -181,7 +181,7 @@ public class LbPayment implements Transaction {
      * @param trxType		Transaction type, LbTk3Record.TRX_* (how fast)
      * @param hbAccountNo	If payments are done from Handelsbanken, this should be the account number
      * 						used for the payment.
-     * @return
+     * @return	An LbPayment representing a UTL-payment.
      */
     public static LbPayment createUtlPayment(int recipientNo,
     										 String swift, 
