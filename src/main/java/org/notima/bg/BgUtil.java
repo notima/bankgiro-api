@@ -157,6 +157,9 @@ public class BgUtil {
 	 * Formats a sequence of digits to the general form of a bankgiro account.
 	 * If it's not a bg account no formatting occurs, the string is returned as is. 
 	 * (ie \d{3,4}-\d{4})
+	 *
+	 *	@param	digits	The digits to be formatted.
+	 *	@return	A human readable formatted bg number (ex 444-5546)
 	 */
 	public static String formatBg(String digits) {
 		String fmt = toDigitsOnly(digits);
@@ -170,8 +173,10 @@ public class BgUtil {
 	}
 	
 	/**
-	 * Format postgiro
+	 * Format plusgiro
 	 * Formats a sequence of digits to the general form of a postgiro account.
+	 * @param	digits	Digits to be formatted.
+	 * @return	A human readable plusgirot account.
 	 */
 	public static String formatPg(String digits) {
 		String fmt = toDigitsOnly(digits);
@@ -185,6 +190,9 @@ public class BgUtil {
 	
 	/**
 	 * Formats taxId to BGMax format (10 digits)
+	 * @param	taxId	The tax id to be formatted.
+	 * @return	A tax id formated as required in the BGMax-format (10 digits, no dashes)
+	 * @throws	ParseException if the tax ID can't be recognized.
 	 */
 	public static String formatTaxId(String taxId) throws ParseException {
 		
@@ -205,7 +213,7 @@ public class BgUtil {
 	 * Converts a double to 12 digits where the two last digits
 	 * are "öre" or "cents".
 	 * Negative amounts are returned as absolute (no negative indicator)
-	 *
+	 * @param amount	The amount to be formatted.
 	 * @return		A string representation of an amount in BG-format.
 	 */
 	public static String getAmountStr(double amount) {
@@ -314,7 +322,7 @@ public class BgUtil {
 	/**
 	 *  Validate OCR number.
 	 *  - Based on LUHN formula (Modulus10)
-	 *  @param OCR
+	 *  @param OCR	The OCR-number to validate
 	 *  @return True if OCR is correct
 	 */
 	public static boolean isValidOCRNumber (String OCR)
@@ -381,6 +389,7 @@ public class BgUtil {
 	 * @param		rightAlign	If the string should be right aligned.
 	 * @param		fillChar	The char to fill.
 	 * @param		len			Lenght to fill. If str is more than len, str is truncated.
+	 * @return	A string filled ackording to the given parameters.
 	 */
 	public static String fillToLength(String str, boolean rightAlign, char fillChar, int len) {
 		if (str==null) str = "";
@@ -433,7 +442,7 @@ public class BgUtil {
 	/**
 	 * Removes all non USASCII chars and converts to uppercase. Swedish characters
 	 * ÅÄÖ are replaced with A and O.
-	 * @param clearupstring
+	 * @param clearupstring		The string to be cleared.
 	 * @return	A string containing only ASCII
 	 */
 	public static String onlyUSASCII(String clearupstring) {
@@ -464,6 +473,8 @@ public class BgUtil {
 
 	/**
 	 * Returns number of days from today
+	 * @param	date	Date to check
+	 * @return	The number of days to the given date
 	 */
 	public static int daysFromNow(java.util.Date date) {
 		
@@ -490,7 +501,9 @@ public class BgUtil {
 	
 	/**
 	 * Adds number of days on specified date
-	 * 
+	 * @param	date	The date to add to
+	 * @param	daysToAdd	The number of days to add.
+	 * @return	The date after the days have been added.
 	 */
 	public static java.util.Date addDays(java.util.Date date, int daysToAdd) {
 

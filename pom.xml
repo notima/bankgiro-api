@@ -108,18 +108,24 @@
 	</organization>
 	<scm>
 		<url>https://github.com/notima/bankgiro-api</url>
-		<developerConnection>Daniel Tamm</developerConnection>
+		<connection>scm:git:git://github.com/notima/bankgiro-api.git</connection>
+		<developerConnection>scm:git:https://github.com:notima/bankgiro-api.git</developerConnection>
 	</scm>
 	<issueManagement>
 		<url>https://github.com/notima/bankgiro-api/issues</url>
 		<system>GitHub</system>
 	</issueManagement>
-	<!-- <profiles> <profile> <id>release-sign-artifacts</id> <activation> <property> 
-		<name>performRelease</name> <value>true</value> </property> </activation> 
-		<build> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-gpg-plugin</artifactId> 
-		<executions> <execution> <id>sign-artifacts</id> <phase>verify</phase> <goals> 
-		<goal>sign</goal> </goals> </execution> </executions> </plugin> </plugins> 
-		</build> </profile> </profiles> -->
+	
+	<developers>
+		<developer>
+			<name>Daniel Tamm</name>
+			<email>daniel@notima.se</email>
+			<organization>Notima SYstem Integration AB</organization>
+			<organizationUrl>https://github.com/notima</organizationUrl>
+		</developer>
+	</developers>
+
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
