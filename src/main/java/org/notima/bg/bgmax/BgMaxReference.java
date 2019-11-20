@@ -88,6 +88,4 @@ public class BgMaxReference {
 		this.bgcRef = bgcRef;
 	}
 	
-	
-	
 }
