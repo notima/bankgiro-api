@@ -2,22 +2,24 @@
 	Bankgiro Java API
     
     Copyright (C) 2009  Daniel Tamm
-                        Notima Consulting Group Ltd
+						Notima Consulting Group Ltd
+						
+	Copyright (C) 2019  Notima System Integration AB
 
-    This API-library is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    any later version.
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
-    This API-library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+       http://www.apache.org/licenses/LICENSE-2.0
 
-    You should have received a copy of the GNU General Public License
-    along with this API-library.  If not, see <http://www.gnu.org/licenses/>.
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.						
 
     =================================================================== */
+
 
 package org.notima.bg;
 
@@ -34,31 +36,61 @@ public abstract class BgFile {
 	
 	protected File			lastFile;
 	
+	/**
+	 * Writes the contents to file
+	 * 
+	 * @param	file	The file to write
+	 * @param	cs		The charset of the file
+	 * @throws	IOException	if file operation fails.
+	 */
     public abstract void writeToFile(File file, Charset cs) throws IOException;
-    
+	
+	/**
+	 * Writes the contents to a stream
+	 * 
+	 * @param os	The output stream to write to
+	 * @param cs	The charset to use.
+	 * @throws IOException	if stream operation fails.
+	 */
     public abstract void writeToStream(OutputStream os, Charset cs) throws IOException;
     
     /**
      * Reads a file and creates a data representation from the file.
-     * @param file
-     * @param cs
-     * @throws IOException
-     * @throws BgParseException
+     * @param file		The file to read from
+     * @param cs		The charset in file
+     * @throws IOException		If file operations fail.
+     * @throws BgParseException		if the file can't be parsed.
      */
     public abstract void readFromFile(File file, Charset cs) throws IOException, BgParseException;
-    
+	
+	/**
+	 * 
+	 * @return	The header of the file
+	 */
 	public BgHeader getFileHeader() {
 		return fileHeader;
 	}
 
+	/**
+	 * Sets the file header
+	 * @param fileHeader	The header
+	 */
 	public void setFileHeader(BgHeader fileHeader) {
 		this.fileHeader = fileHeader;
 	}
 
+	/**
+	 * 
+	 * @return	The footer of the file
+	 */
 	public BgFooter getFileFooter() {
 		return fileFooter;
 	}
 
+	/**
+	 * Sets the file footer
+	 * @param fileFooter	The footer
+	 */
 	public void setFileFooter(BgFooter fileFooter) {
 		this.fileFooter = fileFooter;
 	}
@@ -72,8 +104,16 @@ public abstract class BgFile {
 		return(lastFile);
 	}
 
+	/**
+	 * 
+	 * @return	The date of the file (specified in the file)
+	 */
 	public abstract java.util.Date getFileDate();
 	
+	/**
+	 * 
+	 * @return	The sets of records in the file
+	 */
     public abstract List<BgSet> getRecords();
 
 }

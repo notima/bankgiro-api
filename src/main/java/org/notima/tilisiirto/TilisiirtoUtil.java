@@ -8,7 +8,13 @@ package org.notima.tilisiirto;
  */
 public class TilisiirtoUtil {
 
-	/** returns formatted reference number (e.g. to use for printout) */
+	/** 
+	 * returns formatted reference number (e.g. to use for printout) 
+	 * 
+	 * @param	number		Reference number
+	 * @param	zeroFill	If it should be zerofilled.
+	 * @return	Formatted reference number
+	*/
 	public static String getFormatedReferenceNo(long number, boolean zeroFill) {
 
 		String strRes = "";
@@ -21,6 +27,8 @@ public class TilisiirtoUtil {
 
 	/**
 	 * returns unformatted reference number (e.g. to use within machine reading)
+	 * @param	number	Number to convert
+	 * @return	Reference number
 	 */
 	public static long getReferenceNo(long number) {
 
@@ -33,6 +41,9 @@ public class TilisiirtoUtil {
 
 	/**
 	 * returns unformatted reference number (e.g. to use within machine reading)
+	 * @param	number		Number to convert
+	 * @return	Unformatted reference number as String
+	 * 
 	 */
 	public static String getReferenceNoStr(long number) {
 
@@ -43,6 +54,11 @@ public class TilisiirtoUtil {
 		return (strRes);
 	}
 
+	/**
+	 * Gets control number
+	 * @param number	Number
+	 * @return	An int
+	 */
 	public static int getControlNumber(long number) {
 		int getControlNumberFi = 0;
 		String strNr = "";
@@ -75,6 +91,12 @@ public class TilisiirtoUtil {
 		return getControlNumberFi;
 	}
 
+	/**
+	 * Format control numbers 
+	 * @param number		Number to format
+	 * @param zeroFill		If padded with zeroes.
+	 * @return	Formatted number
+	 */
 	public static String formatControlNumbersFi(String number, boolean zeroFill) {
 
 		if (number==null)

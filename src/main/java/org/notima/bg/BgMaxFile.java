@@ -2,20 +2,21 @@
 	Bankgiro Java API
     
     Copyright (C) 2009  Daniel Tamm
-                        Notima Consulting Group Ltd
+						Notima Consulting Group Ltd
+						
+	Copyright (C) 2019  Notima System Integration AB
 
-    This API-library is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    any later version.
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
-    This API-library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+       http://www.apache.org/licenses/LICENSE-2.0
 
-    You should have received a copy of the GNU General Public License
-    along with this API-library.  If not, see <http://www.gnu.org/licenses/>.
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.						
 
     =================================================================== */
 
@@ -87,6 +88,8 @@ public class BgMaxFile extends BgFile {
 	 * Reads BGMax information from a file. Charset is mandatory. Normally the fileset is Cp850
 	 * Charset cs = Charset.forName("Cp850"); 
 	 * 
+	 * @param	file	The file to read
+	 * @param	cs		Charset of file
 	 */
 	@Override
 	public void readFromFile(File file, Charset cs) throws IOException,
@@ -164,10 +167,16 @@ public class BgMaxFile extends BgFile {
 		
 	}
 
+	/**
+	 * @return	FileFooter
+	 */
 	public BgFooter getFileFooter() {
 		return(fileFooter);
 	}
 
+	/**
+	 * @return	A generated file footer
+	 */
 	public BgFooter generateFileFooter() {
 		if (fileFooter==null) {
 			fileFooter = new BgMaxTk70Footer();
@@ -198,6 +207,12 @@ public class BgMaxFile extends BgFile {
 	/**
 	 * Creates a new bgMaxSet for this file and adds it to the files set.
 	 * 
+	 * @param	setDate			The reconciliation date of the set
+	 * @param	currency		The currency of containing transactions
+	 * @param	clearing		The clearing number of the receiving bank account
+	 * @param	bankAccount		The account number of the bank account
+	 * @param	bgAccount		The bankgiro account paid to
+	 * 
 	 * @return		The newly created BgMaxSet.
 	 */
 	public BgMaxSet createSet(Date setDate, String currency, String clearing, String bankAccount, String bgAccount) {
@@ -207,12 +222,21 @@ public class BgMaxFile extends BgFile {
 		return result;
 		
 	}
-	
+
+	/**
+	 * @return	The containing BgSets
+	 */
     @Override
     public List<BgSet> getRecords() {
         return(records);
     }
 
+	/**
+	 * Writes this BgMax to a file
+	 * 
+	 * @param	file	The file to write
+	 * @param	cs		The charset to use
+	 */
 	@Override
 	public void writeToFile(File file, Charset cs) throws IOException {
 		lastFile = file;
@@ -221,12 +245,21 @@ public class BgMaxFile extends BgFile {
 	}
 	
 	
-
+	/**
+	 * Gets the date of the file (as specified in the file header)
+	 * @return	Date of file
+	 */
 	@Override
 	public Date getFileDate() {
 		return(fileHeader.getCreateDate());
 	}
 
+	/**
+	 * Writes class' contents to an output stream
+	 * 
+	 * @param	os	The stream to write to
+	 * @param	cs	Charset to use
+	 */
 	@Override
 	public void writeToStream(OutputStream os, Charset cs) throws IOException {
 

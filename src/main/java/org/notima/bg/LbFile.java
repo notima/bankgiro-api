@@ -2,20 +2,21 @@
 	Bankgiro Java API
     
     Copyright (C) 2009  Daniel Tamm
-                        Notima Consulting Group Ltd
+						Notima Consulting Group Ltd
+						
+	Copyright (C) 2019  Notima System Integration AB
 
-    This API-library is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    any later version.
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
-    This API-library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+       http://www.apache.org/licenses/LICENSE-2.0
 
-    You should have received a copy of the GNU General Public License
-    along with this API-library.  If not, see <http://www.gnu.org/licenses/>.
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.						
 
     =================================================================== */
 
@@ -54,14 +55,26 @@ public class LbFile extends BgFile {
 	
 	private List<BgSet>	records;
 	
+	/**
+	 * Constructs a new LbFile with an empty set.
+	 */
 	public LbFile() {
 		records = new Vector<BgSet>();
 	}
 	
+	/**
+	 * Gets list of sets.
+	 * @return A list of BgSet
+	 */
 	public List<BgSet> getRecords() {
 		return records;
 	}
 
+	/**
+	 * Adds a set to file
+	 * 
+	 * @param rec	The set to add
+	 */
 	public void addSet(AbstractLbSet rec) {
 		if (records==null) {
 			records = new Vector<BgSet>();
@@ -69,10 +82,20 @@ public class LbFile extends BgFile {
 		records.add(rec);
 	}
 	
+	/**
+	 * Sets records in file.
+	 * @param records	The records
+	 */
 	public void setRecords(Vector<BgSet> records) {
 		this.records = records;
 	}
 
+	/**
+	 * Writes file
+	 * @param	file	The file to write
+	 * @param	cs		The charset to use
+	 * @throws 	IOException	If file operations fail.
+	 */
     public void writeToFile(File file, Charset cs) throws IOException {
         lastFile = file;
         FileOutputStream os = new FileOutputStream(file);
@@ -83,7 +106,12 @@ public class LbFile extends BgFile {
      * Splits the file into one file per sender
      * 
      * The files are named using the following pattern LB_ATER_XXXX_YYDDMM.txt
+	 * @param src		File to split
+	 * @param dir		Destination dir for split files
+	 * @param cs		Character set of file to split
      * 
+	 * @throws	IOException		If file can't be read / written
+	 * @throws 	BgParseException	If file can't be parsed
      */
     public static void splitToFiles(File src, File dir, Charset cs) throws IOException, BgParseException {
     	
@@ -163,10 +191,10 @@ public class LbFile extends BgFile {
     
     /**
      * Reads a file and creates a data representation from the file.
-     * @param file
-     * @param cs
-     * @throws IOException
-     * @throws BgParseException
+     * @param file		The file to read
+     * @param cs		Character set of file
+     * @throws IOException		if file can't be read
+     * @throws BgParseException		If file can't be parsed
      */
     public void readFromFile(File file, Charset cs) throws IOException, BgParseException {
     	lastFile = file;
