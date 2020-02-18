@@ -3,8 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.notima.bg</groupId>
 	<artifactId>bankgiro-api</artifactId>
-	<version>1.3.6</version>
-	<name>bankgiro-api</name>
+	<version>1.3.7</version>
+	<packaging>bundle</packaging>
+	<name>Bankgiro-API</name>
 	<description>API for working with bankgiro files (transaction files for Swedish banking system). (www.bankgirot.se)</description>
 
 	<distributionManagement>
@@ -26,6 +27,23 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>4.2.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Export-Package>org.notima.bg,
+										org.notima.bg.bgmax,
+										org.notima.bg.lb,
+										org.notima.tilisiirto
+						</Export-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+
 
 			<plugin>
 				<groupId>org.sonatype.plugins</groupId>

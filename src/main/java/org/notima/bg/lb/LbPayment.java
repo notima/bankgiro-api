@@ -56,10 +56,12 @@ public class LbPayment implements Transaction {
 
     /**
      * Payment for paying to a bank account
-     * @param dstAccount
-     * @param amount
-     * @param comment
-     * @param ourRef
+     * @param dstAccount		The destination account (to pay to)
+     * @param amount			The amount
+     * @param comment			A comment to send with the payment.
+     * @param ourRef			Our reference (not sent to recipient)
+     * @param payDate			The date when the payment should be committed.
+     * @return An LbPayment record.
      */
 	public static LbPayment createBankPayment(String dstAccount, double amount, String comment, String ourRef, Date payDate) {
         LbPayment payment = new LbPayment();
@@ -88,6 +90,7 @@ public class LbPayment implements Transaction {
      * @param OCR				The OCR-reference for the payment
      * @param amount			The amount 
      * @param ourRef			Our reference (that we wants returned back)
+     * @param payDate			The date when the payment are to be committed.
      * @return	A representation of a accounts payable payment
      */
     public static LbPayment createBgPayment(String recipientBg, String OCR, double amount, String ourRef, Date payDate) {
@@ -125,9 +128,9 @@ public class LbPayment implements Transaction {
      *
      * @param recipientPg   Recipient's Plusgiro
      * @param OCR           Must be numeric
-     * @param amount
+     * @param amount		The amount to be paid.
      * @param ourRef        Used for matching payments
-     * @param payDate
+     * @param payDate		The paydate
      * @param infoText      Array of text. Information that will be sent with the payment.
      * @return	LbPayment. If amount is negative, null is returned.
      */

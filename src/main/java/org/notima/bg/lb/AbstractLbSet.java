@@ -96,7 +96,7 @@ public abstract class AbstractLbSet implements BgSet {
 	
 	/**
 	 * Adds a payment to the set
-	 * @param payment
+	 * @param payment		The payment to be added
 	 */
     public void addTransaction(Transaction payment) {
     	payment.setParentSet(this);
