@@ -5,12 +5,26 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "orderReference")
+@XmlType(propOrder = { 
+    "id", 
+    "buyerID", 
+    "rowID", 
+    "date",
+    "URL",
+    "text",
+    "buyerDate",
+    "buyerURL",
+    "quantity",
+    "confirmedQuantity"
+})
 public class BgcOrderReference {
     private String id;
-    private String buyerId;
-    private String rowId;
+    private String buyerID;
+    private String rowID;
     private Date date;
     private String URL;
     private String text;
@@ -29,24 +43,25 @@ public class BgcOrderReference {
     }
 
     @XmlAttribute
-    public String getBuyerId() {
-        return buyerId;
+    public String getBuyerID() {
+        return buyerID;
     }
 
-    public void setBuyerId(String buyerId) {
-        this.buyerId = buyerId;
+    public void setBuyerID(String buyerID) {
+        this.buyerID = buyerID;
     }
 
     @XmlAttribute
-    public String getRowId() {
-        return rowId;
+    public String getRowID() {
+        return rowID;
     }
 
-    public void setRowId(String rowId) {
-        this.rowId = rowId;
+    public void setRowId(String rowID) {
+        this.rowID = rowID;
     }
 
     @XmlElement
+    @XmlJavaTypeAdapter(BgcDateFormatAdapter.class)
     public Date getDate() {
         return date;
     }
@@ -74,6 +89,7 @@ public class BgcOrderReference {
     }
 
     @XmlElement
+    @XmlJavaTypeAdapter(BgcDateFormatAdapter.class)
     public Date getBuyerDate() {
         return buyerDate;
     }

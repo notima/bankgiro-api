@@ -5,8 +5,22 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "agreementReference")
+@XmlType(propOrder = { 
+    "id", 
+    "rowID", 
+    "buyerID",
+    "date", 
+    "URL", 
+    "text",
+    "agreementRate", 
+    "objectAddress",
+    "capitalAmount",
+    "creditorAddress"
+})
 public class BgcAgreementReference {
     private String id;
     private String rowID;
@@ -14,7 +28,7 @@ public class BgcAgreementReference {
     private Date date;
     private String URL;
     private String text;
-    private double agreementRate;
+    private Double agreementRate;
     private BgcAddress objectAddress;
     private BgcAmount capitalAmount;
     private BgcAddress creditorAddress;
@@ -47,6 +61,7 @@ public class BgcAgreementReference {
     }
 
     @XmlElement
+    @XmlJavaTypeAdapter(BgcDateFormatAdapter.class)
     public Date getDate() {
         return date;
     }
@@ -74,11 +89,12 @@ public class BgcAgreementReference {
     }
 
     @XmlElement
-    public double getAgreementRate() {
+    @XmlJavaTypeAdapter(BgcNumberFormatAdapter.class)
+    public Double getAgreementRate() {
         return agreementRate;
     }
 
-    public void setAgreementRate(double agreementRate) {
+    public void setAgreementRate(Double agreementRate) {
         this.agreementRate = agreementRate;
     }
 

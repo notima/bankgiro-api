@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * An invoice or a an invoice row may have a reference to a
@@ -14,6 +16,15 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Oliver Norin
  */
 @XmlRootElement(name = "invoiceReference")
+@XmlType(propOrder = { 
+    "id", 
+    "rowID", 
+    "date", 
+    "URL", 
+    "netAmount", 
+    "vatAmount" ,
+    "totalAmount"
+})
 public class BgcInvoiceReference {
     /**
      * Identity of invoice, invoice number.
@@ -63,6 +74,7 @@ public class BgcInvoiceReference {
     }
 
     @XmlAttribute
+    @XmlJavaTypeAdapter(BgcDateFormatAdapter.class)
     public Date getDate() {
         return date;
     }

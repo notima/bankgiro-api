@@ -2,8 +2,14 @@ package org.notima.bg.bgc;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "epiDetails")
+@XmlType(propOrder = {
+    "identificationDetails",
+    "beneficiary",
+    "paymentInstructions"
+})
 public class BgcEPIDetails {
     private BgcIdentificationDetails identificationDetails;
     private BgcBeneficiary beneficiary;

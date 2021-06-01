@@ -2,8 +2,14 @@ package org.notima.bg.bgc;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "vatDetails")
+@XmlType(propOrder = { 
+    "vatNumber", 
+    "vatRegistration", 
+    "homeTown"
+})
 public class BgcVATDetails {
     private String vatNumber;
     private String vatRegistration;

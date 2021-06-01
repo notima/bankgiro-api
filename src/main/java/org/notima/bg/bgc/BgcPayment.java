@@ -2,11 +2,26 @@ package org.notima.bg.bgc;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "payment")
+@XmlType(propOrder = { 
+    "status",
+    "dueDate", 
+    "terms",
+    "method",
+    "overDueFine",
+    "netAmount",
+    "vatAmount",
+    "totalAmount",
+    "roundingAmount"
+})
 public class BgcPayment {
+    private String status;
     private Date dueDate;
     private BgcTerms terms;
     private BgcMethod method;
@@ -16,7 +31,16 @@ public class BgcPayment {
     private BgcAmount totalAmount;
     private BgcAmount roundingAmount;
 
+    @XmlAttribute
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @XmlElement
+    @XmlJavaTypeAdapter(BgcDateFormatAdapter.class)
     public Date getDueDate() {
         return dueDate;
     }

@@ -5,8 +5,33 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "invoiceRow")
+@XmlType(propOrder = { 
+    "id", 
+    "article", 
+    "text", 
+    "rowOrderReference", 
+    "rowPriceListReference",
+    "rowTenderReference",
+    "rowDeliveryReferences",
+    "rowRemainderReference",
+    "rowInvoiceReference",
+    "rowPaymentReference",
+    "rowDocumentReference",
+    "period",
+    "quantity",
+    "deliveredQuantity",
+    "unitPrice",
+    "costCenter",
+    "discount",
+    "netAmount",
+    "vatAmount",
+    "totalAmount",
+    "expences",
+    "currencyRate"
+})
 public class BgcInvoiceRow {
     private String id;
     private BgcArticle article;
@@ -15,7 +40,7 @@ public class BgcInvoiceRow {
     private BgcRowPriceListReference rowPriceListReference;
     private BgcRowTenderReference rowTenderReference;
     private List<BgcRowDeliveryReference> rowDeliveryReferences;
-    private BgcRowRemainderReferen rowRemainderReferen;
+    private BgcRowRemainderReference rowRemainderReference;
     private BgcRowInvoiceReference rowInvoiceReference;
     private BgcRowPaymentReference rowPaymentReference;
     private BgcTypedResourceReference rowDocumentReference;
@@ -88,11 +113,11 @@ public class BgcInvoiceRow {
     }
 
     @XmlElement
-    public BgcRowRemainderReferen getRowRemainderReferen() {
-        return rowRemainderReferen;
+    public BgcRowRemainderReference getRowRemainderReference() {
+        return rowRemainderReference;
     }
-    public void setRowRemainderReferen(BgcRowRemainderReferen rowRemainderReferen) {
-        this.rowRemainderReferen = rowRemainderReferen;
+    public void setRowRemainderReference(BgcRowRemainderReference rowRemainderReferen) {
+        this.rowRemainderReference = rowRemainderReferen;
     }
 
     @XmlElement

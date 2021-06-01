@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "rowDeliveryReference")
 public class BgcRowDeliveryReference {
@@ -41,6 +42,7 @@ public class BgcRowDeliveryReference {
     }
 
     @XmlElement
+    @XmlJavaTypeAdapter(BgcDateFormatAdapter.class)
     public Date getDate() {
         return date;
     }

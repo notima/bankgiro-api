@@ -5,8 +5,24 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "invoice")
+@XmlType(propOrder = { 
+    "id", 
+    "type", 
+    "invoiceDetails", 
+    "invoiceRows", 
+    "seller", 
+    "buyer" ,
+    "payment",
+    "delivery",
+    "epiDetails",
+    "currency",
+    "printInfo",
+    "factoring",
+    "enclosures"
+})
 public class BgcInvoice {
     private String id;
     private String type;
@@ -41,7 +57,7 @@ public class BgcInvoice {
         this.type = type;
     }
 
-	@XmlElement(name="invoiceDetails")
+	@XmlElement
     public BgcInvoiceDetails getInvoiceDetails() {
         return invoiceDetails;
     }
@@ -59,8 +75,7 @@ public class BgcInvoice {
         this.invoiceRows = invoiceRows;
     }
 
-
-	@XmlElement(name="seller")
+	@XmlElement
     public BgcSeller getSeller() {
         return seller;
     }
@@ -69,7 +84,7 @@ public class BgcInvoice {
         this.seller = seller;
     }
 
-    @XmlElement(name="buyer")
+    @XmlElement
     public BgcBuyer getBuyer() {
         return buyer;
     }
@@ -78,7 +93,7 @@ public class BgcInvoice {
         this.buyer = buyer;
     }
 
-    @XmlElement(name="payment")
+    @XmlElement
     public BgcPayment getPayment() {
         return payment;
     }
@@ -87,16 +102,16 @@ public class BgcInvoice {
         this.payment = payment;
     }
 
-    @XmlElement(name="deliveriy")
+    @XmlElement
     public BgcDelivery getDelivery() {
         return delivery;
     }
 
-    public void setDeliveries(BgcDelivery delivery) {
+    public void setDelivery(BgcDelivery delivery) {
         this.delivery = delivery;
     }
 
-    @XmlElement(name="epiDetails")
+    @XmlElement
     public BgcEPIDetails getEpiDetails() {
         return epiDetails;
     }
@@ -105,8 +120,8 @@ public class BgcInvoice {
         this.epiDetails = epiDetails;
     }
 
-    @XmlElement(name="currency")
-    public BgcCurrency getCurrencies() {
+    @XmlElement
+    public BgcCurrency getCurrency() {
         return currency;
     }
 
@@ -114,7 +129,7 @@ public class BgcInvoice {
         this.currency = currency;
     }
 
-    @XmlElement(name="printInfo")
+    @XmlElement
     public BgcPrintInfo getPrintInfo() {
         return printInfo;
     }
@@ -123,7 +138,7 @@ public class BgcInvoice {
         this.printInfo = printInfo;
     }
 
-    @XmlElement(name="factoring")
+    @XmlElement
     public BgcFactoring getFactoring() {
         return factoring;
     }
@@ -132,7 +147,7 @@ public class BgcInvoice {
         this.factoring = factoring;
     }
 
-    @XmlElement(name="enclosures")
+    @XmlElement
     public BgcEnclosures getEnclosures() {
         return enclosures;
     }

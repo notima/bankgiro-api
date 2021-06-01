@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "period")
 public class BgcPeriod {
@@ -11,6 +12,7 @@ public class BgcPeriod {
     private Date endDate;
 
     @XmlElement
+    @XmlJavaTypeAdapter(BgcDateFormatAdapter.class)
     public Date getStartDate() {
         return startDate;
     }
@@ -19,6 +21,7 @@ public class BgcPeriod {
     }
 
     @XmlElement
+    @XmlJavaTypeAdapter(BgcDateFormatAdapter.class)
     public Date getEndDate() {
         return endDate;
     }

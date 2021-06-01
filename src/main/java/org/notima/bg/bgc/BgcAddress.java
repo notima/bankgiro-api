@@ -2,8 +2,17 @@ package org.notima.bg.bgc;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "address")
+@XmlType(propOrder = {
+    "name",
+    "reference",
+    "street",
+    "postOfficeBox",
+    "town",
+    "country"
+})
 public class BgcAddress {
     private String name;
     private String reference;

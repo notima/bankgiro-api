@@ -2,8 +2,10 @@ package org.notima.bg.bgc;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "batchDetails")
+@XmlType(propOrder = { "bgnr", "originatorID", "intermediator", "totalSections", "totalDocuments" })
 public class BgcBatchDetails {
     private String bgnr;
     private String originatorID;

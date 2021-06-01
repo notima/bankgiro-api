@@ -3,17 +3,19 @@ package org.notima.bg.bgc;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlType(name = "amount")
 public class BgcAmount {
-    private double amount;
+    private Double amount;
     private String currency;
 
     @XmlValue
-    public double getAmount() {
+    @XmlJavaTypeAdapter(BgcNumberFormatAdapter.class)
+    public Double getAmount() {
         return amount;
     }
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

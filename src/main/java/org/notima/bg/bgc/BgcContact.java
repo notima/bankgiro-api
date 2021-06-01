@@ -2,8 +2,17 @@ package org.notima.bg.bgc;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "contact")
+@XmlType(propOrder = {
+    "name",
+    "phone",
+    "fax",
+    "email",
+    "URL",
+    "text"
+})
 public class BgcContact {
     private String name;
     private String phone;

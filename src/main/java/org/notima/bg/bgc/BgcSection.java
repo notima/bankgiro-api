@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "section")
-@XmlType(propOrder = { "id", "bgnr", "bgnrType", "originatorID", "sectionDetails", "documents" })
+@XmlType(propOrder = { "id", "bgnr","originatorID", "bgnrType", "sectionDetails", "documents" })
 public class BgcSection {
     private String id;
     private String bgnr;

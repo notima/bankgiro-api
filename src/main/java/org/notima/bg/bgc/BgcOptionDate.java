@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlType(name = "optionDate")
 public class BgcOptionDate {
@@ -17,6 +18,7 @@ public class BgcOptionDate {
     private String type;
 
     @XmlValue
+    @XmlJavaTypeAdapter(BgcDateFormatAdapter.class)
     public Date getDate() {
         return date;
     }

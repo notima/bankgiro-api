@@ -5,8 +5,21 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "enclosureDetails")
+@XmlType(propOrder = { 
+    "mimeCode", 
+    "type",
+    "name",
+    "date",
+    "URL",
+    "id",
+    "username",
+    "password",
+    "encodedObject"
+})
 public class BgcEnclosureDetails {
 
     public static final String ENCLOSURE_TYPE_CONTRACT = "CT";
@@ -106,6 +119,7 @@ public class BgcEnclosureDetails {
     }
 
     @XmlElement
+    @XmlJavaTypeAdapter(BgcDateFormatAdapter.class)
     public Date getDate() {
         return date;
     }

@@ -3,8 +3,21 @@ package org.notima.bg.bgc;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "printInfo")
+@XmlType(propOrder = { 
+    "id", 
+    "copyCode", 
+    "exportFlag", 
+    "languageCode", 
+    "originalCode" ,
+    "text",
+    "postage",
+    "layout",
+    "acknowledgeEmail",
+    "logo"
+})
 public class BgcPrintInfo {
     public static final String A_POSTAGE = "A";
     public static final String B_POSTAGE = "B";

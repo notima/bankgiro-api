@@ -5,11 +5,22 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "rowRemainderReference")
-public class BgcRowRemainderReferen {
+@XmlType(propOrder = { 
+    "id", 
+    "buyerID", 
+    "rowID", 
+    "date",
+    "URL",
+    "text",
+    "quantity"
+})
+public class BgcRowRemainderReference {
     private String id;
-    private String rowId;
+    private String rowID;
     private String buyerID;
     private Date date;
     private String URL;
@@ -25,11 +36,11 @@ public class BgcRowRemainderReferen {
     }
 
     @XmlAttribute
-    public String getRowId() {
-        return rowId;
+    public String getRowID() {
+        return rowID;
     }
-    public void setRowId(String rowId) {
-        this.rowId = rowId;
+    public void setRowID(String rowID) {
+        this.rowID = rowID;
     }
 
     @XmlAttribute
@@ -41,6 +52,7 @@ public class BgcRowRemainderReferen {
     }
 
     @XmlElement
+    @XmlJavaTypeAdapter(BgcDateFormatAdapter.class)
     public Date getDate() {
         return date;
     }

@@ -2,8 +2,14 @@ package org.notima.bg.bgc;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "bankCustomer")
+@XmlType(propOrder = { 
+    "identifier", 
+    "bank", 
+    "changeableAmount"
+})
 public class BgcBankCustomer {
     private BgcIdentifier identifier;
     private BgcBankInformation bank;

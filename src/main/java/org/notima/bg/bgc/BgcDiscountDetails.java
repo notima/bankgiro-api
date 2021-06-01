@@ -5,8 +5,17 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "discountDetails")
+@XmlType(propOrder = { 
+    "type", 
+    "date",
+    "baseAmount",
+    "discount",
+    "sumOfDiscountAndCharges"
+})
 public class BgcDiscountDetails {
     private String type;
     private Date date;
@@ -23,6 +32,7 @@ public class BgcDiscountDetails {
     }
 
     @XmlElement
+    @XmlJavaTypeAdapter(BgcDateFormatAdapter.class)
     public Date getDate() {
         return date;
     }

@@ -2,15 +2,25 @@ package org.notima.bg.bgc;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "currency")
+@XmlType(propOrder = { 
+    "currencyCode", 
+    "rate", 
+    "rateEntity", 
+    "codeAC", 
+    "exchangeRateAC" ,
+    "rateEntityAC"
+})
 public class BgcCurrency {
     private String currencyCode;
-    private double rate;
-    private double rateEntity;
+    private Double rate;
+    private Double rateEntity;
     private String codeAC;
-    private double exchangeRateAC;
-    private double rateEntityAC;
+    private Double exchangeRateAC;
+    private Double rateEntityAC;
 
     @XmlAttribute(name = "code")
     public String getCurrencyCode() {
@@ -22,20 +32,22 @@ public class BgcCurrency {
     }
 
     @XmlAttribute
-    public double getRate() {
+    @XmlJavaTypeAdapter(BgcNumberFormatAdapter.class)
+    public Double getRate() {
         return rate;
     }
 
-    public void setRate(double rate) {
+    public void setRate(Double rate) {
         this.rate = rate;
     }
 
     @XmlAttribute
-    public double getRateEntity() {
+    @XmlJavaTypeAdapter(BgcNumberFormatAdapter.class)
+    public Double getRateEntity() {
         return rateEntity;
     }
 
-    public void setRateEntity(double rateEntity) {
+    public void setRateEntity(Double rateEntity) {
         this.rateEntity = rateEntity;
     }
 
@@ -49,20 +61,22 @@ public class BgcCurrency {
     }
 
     @XmlAttribute
-    public double getExchangeRateAC() {
+    @XmlJavaTypeAdapter(BgcNumberFormatAdapter.class)
+    public Double getExchangeRateAC() {
         return exchangeRateAC;
     }
 
-    public void setExchangeRateAC(double exchangeRateAC) {
+    public void setExchangeRateAC(Double exchangeRateAC) {
         this.exchangeRateAC = exchangeRateAC;
     }
 
     @XmlAttribute
-    public double getRateEntityAC() {
+    @XmlJavaTypeAdapter(BgcNumberFormatAdapter.class)
+    public Double getRateEntityAC() {
         return rateEntityAC;
     }
 
-    public void setRateEntityAC(double rateEntityAC) {
+    public void setRateEntityAC(Double rateEntityAC) {
         this.rateEntityAC = rateEntityAC;
     }
     

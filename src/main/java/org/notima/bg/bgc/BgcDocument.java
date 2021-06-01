@@ -3,13 +3,17 @@ package org.notima.bg.bgc;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "document")
+@XmlType(propOrder = { "id", "type", "distribution", "bgcID", "templateID", "documentDetails", "invoice" })
 public class BgcDocument {
     private String id;
     private String type;
     private int templateID;
     private String distribution;
+    private String bgcID = "";
+    
     private BgcDocumentDetails documentDetails;
     private BgcInvoice invoice;
 
@@ -47,6 +51,15 @@ public class BgcDocument {
 
     public void setDistribution(String distribution) {
         this.distribution = distribution;
+    }
+
+    @XmlAttribute
+    public String getBgcID() {
+        return bgcID;
+    }
+
+    public void setBgcID(String bgcID) {
+        this.bgcID = bgcID;
     }
 
     @XmlElement(name="documentDetails")

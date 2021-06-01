@@ -3,6 +3,7 @@ package org.notima.bg.bgc;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlType(name = "overDueFine")
 public class BgcOverDueFine {
@@ -13,7 +14,7 @@ public class BgcOverDueFine {
      * be presented to the customer. E.g. 8% + reference interest rate.
      */
     private String terms;
-    private double rate;
+    private Double rate;
 
     @XmlValue
     public String getTerms() {
@@ -24,10 +25,11 @@ public class BgcOverDueFine {
     }
 
     @XmlAttribute
-    public double getRate() {
+    @XmlJavaTypeAdapter(BgcNumberFormatAdapter.class)
+    public Double getRate() {
         return rate;
     }
-    public void setRate(double rate) {
+    public void setRate(Double rate) {
         this.rate = rate;
     }
 }

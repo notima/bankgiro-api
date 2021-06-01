@@ -1,12 +1,19 @@
 package org.notima.bg.bgc;
 
+import java.io.File;
+import java.io.StringWriter;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "batch")
+@XmlType(propOrder = { "id", "status", "version", "batchDetails", "sections" })
 public class BgcBatch {
 
     public static final String STATUS_CERTIFICATION = "C";
@@ -19,12 +26,26 @@ public class BgcBatch {
     private BgcBatchDetails batchDetails;
     private List<BgcSection> sections;
 
+    @Override
+    public String toString(){
+        try {
+            JAXBContext context = JAXBContext.newInstance(BgcBatch.class);
+            Marshaller mar = context.createMarshaller();
+            mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            StringWriter sw = new StringWriter();
+            File file = new File("/home/oliver/Documents/bankgiro-api/src/test/resources/samplefiles/bgc.txt");
+            mar.marshal(this, sw);
+            return sw.toString().replace("    ", "");
+        } catch (JAXBException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @XmlAttribute
     public String getId() {
         return id;
     }
-
-    
 
     public void setId(String id) {
         this.id = id;

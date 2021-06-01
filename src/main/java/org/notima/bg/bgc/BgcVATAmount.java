@@ -3,25 +3,27 @@ package org.notima.bg.bgc;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlType(name = "vatAmount")
 public class BgcVATAmount {
-    private double amount;
+    private Double amount;
     private String currency;
-    private double rate;
-    private double base;
+    private Double rate;
+    private Double base;
     private String vatCode;
     private String currencyAC;
-    private double baseAC;
-    private double vatAmount;
+    private Double baseAC;
+    private Double vatAmountAC;
     private String vatCodeAC;
     private String text;
 
     @XmlValue
-    public double getAmount() {
+    @XmlJavaTypeAdapter(BgcNumberFormatAdapter.class)
+    public Double getAmount() {
         return amount;
     }
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
@@ -34,18 +36,20 @@ public class BgcVATAmount {
     }
 
     @XmlAttribute
-    public double getRate() {
+    @XmlJavaTypeAdapter(BgcNumberFormatAdapter.class)
+    public Double getRate() {
         return rate;
     }
-    public void setRate(double rate) {
+    public void setRate(Double rate) {
         this.rate = rate;
     }
 
     @XmlAttribute
-    public double getBase() {
+    @XmlJavaTypeAdapter(BgcNumberFormatAdapter.class)
+    public Double getBase() {
         return base;
     }
-    public void setBase(double base) {
+    public void setBase(Double base) {
         this.base = base;
     }
 
@@ -66,19 +70,21 @@ public class BgcVATAmount {
     }
 
     @XmlAttribute
-    public double getBaseAC() {
+    @XmlJavaTypeAdapter(BgcNumberFormatAdapter.class)
+    public Double getBaseAC() {
         return baseAC;
     }
-    public void setBaseAC(double baseAC) {
+    public void setBaseAC(Double baseAC) {
         this.baseAC = baseAC;
     }
 
     @XmlAttribute
-    public double getVatAmount() {
-        return vatAmount;
+    @XmlJavaTypeAdapter(BgcNumberFormatAdapter.class)
+    public Double getVatAmountAC() {
+        return vatAmountAC;
     }
-    public void setVatAmount(double vatAmount) {
-        this.vatAmount = vatAmount;
+    public void setVatAmountAC(Double vatAmountAC) {
+        this.vatAmountAC = vatAmountAC;
     }
 
     @XmlAttribute

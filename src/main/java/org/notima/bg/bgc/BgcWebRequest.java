@@ -4,8 +4,13 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "webRequest")
+@XmlType(propOrder = { 
+    "url", 
+    "webParameter"
+})
 public class BgcWebRequest {
     private String url;
     private List<String> webParameters;

@@ -5,8 +5,34 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "invoiceDetails")
+@XmlType(propOrder = { 
+    "invoiceType", 
+    "identifiers", 
+    "invoiceNumber", 
+    "invoiceDate", 
+    "invoicePeriod", 
+    "priceListReference" ,
+    "tenderReference",
+    "orderReference",
+    "remainderReference",
+    "invoiceReference",
+    "agreementReference",
+    "documentReferences",
+    "invoiceTotal",
+    "costCenter",
+    "vatAmountList",
+    "textList",
+    "urlList",
+    "imagesList",
+    "expencesList",
+    "discountDetailsList",
+    "freightDetails",
+    "projectReferences"
+})
 public class BgcInvoiceDetails {
     private BgcInvoiceType invoiceType;
     private List<BgcIdentifier> identifiers;
@@ -59,6 +85,7 @@ public class BgcInvoiceDetails {
     }
 
     @XmlElement
+    @XmlJavaTypeAdapter(BgcDateFormatAdapter.class)
     public Date getInvoiceDate() {
         return invoiceDate;
     }

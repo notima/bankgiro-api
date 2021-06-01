@@ -3,8 +3,17 @@ package org.notima.bg.bgc;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "expenses")
+@XmlType(propOrder = { 
+    "type", 
+    "text",
+    "netAmount",
+    "vatAmount",
+    "totalAmount",
+    "baseAmount",
+})
 public class BgcExpences {
     
     /**

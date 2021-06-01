@@ -3,8 +3,13 @@ package org.notima.bg.bgc;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "images")
+@XmlType(propOrder = { 
+    "url", 
+    "images"
+})
 public class BgcImages {
     private String url;
     private List<BgcImage> images;

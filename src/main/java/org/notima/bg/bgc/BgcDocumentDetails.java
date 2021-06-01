@@ -2,8 +2,10 @@ package org.notima.bg.bgc;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "documentDetails")
+@XmlType(propOrder = { "originatorBgnr", "originatorID", "originatorIntermediator", "addresseeID", "addresseeID2", "addresseeIntermediator" })
 public class BgcDocumentDetails {
     private String originatorBgnr;
     private String originatorID;

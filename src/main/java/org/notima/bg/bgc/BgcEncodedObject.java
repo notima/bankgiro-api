@@ -3,6 +3,7 @@ package org.notima.bg.bgc;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Object in binary format or other format that can not be represented by
@@ -12,6 +13,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Oliver Norin
  */
 @XmlRootElement(name = "encodedObject")
+@XmlType(propOrder = { 
+    "objectID", 
+    "format",
+    "filename",
+    "data"
+})
 public class BgcEncodedObject {
     private String objectID;
     private String format = "BASE64";

@@ -5,8 +5,20 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "delivery")
+@XmlType(propOrder = { 
+    "id", 
+    "noteNumber",
+    "date",
+    "period",
+    "method",
+    "terms",
+    "deliveree",
+    "logistics"
+})
 public class BgcDelivery {
     private String id;
     private String noteNumber;
@@ -34,6 +46,7 @@ public class BgcDelivery {
     }
 
     @XmlElement
+    @XmlJavaTypeAdapter(BgcDateFormatAdapter.class)
     public Date getDate() {
         return date;
     }

@@ -3,8 +3,20 @@ package org.notima.bg.bgc;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "buyer")
+@XmlType(propOrder = { 
+    "id", 
+    "sellerID", 
+    "name", 
+    "vatDetails", 
+    "postalAddress" ,
+    "contact",
+    "recipient",
+    "bankCustomer",
+    "gs1"
+})
 public class BgcBuyer {
     private String id;
     private String sellerID;
