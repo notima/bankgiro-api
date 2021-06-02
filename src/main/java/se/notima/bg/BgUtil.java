@@ -1,5 +1,7 @@
 package se.notima.bg;
 
+import org.notima.util.NotimaUtil;
+
 /**
  * Kept for backwards compatibility
  * 
@@ -7,6 +9,6 @@ package se.notima.bg;
  * @deprecated Use org.notima.bg.BgUtil
  */
 
-public class BgUtil extends org.notima.bg.BgUtil {
+public class BgUtil extends NotimaUtil {
 
 }

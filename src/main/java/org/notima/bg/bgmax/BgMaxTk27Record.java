@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 
 public class BgMaxTk27Record extends BgRecord{
@@ -55,8 +55,8 @@ public class BgMaxTk27Record extends BgRecord{
 	@Override
 	public String toRecordString() {
 		StringBuffer line = new StringBuffer(transCode);
-		line.append(BgUtil.fillToLength(address,  false,  ' ',  35));
-		line.append(BgUtil.fillToLength(BgUtil.removeBlanks(zipCode), false, ' ', 9));
+		line.append(NotimaUtil.fillToLength(address,  false,  ' ',  35));
+		line.append(NotimaUtil.fillToLength(NotimaUtil.removeBlanks(zipCode), false, ' ', 9));
 		while(line.length()<80) {
 			line.append(" ");
 		}

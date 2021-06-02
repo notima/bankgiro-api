@@ -30,7 +30,7 @@ import java.util.*;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 public class BgMaxTk15Record extends BgRecord {
 
@@ -55,7 +55,7 @@ public class BgMaxTk15Record extends BgRecord {
 		Matcher m = linePattern1.matcher(line);
 		if (m.matches()) {
 			toBankAccount = m.group(1);
-			clearing = BgUtil.trimLeadingZeros(toBankAccount.substring(19, 23));
+			clearing = NotimaUtil.trimLeadingZeros(toBankAccount.substring(19, 23));
 			accountNo = toBankAccount.substring(23, 35);
 			try {
 				transactionDate = dateFormat.parse(m.group(2));
@@ -63,7 +63,7 @@ public class BgMaxTk15Record extends BgRecord {
 				throw new BgParseException("Set date: " + m.group(2) + " not valid. ", line);
 			}
 			receiptNo = m.group(3);
-			amount = BgUtil.parseAmountStr(m.group(4));
+			amount = NotimaUtil.parseAmountStr(m.group(4));
 			currency = m.group(5);
 			count = Integer.parseInt(m.group(6));
 			return(this);
@@ -77,19 +77,19 @@ public class BgMaxTk15Record extends BgRecord {
 		StringBuffer line = new StringBuffer(this.getTransCode());
 		
 		// Bank (clearing)
-		line.append(BgUtil.fillToLength(BgUtil.toDigitsOnly(clearing), false, '0', 4));
+		line.append(NotimaUtil.fillToLength(NotimaUtil.toDigitsOnly(clearing), false, '0', 4));
 		// Bank (account number)
-		line.append(BgUtil.fillToLength(BgUtil.toDigitsOnly(accountNo), true, '0', 31));
+		line.append(NotimaUtil.fillToLength(NotimaUtil.toDigitsOnly(accountNo), true, '0', 31));
 		// Date of payments
 		line.append(dateFormat.format(transactionDate));
 		// Receipt No
-		line.append(BgUtil.fillToLength(receiptNo, true, '0', 5));
+		line.append(NotimaUtil.fillToLength(receiptNo, true, '0', 5));
 		// Total amount
-		line.append(BgUtil.getAmountStr(amount, 18, false));
+		line.append(NotimaUtil.getAmountStr(amount, 18, false));
 		// Currency
-		line.append(BgUtil.fillToLength(currency, true, 'X', 3));
+		line.append(NotimaUtil.fillToLength(currency, true, 'X', 3));
 		// Number of payments
-		line.append(BgUtil.fillToLength(Integer.toString(count), true, '0', 8));
+		line.append(NotimaUtil.fillToLength(Integer.toString(count), true, '0', 8));
 		// Type of receipt
 		line.append(" "); // Normally blank
 		

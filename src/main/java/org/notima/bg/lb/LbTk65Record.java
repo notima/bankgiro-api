@@ -23,7 +23,7 @@
 package org.notima.bg.lb;
 
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 
 /**
@@ -42,7 +42,7 @@ public class LbTk65Record extends BgRecord {
 
     public LbTk65Record(String recipientPg, String infoText) {
         super("65");
-        this.recipientPg = BgUtil.toDigitsOnly(recipientPg);
+        this.recipientPg = NotimaUtil.toDigitsOnly(recipientPg);
         this.infoText = infoText;
     }
 

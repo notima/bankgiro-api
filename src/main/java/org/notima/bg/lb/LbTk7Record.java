@@ -26,7 +26,7 @@ package org.notima.bg.lb;
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
 import org.notima.bg.BgSet;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 /**
  * Centralbankspost med debetkontonummer
@@ -63,12 +63,12 @@ public class LbTk7Record extends BgRecord {
 		
 		// Handelsbanken format
 		StringBuffer line = new StringBuffer(getTransCode()); // Pos 1
-		line.append(BgUtil.fillToLength(Integer.toString(m_recipientNo), 
+		line.append(NotimaUtil.fillToLength(Integer.toString(m_recipientNo), 
 				true, '0', 7)); // Pos 2-8
-		line.append(BgUtil.fillToLength(Integer.toString(m_bankCode), true, '0', 3));
+		line.append(NotimaUtil.fillToLength(Integer.toString(m_bankCode), true, '0', 3));
 		if (m_hbAccountNo!=null && m_hbAccountNo.trim().length()>0) {
 			line.append("         DSE");
-			line.append(BgUtil.toDigitsOnly(m_hbAccountNo));
+			line.append(NotimaUtil.toDigitsOnly(m_hbAccountNo));
 		}
 		while(line.length()<80) {
 			line.append(" ");

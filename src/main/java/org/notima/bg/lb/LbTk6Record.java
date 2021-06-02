@@ -25,7 +25,7 @@ package org.notima.bg.lb;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 public class LbTk6Record extends BgRecord {
 
@@ -57,12 +57,12 @@ public class LbTk6Record extends BgRecord {
 
 		// Handelsbanken format
 		StringBuffer line = new StringBuffer(getTransCode()); // Pos 1
-		line.append(BgUtil.fillToLength(Integer.toString(m_recipientNo), 
+		line.append(NotimaUtil.fillToLength(Integer.toString(m_recipientNo), 
 				true, '0', 7)); // Pos 2-8
-		line.append(BgUtil.fillToLength(m_invoiceRef, false, ' ', 25));
+		line.append(NotimaUtil.fillToLength(m_invoiceRef, false, ' ', 25));
 		// Kundbelopp - SEK (optional)
 		if (m_amount!=0) {
-			line.append(BgUtil.getAmountStr(m_amount, 11, false));
+			line.append(NotimaUtil.getAmountStr(m_amount, 11, false));
 		} else {
 			// Leave empty if zero
 			line.append("           ");
@@ -74,13 +74,13 @@ public class LbTk6Record extends BgRecord {
 		// Currency code
 		line.append(m_currencyCode.substring(0, 3).toUpperCase());
 		// Pay date
-		line.append(BgUtil.getDateString(m_payDate));
+		line.append(NotimaUtil.getDateString(m_payDate));
 		// Kod
 		line.append(" ");
 		// Reserve
 		line.append("0");
 		// Invoice amount in currency Code
-		line.append(BgUtil.getAmountStr(m_foreignAmount, 13, false));
+		line.append(NotimaUtil.getAmountStr(m_foreignAmount, 13, false));
 		while(line.length()<80) {
 			line.append(" ");
 		}

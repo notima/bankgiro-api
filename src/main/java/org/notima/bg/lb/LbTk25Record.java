@@ -27,7 +27,7 @@ import java.util.regex.*;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 
 /**
@@ -103,7 +103,7 @@ public class LbTk25Record extends BgRecord {
      * @param recipientBg the recipientBg to set
      */
     public void setRecipientBg(String recipientBg) {
-        this.recipientBg = BgUtil.toDigitsOnly(recipientBg);
+        this.recipientBg = NotimaUtil.toDigitsOnly(recipientBg);
     }
 
     /**

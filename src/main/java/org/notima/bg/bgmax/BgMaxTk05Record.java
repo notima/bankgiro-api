@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 
 public class BgMaxTk05Record extends BgRecord {
@@ -47,8 +47,8 @@ public class BgMaxTk05Record extends BgRecord {
 	public BgRecord parse(String line) throws BgParseException {
 		Matcher m = linePattern1.matcher(line);
 		if (m.matches()) {
-			recipientBg = BgUtil.trimLeadingZeros(m.group(1));
-			recipientPg = BgUtil.trimLeadingZeros(m.group(2));
+			recipientBg = NotimaUtil.trimLeadingZeros(m.group(1));
+			recipientPg = NotimaUtil.trimLeadingZeros(m.group(2));
 			currency = m.group(3);
 			return(this);
 		} else {
@@ -64,7 +64,7 @@ public class BgMaxTk05Record extends BgRecord {
 	public void setRecipientBg(String aRecipientBg) {
 		recipientBg = aRecipientBg;
 		if (recipientBg==null) return;
-		recipientBg = BgUtil.toDigitsOnly(recipientBg);
+		recipientBg = NotimaUtil.toDigitsOnly(recipientBg);
 	}
 
 	public String getRecipientPg() {
@@ -87,10 +87,10 @@ public class BgMaxTk05Record extends BgRecord {
 	public String toRecordString() {
 		StringBuffer line = new StringBuffer(getTransCode());
 
-		line.append(BgUtil.fillToLength(BgUtil.toDigitsOnly(recipientBg), true, '0', 10));
-		line.append(BgUtil.fillToLength(BgUtil.toDigitsOnly(recipientPg), true, 
+		line.append(NotimaUtil.fillToLength(NotimaUtil.toDigitsOnly(recipientBg), true, '0', 10));
+		line.append(NotimaUtil.fillToLength(NotimaUtil.toDigitsOnly(recipientPg), true, 
 				((recipientPg==null || recipientPg.trim().length()==0) ? ' ' : '0'), 10));
-		line.append(BgUtil.fillToLength(currency, true, ' ', 3));
+		line.append(NotimaUtil.fillToLength(currency, true, ' ', 3));
 		
 		// Pad to 80
 		while(line.length()<80) {

@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 
 public class BgMaxTk29Record extends BgRecord {
@@ -44,7 +44,7 @@ public class BgMaxTk29Record extends BgRecord {
 	public BgRecord parse(String line) throws BgParseException {
 		Matcher m = linePattern1.matcher(line);
 		if (m.matches()) {
-			taxId = BgUtil.trimLeadingZeros(m.group(1));
+			taxId = NotimaUtil.trimLeadingZeros(m.group(1));
 			return(this);
 		} else {
 			throw new BgParseException(line);
@@ -55,11 +55,11 @@ public class BgMaxTk29Record extends BgRecord {
 	public String toRecordString() {
 		StringBuffer line = new StringBuffer(transCode);
 		try {
-			taxId = BgUtil.formatTaxId(taxId);
+			taxId = NotimaUtil.formatTaxId(taxId);
 		} catch (ParseException pe) {
 			pe.printStackTrace();
 		}
-		line.append(BgUtil.fillToLength(taxId,  true,  '0',  12));
+		line.append(NotimaUtil.fillToLength(taxId,  true,  '0',  12));
 		while(line.length()<80) {
 			line.append(" ");
 		}

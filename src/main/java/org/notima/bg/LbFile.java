@@ -46,6 +46,7 @@ import org.notima.bg.lb.LbSet;
 import org.notima.bg.lb.LbTk11Header;
 import org.notima.bg.lb.LbTk16Record;
 import org.notima.bg.lb.LbTk29Record;
+import org.notima.util.NotimaUtil;
 
 
 public class LbFile extends BgFile {
@@ -155,7 +156,7 @@ public class LbFile extends BgFile {
     	for (String key : outFiles.keySet()) {
     		
     		file = new File(dir.getCanonicalPath() + File.separator + 
-    						FILE_PREFIX + key + "_" + BgUtil.getDateString(fileDate) + FILE_SUFFIX);
+    						FILE_PREFIX + key + "_" + NotimaUtil.getDateString(fileDate) + FILE_SUFFIX);
 
     		if (file.exists()) {
     			throw new BgParseException("File " + file.getCanonicalPath() + " already exists.");

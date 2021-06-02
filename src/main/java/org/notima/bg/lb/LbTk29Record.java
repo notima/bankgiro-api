@@ -27,7 +27,7 @@ import java.util.regex.*;
 
 import org.notima.bg.BgFooter;
 import org.notima.bg.BgParseException;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 
 /**
@@ -52,7 +52,7 @@ public class LbTk29Record extends BgFooter {
 		if (m.matches()) {
 			senderAccount = m.group(1);
 			count = Integer.parseInt(m.group(2));
-			amount = BgUtil.parseAmountStr(m.group(3));
+			amount = NotimaUtil.parseAmountStr(m.group(3));
 			if ("-".equals(m.group(4))) {
 				amount = -amount;
 			}
@@ -65,7 +65,7 @@ public class LbTk29Record extends BgFooter {
 	
 	public LbTk29Record(String senderAccount, int count, double totalAmount) {
 		super("29");
-		this.senderAccount = BgUtil.toDigitsOnly(senderAccount); 
+		this.senderAccount = NotimaUtil.toDigitsOnly(senderAccount); 
 		this.setCount(count);
 		this.setAmount(totalAmount);
 	}
@@ -73,7 +73,7 @@ public class LbTk29Record extends BgFooter {
 	@Override
 	public String toRecordString() {
 		StringBuffer line = new StringBuffer("29");
-		StringBuffer accountStr = new StringBuffer(BgUtil.toDigitsOnly(senderAccount));
+		StringBuffer accountStr = new StringBuffer(NotimaUtil.toDigitsOnly(senderAccount));
 		while(accountStr.length()<10) {
 			accountStr.insert(0, "0");
 		}
@@ -83,7 +83,7 @@ public class LbTk29Record extends BgFooter {
 			countStr.insert(0, "0");
 		}
 		line.append(countStr);
-		StringBuffer amountStr = new StringBuffer(BgUtil.getAmountStr(amount));
+		StringBuffer amountStr = new StringBuffer(NotimaUtil.getAmountStr(amount));
 		while(amountStr.length()<12) {
 			amountStr.insert(0, "0");
 		}

@@ -25,7 +25,7 @@ package org.notima.bg.lb;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 public class LbTk3Record extends BgRecord {
 
@@ -51,8 +51,8 @@ public class LbTk3Record extends BgRecord {
 	public LbTk3Record(int recipientNo, String address, String postal, String countryCode, String costDist, String trxType) {
 		super("3");
 		m_recipientNo = recipientNo;
-		m_adress = BgUtil.onlyUSASCII(address);
-		m_postal = BgUtil.onlyUSASCII(postal);
+		m_adress = NotimaUtil.onlyUSASCII(address);
+		m_postal = NotimaUtil.onlyUSASCII(postal);
 		m_countryCode = countryCode;
 		// Lookup country name
 		m_countryName = "";
@@ -71,10 +71,10 @@ public class LbTk3Record extends BgRecord {
 	@Override
 	public String toRecordString() {
 		StringBuffer line = new StringBuffer(getTransCode());
-		line.append(BgUtil.fillToLength(Integer.toString(m_recipientNo),
+		line.append(NotimaUtil.fillToLength(Integer.toString(m_recipientNo),
 				true, '0', 7));
-		line.append(BgUtil.fillToLength(m_adress.toUpperCase(), false, ' ', 30));
-		line.append(BgUtil.fillToLength(m_postal.toUpperCase(), false, ' ', 35));
+		line.append(NotimaUtil.fillToLength(m_adress.toUpperCase(), false, ' ', 30));
+		line.append(NotimaUtil.fillToLength(m_postal.toUpperCase(), false, ' ', 35));
 		// Reserve field 74
 		line.append(" ");
 		// Bank country code

@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 
 public class LbTk14Record extends BgRecord implements LbPaymentRecord {
@@ -54,9 +54,9 @@ public class LbTk14Record extends BgRecord implements LbPaymentRecord {
 		Matcher m = linePattern1.matcher(line);
 		if (m.matches()) {
 			// From BG
-			recipientBg = BgUtil.trimLeadingZeros(m.group(1));
+			recipientBg = NotimaUtil.trimLeadingZeros(m.group(1));
 			ocrRef = m.group(2).trim();
-			amount = BgUtil.parseAmountStr(m.group(3));
+			amount = NotimaUtil.parseAmountStr(m.group(3));
 			payTypeCode = m.group(4);
 			referenceBg = m.group(5);
 			ourRefText = m.group(6).trim();
@@ -64,11 +64,11 @@ public class LbTk14Record extends BgRecord implements LbPaymentRecord {
 			// To BG
 			m = linePattern2.matcher(line);
 			if (m.matches()) {
-				recipientBg = BgUtil.trimLeadingZeros(m.group(1));
+				recipientBg = NotimaUtil.trimLeadingZeros(m.group(1));
 				ocrRef = m.group(2).trim();
-				amount = BgUtil.parseAmountStr(m.group(3));
+				amount = NotimaUtil.parseAmountStr(m.group(3));
 				try {
-					payDate = BgUtil.parseDateString(m.group(4));
+					payDate = NotimaUtil.parseDateString(m.group(4));
 				} catch (java.text.ParseException pe) {
 					throw new BgParseException("Can't parse date " + m.group(4), line);
 				}
@@ -103,7 +103,7 @@ public class LbTk14Record extends BgRecord implements LbPaymentRecord {
      */
 	public LbTk14Record(String recipientBg, double amount, String ourRef) {
 		super("14");
-        this.recipientBg = BgUtil.toDigitsOnly(recipientBg);
+        this.recipientBg = NotimaUtil.toDigitsOnly(recipientBg);
 		this.amount = amount;
 		ourRefText = ourRef;
         payDate = null;
@@ -168,8 +168,8 @@ public class LbTk14Record extends BgRecord implements LbPaymentRecord {
 			ocrStr.append(" ");
 		}
 		line.append(ocrStr);
-		line.append(BgUtil.getAmountStr(amount));
-		line.append(BgUtil.getDateString(payDate));
+		line.append(NotimaUtil.getAmountStr(amount));
+		line.append(NotimaUtil.getDateString(payDate));
 		// Append reserve field
 		line.append("     ");
 		if (ourRefText!=null) line.append(ourRefText);

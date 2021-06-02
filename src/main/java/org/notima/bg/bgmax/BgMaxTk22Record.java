@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 
 public class BgMaxTk22Record extends BgRecord {
@@ -45,8 +45,8 @@ public class BgMaxTk22Record extends BgRecord {
 	public BgRecord parse(String line) throws BgParseException {
 		Matcher m = linePattern1.matcher(line);
 		if (m.matches()) {
-			reference.reference = BgUtil.trimLeadingZeros(m.group(2));
-			reference.amount = BgUtil.parseAmountStr(m.group(3));
+			reference.reference = NotimaUtil.trimLeadingZeros(m.group(2));
+			reference.amount = NotimaUtil.parseAmountStr(m.group(3));
 			reference.referenceType = Integer.parseInt(m.group(4));
 			reference.payChannel = Integer.parseInt(m.group(5));
 			reference.scannedImage = Integer.parseInt(m.group(7)) >0;

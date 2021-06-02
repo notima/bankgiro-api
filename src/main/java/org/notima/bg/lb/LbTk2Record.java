@@ -25,7 +25,7 @@ package org.notima.bg.lb;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 public class LbTk2Record extends BgRecord {
 
@@ -36,8 +36,8 @@ public class LbTk2Record extends BgRecord {
 	public LbTk2Record(int recipientNo, String name1, String name2) {
 		super("2");
 		m_recipientNo = recipientNo;
-		m_name1 = BgUtil.onlyUSASCII(name1);
-		m_name2 = BgUtil.onlyUSASCII(name2);
+		m_name1 = NotimaUtil.onlyUSASCII(name1);
+		m_name2 = NotimaUtil.onlyUSASCII(name2);
 	}
 
 	@Override
@@ -48,10 +48,10 @@ public class LbTk2Record extends BgRecord {
 	@Override
 	public String toRecordString() {
 		StringBuffer line = new StringBuffer(getTransCode());
-		line.append(BgUtil.fillToLength(Integer.toString(m_recipientNo),
+		line.append(NotimaUtil.fillToLength(Integer.toString(m_recipientNo),
 				true, '0', 7));
-		line.append(BgUtil.fillToLength(m_name1.toUpperCase(), false, ' ', 30));
-		line.append(BgUtil.fillToLength(m_name2.toUpperCase(), false, ' ', 35));
+		line.append(NotimaUtil.fillToLength(m_name1.toUpperCase(), false, ' ', 30));
+		line.append(NotimaUtil.fillToLength(m_name2.toUpperCase(), false, ' ', 35));
 		while(line.length()<80) {
 			line.append(" ");
 		}
