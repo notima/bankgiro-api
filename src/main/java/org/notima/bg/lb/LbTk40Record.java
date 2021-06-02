@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 
 public class LbTk40Record extends BgRecord {
@@ -51,7 +51,7 @@ public class LbTk40Record extends BgRecord {
 		if (m.matches()) {
 			seqNo = Integer.parseInt(m.group(1));
 			clearingNo = m.group(3);
-			accountNo = BgUtil.trimLeadingZeros(m.group(4));
+			accountNo = NotimaUtil.trimLeadingZeros(m.group(4));
 			return(this);
 		} else {
 			throw new BgParseException(line);
@@ -91,7 +91,7 @@ public class LbTk40Record extends BgRecord {
 	 * @param aClearingNo
 	 */
 	public void setClearingNo(String aClearingNo) {
-		this.clearingNo = BgUtil.toDigitsOnly(aClearingNo);
+		this.clearingNo = NotimaUtil.toDigitsOnly(aClearingNo);
 	}
 	
 	public String getAccountNo() {
@@ -99,7 +99,7 @@ public class LbTk40Record extends BgRecord {
 	}
 	
 	public void setAccountNo(String aAccountNo) {
-		this.accountNo = BgUtil.toDigitsOnly(aAccountNo);
+		this.accountNo = NotimaUtil.toDigitsOnly(aAccountNo);
 	}
 	
 	/**

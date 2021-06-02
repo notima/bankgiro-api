@@ -27,7 +27,7 @@ import java.util.*;
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
 import org.notima.bg.BgSet;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 import org.notima.bg.Transaction;
 
 
@@ -96,7 +96,7 @@ public class LbPayment implements Transaction {
     public static LbPayment createBgPayment(String recipientBg, String OCR, double amount, String ourRef, Date payDate) {
         LbPayment payment = new LbPayment();
         payment.amount = (double)Math.round(amount*100.0)/100.0;
-        boolean digitsOnly = BgUtil.hasDigitsOnly(OCR);
+        boolean digitsOnly = NotimaUtil.hasDigitsOnly(OCR);
 		if (amount>=0.0) {
 			LbTk14Record rec1 = new LbTk14Record(recipientBg, amount, ourRef);	// Normal payment
             rec1.setPayDate(payDate);
@@ -252,7 +252,7 @@ public class LbPayment implements Transaction {
     	}
     	if (code==14) {
     		LbTk14Record r = (LbTk14Record)record;
-    		dstBg = BgUtil.trimLeadingZeros(r.recipientBg);
+    		dstBg = NotimaUtil.trimLeadingZeros(r.recipientBg);
     		ocr = r.ocrRef.trim();
     		ourRef = r.ourRefText.trim();
     		amount = r.amount;
@@ -261,7 +261,7 @@ public class LbPayment implements Transaction {
     	// Credit record
     	if (code==16) {
     		LbTk16Record r = (LbTk16Record)record;
-    		dstBg = BgUtil.trimLeadingZeros(r.getRecipientBg());
+    		dstBg = NotimaUtil.trimLeadingZeros(r.getRecipientBg());
     		ocr = r.ocrRef.trim();
     		ourRef = r.ourRefText.trim();
     		amount = r.getAmount(); // Negative amount
@@ -269,7 +269,7 @@ public class LbPayment implements Transaction {
     	}
     	if (code==54) {
     		LbTk54Record r = (LbTk54Record)record;
-    		dstPg = BgUtil.trimLeadingZeros(r.getRecipientPg());
+    		dstPg = NotimaUtil.trimLeadingZeros(r.getRecipientPg());
     		ocr = r.getOcrRef();
     		ourRef = r.getOurRef();
     		amount = r.getAmount();
@@ -436,8 +436,8 @@ public class LbPayment implements Transaction {
 	 * null if there's no known destination
 	 */
 	public String getDestinationFormatted() throws BgParseException {
-		if (isBgPayment()) return(BgUtil.formatBg(dstBg));
-		if (isPgPayment()) return(BgUtil.formatPg(dstPg));
+		if (isBgPayment()) return(NotimaUtil.formatBg(dstBg));
+		if (isPgPayment()) return(NotimaUtil.formatPg(dstPg));
 		if (isAccountPayment()) return(dstAccount); // TODO: Add formatter for account
 		return(null);
 	}

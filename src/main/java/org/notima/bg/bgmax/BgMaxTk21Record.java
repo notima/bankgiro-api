@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 
 public class BgMaxTk21Record extends BgRecord {
@@ -52,9 +52,9 @@ public class BgMaxTk21Record extends BgRecord {
 	public BgRecord parse(String line) throws BgParseException {
 		Matcher m = linePattern1.matcher(line);
 		if (m.matches()) {
-			senderBg = BgUtil.trimLeadingZeros(m.group(1));
-			reference.reference = BgUtil.trimLeadingZeros(m.group(2));
-			reference.amount = BgUtil.parseAmountStr(m.group(3));
+			senderBg = NotimaUtil.trimLeadingZeros(m.group(1));
+			reference.reference = NotimaUtil.trimLeadingZeros(m.group(2));
+			reference.amount = NotimaUtil.parseAmountStr(m.group(3));
 			reference.referenceType = Integer.parseInt(m.group(4));
 			reference.payChannel = Integer.parseInt(m.group(5));
 			bgcRef = m.group(6);
@@ -92,11 +92,11 @@ public class BgMaxTk21Record extends BgRecord {
 		
 		// Reference
 		String refStr = reference!=null ? reference.reference : "";
-		String ref = BgUtil.fillToLength(refStr, false, ' ', 25);
+		String ref = NotimaUtil.fillToLength(refStr, false, ' ', 25);
 		line.append(ref);
 		
 		// Amount
-		line.append(BgUtil.getAmountStr(getAmount(), 18, false));
+		line.append(NotimaUtil.getAmountStr(getAmount(), 18, false));
 		
 		// Reference Type
 		line.append(reference!=null ? reference.referenceType : BgMaxReference.REFTYPE_BLANK_NOREF_GIVEN);
@@ -105,7 +105,7 @@ public class BgMaxTk21Record extends BgRecord {
 		line.append(reference!=null ? reference.payChannel : BgMaxReference.PAYCHANNEL_EBANK);
 		
 		// BGC documentnumber
-		ref = BgUtil.fillToLength(bgcRef, true, '0', 12);
+		ref = NotimaUtil.fillToLength(bgcRef, true, '0', 12);
 		line.append(ref);
 		
 		// Image marker

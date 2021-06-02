@@ -27,7 +27,7 @@ import java.util.regex.*;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 
 /**
@@ -57,12 +57,12 @@ public class LbTk20Record extends BgRecord {
 		if (m.matches()) {
 			setRecipientBg((m.group(1) + m.group(2)).trim());
 			try {
-				creditDate = BgUtil.parseDateString(m.group(3));
+				creditDate = NotimaUtil.parseDateString(m.group(3));
 			} catch (Exception ee) {
 				throw new BgParseException("Invalid date", line);
 			}
-			creditAmount = BgUtil.parseAmountStr(m.group(4));
-			remainderAmount = BgUtil.parseAmountStr(m.group(5));
+			creditAmount = NotimaUtil.parseAmountStr(m.group(4));
+			remainderAmount = NotimaUtil.parseAmountStr(m.group(5));
 			
 		} else {
 			throw new BgParseException(line);
@@ -110,8 +110,8 @@ public class LbTk20Record extends BgRecord {
      * @param recipientBg the recipientBg to set
      */
     public void setRecipientBg(String recipientBg) {
-        this.recipientBg = BgUtil.toDigitsOnly(recipientBg);
-        this.recipientBg = BgUtil.trimLeadingZeros(this.recipientBg);
+        this.recipientBg = NotimaUtil.toDigitsOnly(recipientBg);
+        this.recipientBg = NotimaUtil.trimLeadingZeros(this.recipientBg);
     }
 
     /**

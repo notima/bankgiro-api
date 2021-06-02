@@ -29,7 +29,7 @@ import java.util.Vector;
 import org.notima.bg.BgFooter;
 import org.notima.bg.BgHeader;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 import org.notima.bg.Transaction;
 
 
@@ -43,7 +43,7 @@ import org.notima.bg.Transaction;
 public class LbSet extends AbstractLbSet {
 	
 	public static LbSet createPayableSet(String senderAccount) {
-		String sA = BgUtil.toDigitsOnly(senderAccount);
+		String sA = NotimaUtil.toDigitsOnly(senderAccount);
 		BgHeader h = new LbTk11Header(sA);
 		BgFooter f = new LbTk29Record(sA, 0, 0.0);
 		LbSet set = new LbSet(h,f);
@@ -88,7 +88,7 @@ public class LbSet extends AbstractLbSet {
 
 	@Override
 	public java.util.Date getCreditRecordDate(String recipientBg, double amount) {
-		recipientBg = BgUtil.trimLeadingZeros(BgUtil.toDigitsOnly(recipientBg));
+		recipientBg = NotimaUtil.trimLeadingZeros(NotimaUtil.toDigitsOnly(recipientBg));
 		Vector<BgRecord> recs = creditRecords.get(recipientBg);
 		if (recs==null) return(null);
 		LbTk21Record r;

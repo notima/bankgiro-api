@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 
 public class BgMaxTk28Record extends BgRecord {
@@ -58,10 +58,10 @@ public class BgMaxTk28Record extends BgRecord {
 	@Override
 	public String toRecordString() {
 		StringBuffer line = new StringBuffer(transCode);
-		line.append(BgUtil.fillToLength(city,  false,  ' ',  35));
-		line.append(BgUtil.fillToLength(country, false, ' ', 35));
+		line.append(NotimaUtil.fillToLength(city,  false,  ' ',  35));
+		line.append(NotimaUtil.fillToLength(country, false, ' ', 35));
 		if (countryCode!=null && !"SE".equalsIgnoreCase(countryCode)) {
-			line.append(BgUtil.fillToLength(countryCode.toUpperCase(), false, ' ', 2));
+			line.append(NotimaUtil.fillToLength(countryCode.toUpperCase(), false, ' ', 2));
 		}
 		while(line.length()<80) {
 			line.append(" ");

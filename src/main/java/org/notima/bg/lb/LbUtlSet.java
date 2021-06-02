@@ -28,14 +28,14 @@ import java.util.Date;
 import org.notima.bg.BgFooter;
 import org.notima.bg.BgHeader;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 public class LbUtlSet extends AbstractLbSet {
 
 	private int	m_bankId;
 	
 	public static LbUtlSet createPayableSet(String senderAccount, String senderName, String senderAddress, int bankId) {
-		String sA = BgUtil.toDigitsOnly(senderAccount);
+		String sA = NotimaUtil.toDigitsOnly(senderAccount);
 		BgHeader h = new LbTk0Header(sA, senderName, senderAddress);
 		LbTk9Footer f = new LbTk9Footer(sA);
 		LbUtlSet set = new LbUtlSet(h,f, bankId);

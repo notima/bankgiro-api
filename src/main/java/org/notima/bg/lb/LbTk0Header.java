@@ -30,7 +30,7 @@ import org.notima.bg.BgHeader;
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
 import org.notima.bg.BgSet;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 
 /**
@@ -60,8 +60,8 @@ public class LbTk0Header extends BgHeader {
 		bgAccount = senderAccount;
 		setHeaderType("LEVERANT\u00d6RSBETALNINGAR");
 		fileDate = Calendar.getInstance().getTime();
-		name = BgUtil.onlyUSASCII(aName);
-		address = BgUtil.onlyUSASCII(aAddress);
+		name = NotimaUtil.onlyUSASCII(aName);
+		address = NotimaUtil.onlyUSASCII(aAddress);
 	}
 	
 	@Override
@@ -107,7 +107,7 @@ public class LbTk0Header extends BgHeader {
 		
 		// Create bg-account
 		StringBuffer account = new StringBuffer();
-		String bga = BgUtil.toDigitsOnly(bgAccount);
+		String bga = NotimaUtil.toDigitsOnly(bgAccount);
 		account.append(bga);
 		// Left-pad with zeroes
 		while(account.length()<8) {
@@ -118,14 +118,14 @@ public class LbTk0Header extends BgHeader {
 		if (fileDate==null) {
 			fileDate = Calendar.getInstance().getTime();
 		}
-		String dateStr = BgUtil.getDateString(fileDate);
+		String dateStr = NotimaUtil.getDateString(fileDate);
 		line.append(dateStr);
 		// Name of sender
-		line.append(BgUtil.fillToLength(name.toUpperCase(), false, ' ', 22));
+		line.append(NotimaUtil.fillToLength(name.toUpperCase(), false, ' ', 22));
 		// Address of sender
-		line.append(BgUtil.fillToLength(address.toUpperCase(), false, ' ', 35));
+		line.append(NotimaUtil.fillToLength(address.toUpperCase(), false, ' ', 35));
 		if (payDate!=null) {
-			line.append(BgUtil.getDateString(payDate));
+			line.append(NotimaUtil.getDateString(payDate));
 		} else {
 			line.append("      ");
 		}

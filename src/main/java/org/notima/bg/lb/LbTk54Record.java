@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 
 /**
@@ -55,9 +55,9 @@ public class LbTk54Record extends BgRecord implements LbPaymentRecord {
     
     public LbTk54Record(String recipientPg, String ocrRef, double amount, String ourRefText, Date payDate) {
         super("54");
-        this.recipientPg = BgUtil.toDigitsOnly(recipientPg);
+        this.recipientPg = NotimaUtil.toDigitsOnly(recipientPg);
         this.amount = amount;
-        this.ocrRef = BgUtil.toDigitsOnly(ocrRef);
+        this.ocrRef = NotimaUtil.toDigitsOnly(ocrRef);
         this.ourRefText = ourRefText;
         this.payDate = payDate;
     }
@@ -66,11 +66,11 @@ public class LbTk54Record extends BgRecord implements LbPaymentRecord {
 	public BgRecord parse(String line) throws BgParseException {
 		Matcher m = linePattern1.matcher(line);
 		if (m.matches()) {
-			recipientPg = BgUtil.trimLeadingZeros(m.group(1));
+			recipientPg = NotimaUtil.trimLeadingZeros(m.group(1));
 			ocrRef = m.group(2).trim();
-			amount = BgUtil.parseAmountStr(m.group(3));
+			amount = NotimaUtil.parseAmountStr(m.group(3));
 			processCode = m.group(4);
-			recipientPgRedirected = BgUtil.trimLeadingZeros(m.group(5));
+			recipientPgRedirected = NotimaUtil.trimLeadingZeros(m.group(5));
 			ourRefText = m.group(6).trim();
 			return(this);
 		} else {
@@ -95,8 +95,8 @@ public class LbTk54Record extends BgRecord implements LbPaymentRecord {
 			ocrStr.append(" ");
 		}
 		line.append(ocrStr);
-		line.append(BgUtil.getAmountStr(amount));
-		line.append(BgUtil.getDateString(payDate));
+		line.append(NotimaUtil.getAmountStr(amount));
+		line.append(NotimaUtil.getDateString(payDate));
 		// Append reserve field
 		line.append("     ");
 		if (ourRefText!=null) line.append(ourRefText);
