@@ -40,6 +40,12 @@
 										org.notima.bg.lb,
 										org.notima.tilisiirto
 						</Export-Package>
+						<Import-Package>
+							javax.xml.bind.annotation;version="[2.2,3)",
+							javax.xml.bind;version="[2.2,3)",
+							javax.xml.bind.annotation.adapters;version="[2.2,3)",
+							*
+						</Import-Package>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -92,7 +98,7 @@
 				<executions>
 					<execution>
 						<id>sign-artifacts</id>
-						<phase>verify</phase>
+						<phase>deploy</phase>
 						<goals>
 							<goal>sign</goal>
 						</goals>

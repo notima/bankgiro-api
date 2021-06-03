@@ -14,4 +14,7 @@ Releases are found in Maven-Central repository and can easliy be used by adding 
     
 Or in karaf
 
-	install -s mvn:org.notima.bg/bankgiro-api/1.3.7
+    install -s mvn:org.apache.httpcomponents/httpcore-osgi/4.4.12
+    install -s mvn:org.apache.httpcomponents/httpclient-osgi/4.5.10
+	install -s mvn:org.notima/util
+	install -s mvn:org.notima.bg/bankgiro-api
