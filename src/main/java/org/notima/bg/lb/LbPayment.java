@@ -27,6 +27,7 @@ import java.util.*;
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
 import org.notima.bg.BgSet;
+import org.notima.bg.BgUtil;
 import org.notima.util.NotimaUtil;
 import org.notima.bg.Transaction;
 
@@ -436,8 +437,8 @@ public class LbPayment implements Transaction {
 	 * null if there's no known destination
 	 */
 	public String getDestinationFormatted() throws BgParseException {
-		if (isBgPayment()) return(NotimaUtil.formatBg(dstBg));
-		if (isPgPayment()) return(NotimaUtil.formatPg(dstPg));
+		if (isBgPayment()) return(BgUtil.formatBg(dstBg));
+		if (isPgPayment()) return(BgUtil.formatPg(dstPg));
 		if (isAccountPayment()) return(dstAccount); // TODO: Add formatter for account
 		return(null);
 	}

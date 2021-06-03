@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.notima.bg</groupId>
 	<artifactId>bankgiro-api</artifactId>
-	<version>1.3.7</version>
+	<version>1.4.0-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<name>Bankgiro-API</name>
 	<description>API for working with bankgiro files (transaction files for Swedish banking system). (www.bankgirot.se)</description>
@@ -146,7 +146,7 @@
 
 		<dependency>
 			<groupId>org.notima</groupId>
-			<artifactId>util</artifactId>
+			<artifactId>notima-util</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
  	</dependencies>

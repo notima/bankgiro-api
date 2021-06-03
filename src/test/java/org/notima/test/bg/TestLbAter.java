@@ -12,6 +12,7 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.notima.bg.BgFile;
+import org.notima.bg.BgUtil;
 import org.notima.bg.LbFile;
 import org.notima.util.NotimaUtil;
 
@@ -38,7 +39,7 @@ public class TestLbAter extends TestCase {
         	inFile.readFromFile(reportFile, cs);
         	fileDate = inFile.getFileDate();
         	// Test file date
-        	Assert.assertEquals("160222", NotimaUtil.getDateString(fileDate));
+        	Assert.assertEquals("160222", BgUtil.getDateString(fileDate));
         	
         	// Test recipient accounts
         	Assert.assertEquals(true, ((LbFile)inFile).getBgSenders().contains("2407617"));
@@ -66,7 +67,7 @@ public class TestLbAter extends TestCase {
         	inFile.readFromFile(reportFile, cs);
         	fileDate = inFile.getFileDate();
         	// Test file date
-        	Assert.assertEquals("160224", NotimaUtil.getDateString(fileDate));
+        	Assert.assertEquals("160224", BgUtil.getDateString(fileDate));
         	
         	// Test recipient accounts
         	Assert.assertEquals(true, ((LbFile)inFile).getBgSenders().contains("2407617"));
