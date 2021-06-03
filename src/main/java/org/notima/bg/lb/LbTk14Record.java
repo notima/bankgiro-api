@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
+import org.notima.bg.BgUtil;
 import org.notima.util.NotimaUtil;
 
 
@@ -66,9 +67,9 @@ public class LbTk14Record extends BgRecord implements LbPaymentRecord {
 			if (m.matches()) {
 				recipientBg = NotimaUtil.trimLeadingZeros(m.group(1));
 				ocrRef = m.group(2).trim();
-				amount = NotimaUtil.parseAmountStr(m.group(3));
+				amount = BgUtil.parseAmountStr(m.group(3));
 				try {
-					payDate = NotimaUtil.parseDateString(m.group(4));
+					payDate = BgUtil.parseDateString(m.group(4));
 				} catch (java.text.ParseException pe) {
 					throw new BgParseException("Can't parse date " + m.group(4), line);
 				}
@@ -168,8 +169,8 @@ public class LbTk14Record extends BgRecord implements LbPaymentRecord {
 			ocrStr.append(" ");
 		}
 		line.append(ocrStr);
-		line.append(NotimaUtil.getAmountStr(amount));
-		line.append(NotimaUtil.getDateString(payDate));
+		line.append(BgUtil.getAmountStr(amount));
+		line.append(BgUtil.getDateString(payDate));
 		// Append reserve field
 		line.append("     ");
 		if (ourRefText!=null) line.append(ourRefText);

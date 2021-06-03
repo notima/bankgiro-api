@@ -28,6 +28,7 @@ import java.util.regex.*;
 
 import org.notima.bg.BgHeader;
 import org.notima.bg.BgParseException;
+import org.notima.bg.BgUtil;
 import org.notima.util.NotimaUtil;
 
 
@@ -109,7 +110,7 @@ public class LbTk11Header extends BgHeader {
 			// We have a match of the first required part.
 			bgAccount = NotimaUtil.trimLeadingZeros(m.group(1));
 			try {
-				fileDate = NotimaUtil.parseDateString(m.group(2));
+				fileDate = BgUtil.parseDateString(m.group(2));
 			} catch (java.text.ParseException pe) {
 				throw new BgParseException("File date: " + m.group(2) + " not valid. ", line);
 			}
@@ -117,7 +118,7 @@ public class LbTk11Header extends BgHeader {
 			if (m.matches()) {
 				currency = m.group(2);
 				try {
-					payDate = NotimaUtil.parseDateString(m.group(1));
+					payDate = BgUtil.parseDateString(m.group(1));
 				} catch (java.text.ParseException pe2) {
 					throw new BgParseException("Pay date: " + m.group(1) + " not valid. ", line);
 				}
@@ -152,11 +153,11 @@ public class LbTk11Header extends BgHeader {
 		if (fileDate==null) {
 			fileDate = Calendar.getInstance().getTime();
 		}
-		String dateStr = NotimaUtil.getDateString(fileDate);
+		String dateStr = BgUtil.getDateString(fileDate);
 		line.append(dateStr);
 		line.append(getHeaderType());
 		if (payDate!=null) {
-			line.append(NotimaUtil.getDateString(payDate));
+			line.append(BgUtil.getDateString(payDate));
 		} else {
 			line.append("      ");
 		}

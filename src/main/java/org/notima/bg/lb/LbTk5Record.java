@@ -25,6 +25,7 @@ package org.notima.bg.lb;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
+import org.notima.bg.BgUtil;
 import org.notima.util.NotimaUtil;
 
 /**
@@ -80,13 +81,13 @@ public class LbTk5Record extends BgRecord {
 		// Currency code
 		line.append(m_currencyCode.substring(0, 3).toUpperCase());
 		// Pay date
-		line.append(NotimaUtil.getDateString(m_payDate));
+		line.append(BgUtil.getDateString(m_payDate));
 		// Kod
 		line.append(" ");
 		// Reserve
 		line.append("0");
 		// Invoice amount in currency Code
-		line.append(NotimaUtil.getAmountStr(m_foreignAmount, 13, false));
+		line.append(BgUtil.getAmountStr(m_foreignAmount, 13, false));
 		while(line.length()<80) {
 			line.append(" ");
 		}

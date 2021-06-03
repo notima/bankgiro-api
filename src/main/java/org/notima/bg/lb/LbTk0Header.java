@@ -30,6 +30,7 @@ import org.notima.bg.BgHeader;
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
 import org.notima.bg.BgSet;
+import org.notima.bg.BgUtil;
 import org.notima.util.NotimaUtil;
 
 
@@ -118,14 +119,14 @@ public class LbTk0Header extends BgHeader {
 		if (fileDate==null) {
 			fileDate = Calendar.getInstance().getTime();
 		}
-		String dateStr = NotimaUtil.getDateString(fileDate);
+		String dateStr = BgUtil.getDateString(fileDate);
 		line.append(dateStr);
 		// Name of sender
 		line.append(NotimaUtil.fillToLength(name.toUpperCase(), false, ' ', 22));
 		// Address of sender
 		line.append(NotimaUtil.fillToLength(address.toUpperCase(), false, ' ', 35));
 		if (payDate!=null) {
-			line.append(NotimaUtil.getDateString(payDate));
+			line.append(BgUtil.getDateString(payDate));
 		} else {
 			line.append("      ");
 		}

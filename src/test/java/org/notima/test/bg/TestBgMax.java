@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.notima.bg.BgFile;
 import org.notima.bg.BgMaxFile;
 import org.notima.bg.BgSet;
+import org.notima.bg.BgUtil;
 import org.notima.util.NotimaUtil;
 import org.notima.bg.Transaction;
 import org.notima.bg.bgmax.BgMaxReceipt;
@@ -44,7 +45,7 @@ public class TestBgMax extends TestCase {
         	inFile.readFromFile(reportFile, cs);
         	fileDate = inFile.getFileDate();
         	// Test file date
-        	Assert.assertEquals("100324", NotimaUtil.getDateString(fileDate));
+        	Assert.assertEquals("100324", BgUtil.getDateString(fileDate));
         	
         	// Test recipient accounts
         	Assert.assertEquals(true, ((BgMaxFile)inFile).getBgRecipients().contains("2407617"));
