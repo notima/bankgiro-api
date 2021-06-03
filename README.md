@@ -16,7 +16,7 @@ Or in karaf
 
     install -s mvn:org.apache.httpcomponents/httpcore-osgi/4.4.12
     install -s mvn:org.apache.httpcomponents/httpclient-osgi/4.5.10
-	install -s mvn:org.notima/util
+	install -s mvn:org.notima/notima-util     (needed for bankgiro-api version >= 1.4.x)
 	install -s mvn:org.notima.bg/bankgiro-api
 
 ## See also
