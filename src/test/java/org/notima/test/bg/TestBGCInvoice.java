@@ -13,13 +13,13 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.junit.Test;
-import org.notima.bg.bgc.BgcAddresseeID;
-import org.notima.bg.bgc.BgcBatch;
-import org.notima.bg.bgc.BgcBatchDetails;
-import org.notima.bg.bgc.BgcDocument;
-import org.notima.bg.bgc.BgcDocumentDetails;
-import org.notima.bg.bgc.BgcSection;
-import org.notima.bg.bgc.BgcSectionDetails;
+import org.notima.bg.einvoice.BgcAddresseeID;
+import org.notima.bg.einvoice.BgcBatch;
+import org.notima.bg.einvoice.BgcBatchDetails;
+import org.notima.bg.einvoice.BgcDocument;
+import org.notima.bg.einvoice.BgcDocumentDetails;
+import org.notima.bg.einvoice.BgcSection;
+import org.notima.bg.einvoice.BgcSectionDetails;
 
 import junit.framework.TestCase;
 
