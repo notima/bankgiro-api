@@ -18,3 +18,7 @@ Or in karaf
     install -s mvn:org.apache.httpcomponents/httpclient-osgi/4.5.10
 	install -s mvn:org.notima/util
 	install -s mvn:org.notima.bg/bankgiro-api
+
+## See also
+
+[Click here](https://www.bankgirot.se/tjanster/fakturatjanster/e-faktura-foretag/teknisk-informaton_E-faktura-foretag/) for additional information about BGC Invoice (such as technical manual, implmentation guide, example files, etc).
