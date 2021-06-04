@@ -8,16 +8,14 @@ Releases are found in Maven-Central repository and can easliy be used by adding 
     <dependency>
         <groupId>org.notima.bg</groupId>
         <artifactId>bankgiro-api</artifactId>
-        <version>1.3.7</version>
+        <version>1.4.0-SNAPSHOT</version>
     </dependency>
 
     
 Or in karaf
 
-    install -s mvn:org.apache.httpcomponents/httpcore-osgi/4.4.12
-    install -s mvn:org.apache.httpcomponents/httpclient-osgi/4.5.10
-	install -s mvn:org.notima/notima-util     (needed for bankgiro-api version >= 1.4.x)
-	install -s mvn:org.notima.bg/bankgiro-api
+	repo-add mvn:org.notima.bg/bankgiro-api/LATEST/xml/features
+	feature:install bankgiro-api
 
 ## See also
 
