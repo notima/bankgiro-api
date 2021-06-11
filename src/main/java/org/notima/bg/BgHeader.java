@@ -22,6 +22,7 @@
 
 package org.notima.bg;
 
+import org.notima.bg.reference.BgCustomer;
 
 /**
  * Generic header for LB-files
@@ -31,6 +32,8 @@ package org.notima.bg;
 public abstract class BgHeader extends BgRecord {
 
 	private String			headerType;
+	
+	protected BgCustomer	recordOwner;
 	
 	public BgHeader(String code) {
 		super(code);
@@ -43,7 +46,21 @@ public abstract class BgHeader extends BgRecord {
 	public void setHeaderType(String headerType) {
 		this.headerType = headerType;
 	}
+
 	
+	/**
+	 * The owner of the records that this header describes.
+	 * 
+	 * @return
+	 */
+	public BgCustomer getRecordOwner() {
+		return recordOwner;
+	}
+
+	public void setRecordOwner(BgCustomer recordOwner) {
+		this.recordOwner = recordOwner;
+	}
+
 	public abstract String getCurrency();
 
 	public abstract void setCurrency(String currency);

@@ -53,8 +53,6 @@ public class LbFile extends BgFile {
 	public static final String FILE_PREFIX = "LB_ATER_";
 	public static final String FILE_SUFFIX = ".txt";
 	
-	private List<BgSet>	records;
-	
 	/**
 	 * Constructs a new LbFile with an empty set.
 	 */
@@ -305,6 +303,11 @@ public class LbFile extends BgFile {
             }
         }
         os.close();
+	}
+
+	@Override
+	public BgFooter generateFileFooter() {
+		return fileFooter;
 	}
 	
 	

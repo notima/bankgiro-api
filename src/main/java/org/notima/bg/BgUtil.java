@@ -33,10 +33,13 @@ import org.notima.util.NotimaUtil;
 public class BgUtil {
 
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd");
+	private static SimpleDateFormat longDateFormat = new SimpleDateFormat("yyyyMMdd");
 
 	/**
 	 * Method for converting date to standard date format for BG-files If the date
 	 * is null it equals to immediate payment.
+	 * 
+	 * 6 characters long.
 	 *
 	 * @param d Date to be converted.
 	 * @return A date in BG-format. If null, GENAST is returned.
@@ -46,6 +49,22 @@ public class BgUtil {
 			return ("GENAST");
 		return (dateFormat.format(d));
 	}
+	
+	/**
+	 * Method for converting date to standard date format for BG-files If the date
+	 * is null it equals to immediate payment.
+	 * 
+	 * 8 characters long
+	 *
+	 * @param d Date to be converted.
+	 * @return A date in BG-format. If null, GENAST is returned.
+	 */
+	public static String getLongDateString(java.util.Date d) {
+		if (d == null)
+			return ("GENAST");
+		return (longDateFormat.format(d));
+	}
+	
 
 	/**
 	 * Return the date. If the date string is empty or "GENAST", null is returned.

@@ -17,7 +17,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<notima-util.version>0.0.1</notima-util.version>
+		<notima-util.version>0.0.2-SNAPSHOT</notima-util.version>
 	</properties>	
 
 	<build>

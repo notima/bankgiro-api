@@ -8,18 +8,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import junit.framework.Assert;
-import junit.framework.TestCase;
-
 import org.junit.Test;
 import org.notima.bg.BgFile;
 import org.notima.bg.BgMaxFile;
 import org.notima.bg.BgSet;
 import org.notima.bg.BgUtil;
-import org.notima.util.NotimaUtil;
 import org.notima.bg.Transaction;
 import org.notima.bg.bgmax.BgMaxReceipt;
 import org.notima.bg.bgmax.BgMaxSet;
+
+import junit.framework.Assert;
+import junit.framework.TestCase;
 
 
 

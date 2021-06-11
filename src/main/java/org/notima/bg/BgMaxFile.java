@@ -34,7 +34,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.Vector;
 
 import org.notima.bg.bgmax.BgMaxReceipt;
 import org.notima.bg.bgmax.BgMaxRecordFactory;
@@ -45,8 +44,6 @@ import org.notima.bg.bgmax.BgMaxTk15Record;
 import org.notima.bg.bgmax.BgMaxTk70Footer;
 
 public class BgMaxFile extends BgFile {
-
-	private List<BgSet>	records = new Vector<BgSet>();
 
 	/**
 	 * Empty constructor
@@ -177,6 +174,7 @@ public class BgMaxFile extends BgFile {
 	/**
 	 * @return	A generated file footer
 	 */
+	@Override
 	public BgFooter generateFileFooter() {
 		if (fileFooter==null) {
 			fileFooter = new BgMaxTk70Footer();
@@ -222,27 +220,6 @@ public class BgMaxFile extends BgFile {
 		return result;
 		
 	}
-
-	/**
-	 * @return	The containing BgSets
-	 */
-    @Override
-    public List<BgSet> getRecords() {
-        return(records);
-    }
-
-	/**
-	 * Writes this BgMax to a file
-	 * 
-	 * @param	file	The file to write
-	 * @param	cs		The charset to use
-	 */
-	@Override
-	public void writeToFile(File file, Charset cs) throws IOException {
-		lastFile = file;
-		OutputStream os = new FileOutputStream(file);
-		writeToStream(os, cs);
-	}
 	
 	
 	/**
@@ -254,32 +231,5 @@ public class BgMaxFile extends BgFile {
 		return(fileHeader.getCreateDate());
 	}
 
-	/**
-	 * Writes class' contents to an output stream
-	 * 
-	 * @param	os	The stream to write to
-	 * @param	cs	Charset to use
-	 */
-	@Override
-	public void writeToStream(OutputStream os, Charset cs) throws IOException {
-
-		if (fileFooter==null)
-			generateFileFooter();
-		
-		os.write(getFileHeader().toRecordString().getBytes(cs));
-		os.write('\n');
-		
-        if (records!=null) {
-            for (int i=0; i<records.size(); i++) {
-                os.write(records.get(i).toRecordString().getBytes(cs));
-            }
-        }
-        
-        os.write(getFileFooter().toRecordString().getBytes(cs));
-        os.write('\n');
-        
-        os.close();
-		
-	}
 
 }

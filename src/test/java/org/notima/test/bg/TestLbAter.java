@@ -14,7 +14,6 @@ import org.junit.Test;
 import org.notima.bg.BgFile;
 import org.notima.bg.BgUtil;
 import org.notima.bg.LbFile;
-import org.notima.util.NotimaUtil;
 
 
 /*
