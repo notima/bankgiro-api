@@ -28,6 +28,12 @@
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
 			</resource>
+			<resource>
+				<directory>src/test/resources</directory>
+				<excludes>
+					<exclude>TestBgCustomer*</exclude>
+				</excludes>
+			</resource>
 		</resources>
 	
 		<plugins>
