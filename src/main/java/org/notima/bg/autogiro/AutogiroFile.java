@@ -2,15 +2,11 @@ package org.notima.bg.autogiro;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.Date;
-import java.util.List;
-
 import org.notima.bg.BgFile;
 import org.notima.bg.BgFooter;
 import org.notima.bg.BgParseException;
-import org.notima.bg.BgSet;
 import org.notima.bg.reference.BgCustomer;
 import org.notima.bg.reference.InvalidReferenceException;
 
@@ -30,24 +26,41 @@ public class AutogiroFile extends BgFile {
 	 */
 	public static AutogiroFile createConsentReport(BgCustomer recipient) {
 		
-		AutogiroFile af = new AutogiroFile();
-		AgContentCode contentCode = null;
-		try {
-			contentCode = new AgContentCode(AgContentCode.CONSENTS);
-		} catch (InvalidReferenceException ire) {
-			// This shoulnd't happen.
-		}
-		AgTk01Header header = new AgTk01Header(contentCode, recipient);
-		
-		af.fileHeader = header;
+		AutogiroFile af = new AutogiroFile(AgContentCode.CONSENTS, recipient);
+
 		af.fileFooter = new AgTk09Footer();
-		
-		AgSet agSet = new AgSet();
-		af.addBgSet(agSet);
 
 		return af;
 		
 	}
+
+	/**
+	 * Create a payment request report.
+	 * 
+	 * @param recipient
+	 * @return		A payment request report.
+	 */
+	public static AutogiroFile createPaymentRequestFile(BgCustomer recipient) {
+
+		AutogiroFile af = new AutogiroFile(AgContentCode.PAYMENTS, recipient);
+		return af;
+
+	}
+
+	public AutogiroFile(String contentCodeStr, BgCustomer recipient) {
+		AgContentCode contentCode = null;
+		try {
+			contentCode = new AgContentCode(AgContentCode.PAYMENTS);
+		} catch (InvalidReferenceException ire) {
+			// This shoulnd't happen.
+		}
+		fileHeader = new AgTk01Header(contentCode, recipient);
+
+		AgSet agSet = new AgSet();
+		addBgSet(agSet);
+
+	}
+
 	
 	public void addApprovedConsentConfirmationRecord(BgCustomer payer) throws Exception {
 		
