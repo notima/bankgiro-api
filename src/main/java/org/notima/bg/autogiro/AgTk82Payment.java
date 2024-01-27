@@ -9,7 +9,7 @@ import org.notima.bg.reference.BgPayerNumber;
 import org.notima.bg.reference.BgReference;
 import org.notima.util.NotimaUtil;
 
-public class AgTk82Payment extends BgRecord {
+public class AgTk82Payment extends BgRecord implements AgTransaction {
 
 	private BgDate	payDate;	
     private AgPaymentInterval paymentInterval;
