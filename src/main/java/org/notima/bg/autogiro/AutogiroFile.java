@@ -3,11 +3,14 @@ package org.notima.bg.autogiro;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.time.LocalDate;
 import java.util.Date;
 import org.notima.bg.BgFile;
 import org.notima.bg.BgFooter;
 import org.notima.bg.BgParseException;
+import org.notima.bg.reference.BgAmount;
 import org.notima.bg.reference.BgCustomer;
+import org.notima.bg.reference.BgReference;
 import org.notima.bg.reference.InvalidReferenceException;
 
 /**
@@ -61,6 +64,14 @@ public class AutogiroFile extends BgFile {
 
 	}
 
+	public void addPaymentRequestRecord(BgCustomer payer, LocalDate dueDate, BgAmount amount, AgPaymentInterval pi, BgReference ref) {
+		
+		AgTk82Payment paymentRequest = new AgTk82Payment();
+		paymentRequest.setRecipientBgAccount(fileHeader.getRecordOwner().getBgAccount());
+
+		// TODO: Add to AgSet
+
+	}
 	
 	public void addApprovedConsentConfirmationRecord(BgCustomer payer) throws Exception {
 		
