@@ -136,7 +136,7 @@ public class BgMaxFile extends BgFile {
     			}
     			currentSet.setSetFooter((BgMaxTk15Record)record);
     			// Add current set to file
-    			records.add(currentSet);
+    			this.addBgSet(currentSet);
     			currentSet = null;
     			currentTrans = null;
     			continue;
