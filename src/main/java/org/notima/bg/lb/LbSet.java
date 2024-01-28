@@ -24,11 +24,13 @@
 package org.notima.bg.lb;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 import org.notima.bg.BgFooter;
 import org.notima.bg.BgHeader;
 import org.notima.bg.BgRecord;
+import org.notima.bg.BgTransaction;
 import org.notima.util.NotimaUtil;
 import org.notima.bg.Transaction;
 
@@ -57,16 +59,16 @@ public class LbSet extends AbstractLbSet {
 	public void addCreditRecord(BgRecord creditRecord) {
 		if (creditRecord instanceof LbTk21Record) {
 			LbTk21Record r = (LbTk21Record)creditRecord;
-			Vector<BgRecord> recs = creditRecords.get(r.getRecipientBg());
+			List<BgRecord> recs = creditRecords.get(r.getRecipientBg());
 			if (recs==null) {
 				recs = new Vector<BgRecord>();
 				creditRecords.put(r.getRecipientBg(), recs);
 			}
 			recs.add(r);
 			// Find the credit which this credit record belongs to and set transaction date from Tk21
-			Transaction tr;
+			BgTransaction tr;
 			LbPayment payment;
-			for (Iterator<Transaction> it = creditTransactions.iterator(); it.hasNext();) {
+			for (Iterator<BgTransaction> it = creditTransactions.iterator(); it.hasNext();) {
 				tr = it.next();
 				payment = (LbPayment)tr;
 				if (payment.getDstBg().equals(r.getRecipientBg()) && Math.abs(tr.getAmount())==r.getCreditAmount()) {
@@ -76,7 +78,7 @@ public class LbSet extends AbstractLbSet {
 		 } else if (creditRecord instanceof LbTk20Record) {
 			 // LbTk20Record is just an information message
 			 LbTk20Record r = (LbTk20Record)creditRecord;
-				Vector<BgRecord> recs = creditRecords.get(r.getRecipientBg());
+				List<BgRecord> recs = creditRecords.get(r.getRecipientBg());
 				if (recs==null) {
 					recs = new Vector<BgRecord>();
 					creditRecords.put(r.getRecipientBg(), recs);
@@ -89,7 +91,7 @@ public class LbSet extends AbstractLbSet {
 	@Override
 	public java.util.Date getCreditRecordDate(String recipientBg, double amount) {
 		recipientBg = NotimaUtil.trimLeadingZeros(NotimaUtil.toDigitsOnly(recipientBg));
-		Vector<BgRecord> recs = creditRecords.get(recipientBg);
+		List<BgRecord> recs = creditRecords.get(recipientBg);
 		if (recs==null) return(null);
 		LbTk21Record r;
 		BgRecord rec;

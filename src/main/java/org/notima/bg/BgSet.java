@@ -23,14 +23,13 @@
 
 package org.notima.bg;
 
-import java.util.Vector;
-
+import java.util.List;
 
 public interface BgSet {
 
-	public void setRecords(Vector<Transaction> records);
+	public void setRecords(List<Transaction> records);
 
-    public Vector<Transaction> getRecords();
+    public List<Transaction> getRecords();
 
 	public void addTransaction(Transaction trans);
 	

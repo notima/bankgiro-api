@@ -103,39 +103,4 @@ public class AgTk73Consent extends BgRecord implements Transaction {
 		this.registrationDate = registrationDate;
 	}
 	
-	@Override
-	public double getAmount() {
-		return 0;
-	}
-
-	@Override
-	public double getForeignAmount() {
-		return 0;
-	}
-
-	@Override
-	public String getForeignCurrency() {
-		return null;
-	}
-
-	@Override
-	public boolean isForeign() {
-		return false;
-	}
-
-	@Override
-	public void addRecord(BgRecord record) {
-	}
-
-	@Override
-	public Date getTransactionDate() {
-		return null;
-	}
-
-	@Override
-	public void setTransactionDate(Date d) {
-		
-	}
-	
-	
 }

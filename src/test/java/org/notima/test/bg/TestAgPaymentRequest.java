@@ -13,7 +13,7 @@ public class TestAgPaymentRequest {
 	}
 
 	@Test
-	public void testAgConsentReport() {
+	public void testAgPaymentRequest() {
 		
 		try {
 		

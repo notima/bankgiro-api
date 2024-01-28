@@ -25,7 +25,7 @@ package org.notima.bg;
 import java.util.*;
 
 
-public class Receipt implements Transaction {
+public class Receipt implements BgTransaction {
 
 	private Vector<BgRecord>	records = new Vector<BgRecord>();
 	

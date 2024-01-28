@@ -1,37 +1,29 @@
 package org.notima.bg.autogiro;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Vector;
+import java.util.List;
 
 import org.notima.bg.BgSet;
 import org.notima.bg.Transaction;
 
+
 public class AgSet implements BgSet {
 
-	private Vector<Transaction> records = new Vector<Transaction>();
+	private List<Transaction> records = new ArrayList<Transaction>();
 	
-	@Override
-	public void setRecords(Vector<Transaction> records) {
+	public void setRecords(List<Transaction> records) {
 		this.records = records;
 	}
 
-	@Override
-	public Vector<Transaction> getRecords() {
+	public List<Transaction> getRecords() {
 		return records;
 	}
 
-	@Override
 	public void addTransaction(Transaction trans) {
 		records.add(trans);
 	}
 
-	@Override
-	public Date getCreditRecordDate(String recipientBg, double amount) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String toRecordString() {
 		if (records==null || records.size()==0) return "";
 		StringBuffer buf = new StringBuffer();
@@ -41,19 +33,25 @@ public class AgSet implements BgSet {
 		return buf.toString();
 	}
 
-	@Override
 	public String getCurrency() {
 		return null;
 	}
 
-	@Override
 	public String getRecipientBankAccount() {
 		return null;
 	}
 
 	@Override
-	public String getSenderBankAccount() {
-		return null;
+	public Date getCreditRecordDate(String recipientBg, double amount) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getCreditRecordDate'");
 	}
+
+	@Override
+	public String getSenderBankAccount() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getSenderBankAccount'");
+	}
+
 
 }

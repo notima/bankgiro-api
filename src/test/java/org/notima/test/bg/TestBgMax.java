@@ -57,8 +57,9 @@ public class TestBgMax extends TestCase {
         	
         	// Iterate through the sets
         	int setCounter = 0;
-        	Vector<Transaction> trans;
+        	List<Transaction> trans;
         	BgMaxReceipt receipt;
+			
         	for (Iterator<BgSet> it = bgSets.iterator(); it.hasNext(); setCounter++) {
         		bgMaxSet = (BgMaxSet)it.next();
         		Assert.assertEquals("SEK", bgMaxSet.getCurrency()); // Check Currency

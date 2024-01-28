@@ -23,15 +23,17 @@
 
 package org.notima.bg.lb;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Vector;
 
 import org.notima.bg.BgFooter;
 import org.notima.bg.BgHeader;
 import org.notima.bg.BgRecord;
 import org.notima.bg.BgSet;
+import org.notima.bg.BgTransaction;
 import org.notima.bg.Transaction;
 
 
@@ -44,14 +46,14 @@ public abstract class AbstractLbSet implements BgSet {
 	
 	protected BgHeader	header;
 	protected BgFooter	footer;
-	protected Vector<Transaction>	records;
-	protected Vector<Transaction> creditTransactions = new Vector<Transaction>();
-	protected Map<String, Vector<BgRecord>>	creditRecords = new TreeMap<String, Vector<BgRecord>>();
+	protected List<Transaction>	records;
+	protected List<BgTransaction> creditTransactions = new ArrayList<BgTransaction>();
+	protected Map<String, List<BgRecord>>	creditRecords = new TreeMap<String, List<BgRecord>>();
 
 	public AbstractLbSet(BgHeader header, BgFooter footer) {
 		this.header = header;
 		this.footer = footer;
-		records = new Vector<Transaction>();
+		records = new ArrayList<Transaction>();
 	}
 	
 	public String getSenderBankAccount() {
@@ -90,50 +92,63 @@ public abstract class AbstractLbSet implements BgSet {
 		this.footer = footer;
 	}
 	
-	public Vector<Transaction> getRecords() {
+	public List<Transaction> getRecords() {
 		return records;
 	}
 	
 	/**
 	 * Adds a payment to the set
-	 * @param payment		The payment to be added
+	 * @param trx		The payment to be added
 	 */
-    public void addTransaction(Transaction payment) {
-    	payment.setParentSet(this);
-    	if (footer!=null) {
-    		footer.incrementAmount(payment.getAmount());
-    		footer.incrementCount();
-    		if (payment.getForeignAmount()!=0) {
-    			footer.incrementForeignAmount(payment.getForeignAmount());
-    		}
-    	}
-    	if (payment.getAmount()<0) {
-    		creditTransactions.add(payment);
-    	}
-        records.add((LbPayment)payment);
+    public void addTransaction(Transaction trx) {
+		if (trx instanceof BgTransaction) {
+			BgTransaction payment = (BgTransaction)trx;
+			payment.setParentSet(this);
+			if (footer!=null) {
+				footer.incrementAmount(payment.getAmount());
+				footer.incrementCount();
+				if (payment.getForeignAmount()!=0) {
+					footer.incrementForeignAmount(payment.getForeignAmount());
+				}
+			}
+			if (payment.getAmount()<0) {
+				creditTransactions.add(payment);
+			}
+		}
+        records.add((LbPayment)trx);
     }
 
 	
-	public void setRecords(Vector<Transaction> records) {
+	public void setRecords(List<Transaction> records) {
 		this.records = records;
 		footer.setAmount(0.0);
 		if (records!=null) {
 			footer.setCount(records.size());
 		}
+		BgTransaction bgt;
+		Transaction t;
 		for (Iterator<Transaction> it = records.iterator(); it.hasNext();) {
-			footer.incrementAmount(it.next().getAmount());
+			t = it.next();
+			if (t instanceof BgTransaction) {
+				bgt = (BgTransaction)t;
+				footer.incrementAmount(bgt.getAmount());
+			}
 		}
 	}
 
 	public String toRecordString() {
 		StringBuffer lines = new StringBuffer();
 		lines.append(header.toRecordString() + "\n");
-		Transaction payment;
+		Transaction t;
+		BgTransaction payment;
 		if (records!=null && records.size()>0) {
 			for (int i=0; i<records.size(); i++) {
-				payment = records.get(i);
-				payment.setSeqNo(i+1);
-				lines.append(payment.toRecordString());
+				t = records.get(i);
+				if (t instanceof BgTransaction) {
+					payment = (BgTransaction)t;
+					payment.setSeqNo(i+1);
+				}
+				lines.append(t.toRecordString());
 			}
 		}
 		

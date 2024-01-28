@@ -29,12 +29,12 @@ import org.notima.bg.BgRecord;
 import org.notima.bg.BgSet;
 import org.notima.bg.BgUtil;
 import org.notima.util.NotimaUtil;
-import org.notima.bg.Transaction;
+import org.notima.bg.BgTransaction;
 
 
-public class LbPayment implements Transaction {
+public class LbPayment implements BgTransaction {
 	
-	private Vector<BgRecord>	records;
+	private List<BgRecord>	records;
 	private BgSet				parentSet;
 	private double				amount;
 	private String				dstName;
@@ -48,11 +48,11 @@ public class LbPayment implements Transaction {
 	private double				foreignAmount;
 	private String				foreignCurrency;
 	private boolean				foreign = false;
-	private Vector<String>		info;
+	private List<String>		info;
 
     public LbPayment() {
-        records = new Vector<BgRecord>();
-        info = new Vector<String>();
+        records = new ArrayList<BgRecord>();
+        info = new ArrayList<String>();
     }
 
     /**
@@ -74,7 +74,7 @@ public class LbPayment implements Transaction {
 		} else {
 			rec2 = new LbTk16Record(amount, ourRef, payDate);	// Credit payment
 		}
-		payment.records = new Vector<BgRecord>();
+		payment.records = new ArrayList<BgRecord>();
 		payment.records.add(rec1);
 		payment.records.add(rec2);
 		payment.dstAccount = dstAccount;
@@ -327,11 +327,11 @@ public class LbPayment implements Transaction {
 		return(lines.toString());
 	}
 
-	public Vector<BgRecord> getRecords() {
+	public List<BgRecord> getRecords() {
 		return records;
 	}
 
-	public void setRecords(Vector<BgRecord> records) {
+	public void setRecords(List<BgRecord> records) {
 		this.records = records;
 	}
 
@@ -383,11 +383,11 @@ public class LbPayment implements Transaction {
 		this.ocr = ocr;
 	}
 
-	public Vector<String> getInfo() {
+	public List<String> getInfo() {
 		return info;
 	}
 
-	public void setInfo(Vector<String> info) {
+	public void setInfo(List<String> info) {
 		this.info = info;
 	}
 

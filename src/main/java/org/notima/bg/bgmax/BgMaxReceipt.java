@@ -29,10 +29,9 @@ import java.util.Vector;
 
 import org.notima.bg.BgRecord;
 import org.notima.bg.BgSet;
-import org.notima.bg.Transaction;
+import org.notima.bg.BgTransaction;
 
-
-public class BgMaxReceipt implements Transaction {
+public class BgMaxReceipt implements BgTransaction {
 
 	private Vector<BgRecord>	records = new Vector<BgRecord>();
 	private double				amount;

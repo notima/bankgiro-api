@@ -23,18 +23,20 @@
 
 package org.notima.bg.bgmax;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.List;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgSet;
+import org.notima.bg.BgTransaction;
 import org.notima.bg.Transaction;
 
 
 public class BgMaxSet implements BgSet {
 
-	private Vector<Transaction>	records = new Vector<Transaction>();
+	private List<Transaction>	records = new ArrayList<Transaction>();
 	private BgMaxTk05Record	setHeader;
 	private BgMaxTk15Record setFooter;
 
@@ -60,11 +62,11 @@ public class BgMaxSet implements BgSet {
 		records.add(trans);
 	}
 
-	public void setRecords(Vector<Transaction> records) {
+	public void setRecords(List<Transaction> records) {
 		this.records = records;
 	}
 	
-    public Vector<Transaction> getRecords() {
+    public List<Transaction> getRecords() {
         return(records);
     }
 
@@ -78,13 +80,17 @@ public class BgMaxSet implements BgSet {
 	 */
 	public void setSetFooter(BgMaxTk15Record setFooter) throws BgParseException {
 		this.setFooter = setFooter;
-		Transaction tr;
+		Transaction trx;
+		BgTransaction tr;
 		double total = 0.0;
 		for (Iterator<Transaction> it = records.iterator(); it.hasNext();) {
-			tr = it.next();
-			if (tr.getTransactionDate()==null)
-				tr.setTransactionDate(setFooter.getTransactionDate());
-			total += tr.getAmount();
+			trx = it.next();
+			if (trx instanceof BgTransaction) {
+				tr = (BgTransaction)trx;
+				if (tr.getTransactionDate()==null)
+					tr.setTransactionDate(setFooter.getTransactionDate());
+				total += tr.getAmount();
+			}
 		}
 		// Round total to two decimals. In certain cases differences may occur otherwise.
 		total = ((double)Math.round(total * 100))/100;
@@ -100,11 +106,15 @@ public class BgMaxSet implements BgSet {
 
 		double total = 0.0;
 		int count = 0;
-		Transaction tr;
+		BgTransaction tr;
+		Transaction trx;
 		for (Iterator<Transaction> it = records.iterator(); it.hasNext();) {
-			tr = it.next();
-			total += tr.getAmount();
-			count++;
+			trx = it.next();
+			if (trx instanceof BgTransaction) {
+				tr = (BgTransaction)trx;
+				total += tr.getAmount();
+				count++;
+			}
 		}
 		// Round total to two decimals. In certain cases differences may occur otherwise.
 		total = ((double)Math.round(total * 100))/100;
@@ -156,12 +166,16 @@ public class BgMaxSet implements BgSet {
 			return "";
 		}
 		lines.append(setHeader.toRecordString() + "\n");
-		Transaction receipt;
+		BgTransaction receipt;
+		Transaction trx;
 		if (records!=null && records.size()>0) {
 			for (int i=0; i<records.size(); i++) {
-				receipt = records.get(i);
-				receipt.setSeqNo(i+1);
-				lines.append(receipt.toRecordString());
+				trx = records.get(i);
+				if (trx instanceof BgTransaction) {
+					receipt = (BgTransaction)trx;
+					receipt.setSeqNo(i+1);
+				}
+				lines.append(trx.toRecordString());
 			}
 		}
 		try {

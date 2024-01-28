@@ -96,7 +96,7 @@ public class BgMaxFile extends BgFile {
     	BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream( file ), cs));
     	String line;
     	BgMaxSet currentSet = null;
-    	Transaction	currentTrans = null;
+    	BgTransaction	currentTrans = null;
     	BgRecord record;
     	int code = 0;
     	// Read first line
@@ -185,12 +185,17 @@ public class BgMaxFile extends BgFile {
 		int payments = 0;
 		int reductions = 0;
 		
+		BgTransaction bgt;
+
 		for (BgSet bg : records) {
 			for (Transaction t : bg.getRecords()) {
-				if (t.getAmount()>0) {
-					payments++;
-				} else {
-					reductions++;
+				if (t instanceof BgTransaction) {
+					bgt = (BgTransaction)t;
+					if (bgt.getAmount()>0) {
+						payments++;
+					} else {
+						reductions++;
+					}
 				}
 			}
 		}
