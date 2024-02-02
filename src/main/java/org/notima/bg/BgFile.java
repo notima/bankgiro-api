@@ -138,8 +138,10 @@ public abstract class BgFile {
             }
         }
         
-        os.write(getFileFooter().toRecordString().getBytes(cs));
-        os.write('\n');
+		if (getFileFooter()!=null) {
+        	os.write(getFileFooter().toRecordString().getBytes(cs));
+        	os.write('\n');
+		}
         
         os.close();
 		

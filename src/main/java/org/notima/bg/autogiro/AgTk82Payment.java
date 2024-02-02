@@ -2,6 +2,7 @@ package org.notima.bg.autogiro;
 
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
+import org.notima.bg.Transaction;
 import org.notima.bg.reference.BgAmount;
 import org.notima.bg.reference.BgBankgiroAccount;
 import org.notima.bg.reference.BgDate;
@@ -9,7 +10,7 @@ import org.notima.bg.reference.BgPayerNumber;
 import org.notima.bg.reference.BgReference;
 import org.notima.util.NotimaUtil;
 
-public class AgTk82Payment extends BgRecord implements AgTransaction {
+public class AgTk82Payment extends BgRecord implements Transaction {
 
 	private BgDate	payDate;	
     private AgPaymentInterval paymentInterval;
@@ -91,7 +92,11 @@ public class AgTk82Payment extends BgRecord implements AgTransaction {
 
         StringBuffer line = new StringBuffer(getTransCode());
         line.append(payDate.toMachineFormat(8));
-        line.append(paymentInterval.toRecordString());
+        if (paymentInterval!=null)
+            line.append(paymentInterval.toRecordString());
+        else
+            line.append("0");
+        
         line.append(toNumberOfRenewalsString());
         line.append(" "); // Reserve
         line.append(payerNumber.toMachineFormat(16));

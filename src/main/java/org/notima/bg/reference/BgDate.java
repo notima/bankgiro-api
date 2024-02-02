@@ -31,16 +31,25 @@ public class BgDate extends BgReference {
 	}
 	
 	public void setLocalDate(LocalDate date) {
-		internalDate = LocalDate.from(date);
+		if (date==null)
+			internalDate = null;
+		else
+			internalDate = LocalDate.from(date);
 	}
 	
 	@Override
 	public String toMachineFormat(int positionWide) {
 		
 		if (positionWide>6) {
-			return BgUtil.getLongDateString(LocalDateUtils.asDate(internalDate));
+			if (internalDate!=null)
+				return BgUtil.getLongDateString(LocalDateUtils.asDate(internalDate));
+			else
+				return BgUtil.getLongDateString(null);
 		} else {
-			return BgUtil.getDateString(LocalDateUtils.asDate(internalDate));
+			if (internalDate!=null)
+				return BgUtil.getDateString(LocalDateUtils.asDate(internalDate));
+			else
+				return BgUtil.getDateString(null);
 		}
 		
 	}

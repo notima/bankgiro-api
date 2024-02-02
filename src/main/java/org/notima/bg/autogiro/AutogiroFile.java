@@ -10,6 +10,7 @@ import org.notima.bg.BgFooter;
 import org.notima.bg.BgParseException;
 import org.notima.bg.reference.BgAmount;
 import org.notima.bg.reference.BgCustomer;
+import org.notima.bg.reference.BgDate;
 import org.notima.bg.reference.BgReference;
 import org.notima.bg.reference.InvalidReferenceException;
 
@@ -64,12 +65,19 @@ public class AutogiroFile extends BgFile {
 
 	}
 
-	public void addPaymentRequestRecord(BgCustomer payer, LocalDate dueDate, BgAmount amount, AgPaymentInterval pi, BgReference ref) {
+	public void addPaymentRequestRecord(BgCustomer payer, LocalDate dueDate, BgAmount amount, AgPaymentInterval pi, BgReference ref) throws Exception {
 		
 		AgTk82Payment paymentRequest = new AgTk82Payment();
 		paymentRequest.setRecipientBgAccount(fileHeader.getRecordOwner().getBgAccount());
+		paymentRequest.setAmount(amount);
+		paymentRequest.setPaymentInterval(pi);
+		paymentRequest.setReference(ref);
+		if (dueDate!=null) {
+			paymentRequest.setPayDate(new BgDate(dueDate));
+		}
+		paymentRequest.setPayerNumber(payer.getPayerNumber());
 
-		// TODO: Add to AgSet
+		this.addTransactionToCurrentSet(paymentRequest);
 
 	}
 	
