@@ -6,7 +6,6 @@ import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Vector;
 
 import org.junit.Test;
 import org.notima.bg.BgFile;

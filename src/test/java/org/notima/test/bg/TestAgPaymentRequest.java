@@ -6,7 +6,6 @@ import org.notima.bg.BgFile;
 import org.notima.bg.autogiro.AutogiroFile;
 import org.notima.bg.reference.BgAmount;
 import org.notima.bg.reference.BgCustomer;
-import org.notima.bg.reference.BgReference;
 import org.notima.bg.reference.BgTextReference;
 
 public class TestAgPaymentRequest {

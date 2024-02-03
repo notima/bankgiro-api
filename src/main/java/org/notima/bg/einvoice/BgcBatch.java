@@ -1,6 +1,5 @@
 package org.notima.bg.einvoice;
 
-import java.io.File;
 import java.io.StringWriter;
 import java.util.List;
 

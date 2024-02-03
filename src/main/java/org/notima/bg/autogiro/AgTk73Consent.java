@@ -1,7 +1,5 @@
 package org.notima.bg.autogiro;
 
-import java.util.Date;
-
 import org.notima.bg.BgParseException;
 import org.notima.bg.BgRecord;
 import org.notima.bg.Transaction;

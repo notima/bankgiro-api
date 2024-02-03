@@ -32,8 +32,6 @@ import org.notima.bg.BgHeader;
 import org.notima.bg.BgRecord;
 import org.notima.bg.BgTransaction;
 import org.notima.util.NotimaUtil;
-import org.notima.bg.Transaction;
-
 
 /**
  * An LbFile consists of one or more sets.
