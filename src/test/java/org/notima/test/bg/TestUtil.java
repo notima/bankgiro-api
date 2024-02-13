@@ -1,6 +1,12 @@
 package org.notima.test.bg;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Properties;
+
 import org.notima.bg.BgParseException;
 import org.notima.bg.reference.BgBankAccount;
 import org.notima.bg.reference.BgBankgiroAccount;
@@ -35,6 +41,24 @@ public class TestUtil {
 		
 	}
 	
+	/**
+	 * 
+	 * @return	Payment request file if it exists.
+	 */
+	public static File getPaymentRequestFile() {
+		
+		String fileName = "samplefiles/PaymentRequest.csv";
+
+		URL url = TestUtil.class.getClassLoader().getResource(fileName);
+		if (url==null) {
+			return null;
+		}
+
+		File result = new File(url.getFile());
+
+		return result;
+		
+	}
 	
 	/**
 	 * 

@@ -9,6 +9,8 @@ import org.notima.util.LocalDateUtils;
 
 public class BgDate extends BgReference {
 
+	public String dfmt = "yyyy-MM-dd"; 
+	
 	private LocalDate internalDate;
 
 	public BgDate() {
@@ -17,6 +19,10 @@ public class BgDate extends BgReference {
 
 	public BgDate(LocalDate date) {
 		internalDate = LocalDate.from(date);
+	}
+	
+	public BgDate(String dateAsStr) {
+		internalDate = LocalDate.parse(dateAsStr, DateTimeFormatter.ofPattern(dfmt));
 	}
 	
 	public Date asDate() {
