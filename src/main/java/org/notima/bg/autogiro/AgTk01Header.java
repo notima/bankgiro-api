@@ -66,14 +66,12 @@ public class AgTk01Header extends BgHeader {
 	public String toRecordString() {
 
 		StringBuffer line = new StringBuffer(getTransCode());
-		line.append(NotimaUtil.fillToLength("AUTOGIRO", false, ' ', 22));
-		// DATE
 		line.append(createDate.toMachineFormat(8));
-		line.append(NotimaUtil.fillToLength("", false, ' ', 12));
-		// Content
-		line.append(contentCode.toMachineFormat(20));
+		line.append(NotimaUtil.fillToLength("AUTOGIRO", false, ' ', 8));
+		line.append(NotimaUtil.fillToLength("", false, ' ', 44));
 		line.append(bgCustomerNo.toMachineFormat(6));
 		line.append(bgRecipient.toMachineFormat(10));
+		line.append(NotimaUtil.fillToLength("", false, ' ', 2));
 		
 		return line.toString();
 	}
