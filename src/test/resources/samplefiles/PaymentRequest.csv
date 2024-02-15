@@ -1,0 +1,6 @@
+PayDate;Interval;Renewals;PayerNumber;Amount SEK;Reference;Name
+2024-02-28;;;100;800;Invoice 1;James Doe
+2024-02-28;;;101;5895;Invoice 2;Julie Doe
+2024-02-28;;;201;5895;Invoice 3;Jonathan Doe
+2024-02-28;;;301;3984;Invoice 4;Jane Doe
+2024-02-28;;;401;4530;Invoice 5;John Doe
