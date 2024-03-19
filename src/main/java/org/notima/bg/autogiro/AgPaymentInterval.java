@@ -9,6 +9,28 @@ public class AgPaymentInterval {
         return pi;
     }
 
+    public AgPaymentInterval(int iv) {
+    	switch(iv) {
+    		case 0: interval = AgPaymentIntervalEnum.ONCE;
+    		break;
+    		case 1: interval = AgPaymentIntervalEnum.MONTHLY;
+    		break;
+    		case 2: interval = AgPaymentIntervalEnum.QUARTERLY;
+    		break;
+    		case 3: interval = AgPaymentIntervalEnum.SEMIANNUALLY;
+    		break;
+    		case 4: interval = AgPaymentIntervalEnum.ANNUALLY;
+    		break;
+    		case 5: interval = AgPaymentIntervalEnum.MONTHLY_END_OF_MONTH;
+    		break;
+    		case 6: interval = AgPaymentIntervalEnum.QUARTERLY_END_OF_MONTH;
+    		break;
+    		case 7: interval = AgPaymentIntervalEnum.SEMIANNUALLY_END_OF_MONTH;
+    		break;
+    		case 8: interval = AgPaymentIntervalEnum.ANNUALLY_END_OF_MONTH;
+    	}
+    }
+    
     public AgPaymentInterval(AgPaymentIntervalEnum i) {
         interval = i;
     }

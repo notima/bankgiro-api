@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.notima.bg.autogiro.AgPaymentInterval;
+import org.notima.bg.autogiro.AgPaymentIntervalEnum;
 import org.notima.bg.autogiro.AgTk82Payment;
 import org.notima.bg.reference.BgAmount;
 import org.notima.bg.reference.BgCustomer;
@@ -51,6 +53,7 @@ public class CsvToAgTk82Payment {
 				 amount = new BgAmount(Double.parseDouble(rec.get("Amount SEK")));
 				 ref = new BgTextReference(rec.get("Reference"));
 				 payment = new AgTk82Payment();
+				 payment.setPaymentInterval(getPaymentIntervalFromString(rec.get("Interval")));
 				 payment.setRecipientBgAccount(recipient.getBgAccount());
 				 payment.setPayDate(bgDate);
 				 payment.setPayerNumber(pnumber);
@@ -64,6 +67,15 @@ public class CsvToAgTk82Payment {
 		return result;
 	}
 	
+	private AgPaymentInterval getPaymentIntervalFromString(String pi) {
+		
+		if (pi==null || pi.trim().length()==0) return new AgPaymentInterval(AgPaymentIntervalEnum.ONCE);
+
+		int interval = Integer.parseInt(pi);
+		
+		return new AgPaymentInterval(interval);
+		
+	}
 	
 	private BgDate toBgDate(String dateStr) {
 		
