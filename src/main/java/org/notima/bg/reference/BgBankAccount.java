@@ -58,10 +58,25 @@ public class BgBankAccount extends BgReference {
 	
 	@Override
 	public String toHumanReadable() {
-		// TODO Auto-generated method stub
-		return null;
+		return clearingNo + "-" + accountNo;
 	}
 	
+	public String getClearingNo() {
+		return clearingNo;
+	}
+
+	public void setClearingNo(String clearingNo) {
+		this.clearingNo = clearingNo;
+	}
+
+	public String getAccountNo() {
+		return accountNo;
+	}
+
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
+	}
+
 	/**
 	 * Formats an exception message from the account number and throws it.
 	 * 
