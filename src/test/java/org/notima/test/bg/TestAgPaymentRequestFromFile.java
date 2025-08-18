@@ -1,6 +1,9 @@
 package org.notima.test.bg;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.junit.Before;
@@ -28,13 +31,25 @@ public class TestAgPaymentRequestFromFile {
 		try {
 		
 			recipient = TestUtil.getBgCustomer(1);
-			payer = TestUtil.getBgCustomer(2);
+			// payer = TestUtil.getBgCustomer(2);
 			agPaymentRequestFile = AutogiroFile.createPaymentRequestFile(recipient);
 			
 			readRequestsFromFile();
 			
 			String result = agPaymentRequestFile.writeToString(BgFile.BGFILE_CHARSET);
 			System.out.println(result);
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMdd_HHmm");
+			String timestamp = LocalDateTime.now().format(formatter);			
+			
+			File file = new File("output_" + timestamp +".txt");
+			
+			try (FileWriter writer = new FileWriter(file)) {
+			    writer.write(result);
+			}			
+			
+			
+			System.out.println("Fil skapad: " + file.getAbsolutePath());
 			
 		} catch (Exception bpe) {
 			bpe.printStackTrace();

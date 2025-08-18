@@ -33,7 +33,7 @@ public class TestUtil {
 	 */
 	public static BgCustomer getBgCustomer(int idx) throws IOException, BgParseException, InvalidReferenceException, InvalidTaxIdFormatException, UnknownTaxIdFormatException {
 		
-		String fileName = "samplefiles/TestBgCustomer" + idx + ".properties";
+		String fileName = "samplefiles/TestBgCustomer" + idx + "Lupinen.properties";
 
 		BgCustomer customer = BgCustomer.loadFromPropertyFile(fileName);
 		
@@ -47,7 +47,7 @@ public class TestUtil {
 	 */
 	public static File getPaymentRequestFile() {
 		
-		String fileName = "samplefiles/PaymentRequest.csv";
+		String fileName = "samplefiles/PaymentRequestLupinen.csv";
 
 		URL url = TestUtil.class.getClassLoader().getResource(fileName);
 		if (url==null) {
